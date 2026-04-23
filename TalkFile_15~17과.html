@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>히브리어 15-17과 마스터 앱</title>
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 히브리어 명조체(인쇄체) 웹폰트 강제 적용 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700&family=Noto+Serif+Hebrew:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            background-color: #f8fafc;
+        }
+        /* 히브리어 인쇄체 클래스 */
+        .hebrew-print {
+            font-family: 'Frank Ruhl Libre', 'Noto Serif Hebrew', 'Times New Roman', 'SBL Hebrew', 'Ezra SIL', serif;
+            direction: rtl;
+            text-align: right;
+            line-height: 1.8;
+        }
+        .hebrew-large {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+        .hebrew-inline {
+            font-family: 'Frank Ruhl Libre', 'Noto Serif Hebrew', 'Times New Roman', serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #b91c1c;
+            direction: rtl;
+            display: inline-block;
+        }
+        .card-enter {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // ==========================================
+        // 1. DATA: 15~17과 전체 문제 데이터 (하나도 빠짐없이 수록)
+        // ==========================================
+        const hebrewData = {
+            15: [
+                {
+                    section: "5) 다음 동사들을 분해하십시오.",
+                    items: [
+                        { id: "15-5-1", heb: "יִשְׁלְחוּ", pron: "이쉴레후", trans: "그들이 보낼 것이다", root: "שָׁלַח (보내다)", parse: "Qal(칼), 미완료(Impf), 3인칭 남성 복수 (3mp)", desc: "강변화 동사의 규칙적인 미완료 형태(`יִקְטְלוּ`)입니다. 접두어 `יִ`(3인칭 남성) + 복수 접미어 `וּ`. 첫 번째 자음 `ש` 아래의 쉐바(`ְ`)는 단모음(히렉 `יִ`) 뒤에 닫힌 음절을 형성하므로 무성 쉐바입니다." },
+                        { id: "15-5-2", heb: "עָבַרְנוּ", pron: "아바르누", trans: "우리가 건넜다", root: "עָבַר (건너다, 지나가다)", parse: "Qal(칼), 완료(Pf), 1인칭 공성 복수 (1cp)", desc: "규칙 동사 완료형입니다. 1인칭 복수 접미어 `נוּ`(우리가)가 붙었습니다. 강세가 `נוּ` 바로 앞 음절(`בַרְ`)에 있으므로 원래의 모음 카메츠(`עָ`)와 파타흐(`בַ`)가 축약되지 않고 그대로 유지됩니다." },
+                        { id: "15-5-3", heb: "גָּאֲלָה", pron: "가알라", trans: "그녀가 구속했다", root: "גָּאַל (구속하다)", parse: "Qal(칼), 완료(Pf), 3인칭 여성 단수 (3fs)", desc: "아인-후음(가운데 글자가 후음) 동사입니다. 완료 3fs 접미어 `ה ָ`가 붙으면 강세 이동으로 두 번째 글자가 무성 쉐바를 가져야 하지만, 가운데 자음 `א`(알렙)은 후음이라 무성 쉐바 대신 아주 짧은 '아' 소리인 하텝 파타흐(`ֲ`)를 취합니다." },
+                        { id: "15-5-4", heb: "אֶקַּח", pron: "에카흐", trans: "내가 취할 것이다", root: "לָקַח (취하다, 가지다)", parse: "Qal(칼), 미완료(Impf), 1인칭 공성 단수 (1cs)", desc: "특수 약변화 동사입니다. `לקח` 동사의 첫 자음 `ל`은 예외적으로 페-눈 동사의 `נ`과 똑같이 행동합니다. 1cs 접두어 `אֶ`가 붙었을 때 `ל`이 탈락하고, 그 흔적으로 다음 자음 `ק`에 경강점(Dagesh Forte)이 찍힙니다 (אֶלְקַח -> אֶקַּח)." },
+                        { id: "15-5-5", heb: "כָּלִיתִי", pron: "칼리티", trans: "내가 끝마쳤다", root: "כָּלָה (끝나다, 완성하다)", parse: "Qal(칼), 완료(Pf), 1인칭 공성 단수 (1cs)", desc: "라메드-헤(`ה`) 동사입니다. 완료형에서 자음으로 시작하는 접미어(`תִּי` 내가)가 올 때, 어근 끝의 `ה`가 본래 어근 자음인 `י`(요드)로 복귀하여 히렉-요드(`ִי`) 장모음을 형성합니다." },
+                        { id: "15-5-6", heb: "תִּמְצָא", pron: "팀차", trans: "그녀가 찾을 것이다 / 네가 찾을 것이다", root: "מָצָא (찾다, 발견하다)", parse: "Qal(칼), 미완료(Impf), 3fs 또는 2ms", desc: "라메드-알렙(`א`) 동사입니다. 알렙(`א`)은 단어 끝에서 묵음화되므로 모음을 가질 수 없습니다. 따라서 일반 미완료의 끝 모음 파타흐(`ַ`)나 카메츠(`ָ`)가 변하지 않고 그대로 남습니다." },
+                        { id: "15-5-7", heb: "נִמְלֹךְ", pron: "님로크", trans: "우리가 다스릴 것이다", root: "מָלַךְ (다스리다)", parse: "Qal(칼), 미완료(Impf), 1인칭 공성 복수 (1cp)", desc: "규칙 동사입니다. 1cp 미완료 접두어 `נִ`가 붙었습니다. (첫 글자가 `נ`이라도 어근이 아니므로 페-눈 동사가 아닙니다.)" },
+                        { id: "15-5-8", heb: "כָּבֵד", pron: "카베드", trans: "그는 무겁다", root: "כָּבֵד (무겁다)", parse: "Qal(칼), 완료(Pf), 3인칭 남성 단수 (3ms)", desc: "상태를 나타내는 상태동사(Stative verb)입니다. 일반적인 동작동사는 `קָטַל`(파타흐) 형태지만, 상태동사는 두 번째 음절에 체레(`ֵ`) 모음을 가집니다." },
+                        { id: "15-5-9", heb: "יִפְּלוּ", pron: "이플루", trans: "그들이 떨어질 것이다", root: "נָפַל (떨어지다)", parse: "Qal(칼), 미완료(Impf), 3인칭 남성 복수 (3mp)", desc: "페-눈(`נ`) 동사의 완벽한 예시입니다. 접두어 `יִ` 뒤에서 음절 끝에 온 어근의 첫 자음 `נ`이 탈락하면서 다음 자음 `פ`에 동화되어 경강점(`פּ`)을 남깁니다 (יִנְפְּלוּ -> יִפְּלוּ)." },
+                        { id: "15-5-10", heb: "מָצָאתָ", pron: "마차타", trans: "네가(남성) 찾았다", root: "מָצָא (찾다)", parse: "Qal(칼), 완료(Pf), 2인칭 남성 단수 (2ms)", desc: "라메드-알렙(`א`) 동사입니다. 완료 접미어 `תָּ`가 올 때, 중간에 낀 `א`가 묵음화되면서 소리가 사라집니다. 그 보상으로 앞의 파타흐 모음이 카메츠(`ָ`)로 보상 장음화(Lengthening) 됩니다 (מָצַא + תָּ -> מָצָאתָ)." }
+                    ]
+                },
+                {
+                    section: "6) 다음을 우리말로 옮기십시오.",
+                    items: [
+                        { id: "15-6-1", heb: "לֹא גָּדוֹל אֲדוֹן הָעִיר הָרְשָׁעָה", pron: "로 가돌 아돈 하-이르 하-르샤아", trans: "그 사악한 성읍의 주인은 위대하지 않다.", desc: "`לֹא`(부정 부사) + `גָּדוֹל`(위대하다, 형용사 서술적 용법) + `אֲדוֹן`(~의 주인, 연계형) + `הָעִיר`(그 성읍, 불규칙 여성명사) + `הָרְשָׁעָה`(그 사악한, 여성형 한정적 용법)." },
+                        { id: "15-6-2", heb: "יָשַׁבְנוּ בָּאֹהֶל תַּחַת הַשָּׁמַיִם", pron: "야샤브누 바-오헬 타하트 하-샤마임", trans: "우리들은 하늘 아래 천막에서 살았다(앉았다).", desc: "`יָשַׁבְנוּ`(우리가 살았다, Qal 완료 1cp) + `בָּאֹהֶל`(~안에 + 그 천막) + `תַּחַת`(~아래에) + `הַשָּׁמַיִם`(그 하늘, 쌍수)." },
+                        { id: "15-6-3", heb: "יִבְנוּ הָאִישׁ וְהָאִשָּׁה בַּיִת לַבָּנִים וְלַבָּנוֹת", pron: "이브누 하-이쉬 베하-잇샤 바이트 라-바님 베라-바노트", trans: "그 남자와 그 여자가 그 아들들과 그 딸들을 위해 집 한 채를 지을 것이다.", desc: "`יִבְנוּ`(지을 것이다, Qal 미완료 3mp, 라메드-헤 ה 탈락) + `הָאִישׁ וְהָאִשָּׁה`(주어) + `בַּיִת`(목적어) + `לַבָּנִים וְלַבָּנוֹת`(~를 위해 + 그 아들들과 딸들)." },
+                        { id: "15-6-4", heb: "לֹא יִגַּשׁ הַנָּבִיא אֶל־מִזְבַּח יְהוָה", pron: "로 이가쉬 하-나비 엘-미즈바흐 야훼", trans: "그 예언자는 야훼의 제단으로 나아가지 않을 것이다.", desc: "`לֹא יִגַּשׁ`(나아가지 않을 것이다, 어근 נגש, 페-눈 미완료 3ms, נ 동화로 ג에 경강점) + `הַנָּבִיא`(주어) + `אֶל־`(~로) + `מִזְבַּח יְהוָה`(야훼의 제단, 연계구문)." },
+                        { id: "15-6-5", heb: "בְּכִיתֶם כָּל־הַיּוֹם וְכָל־הַלַּיְלָה", pron: "베키템 콜-하-욤 베콜-하-라일라", trans: "너희들은 온 낮(하루 종일)과 온 밤을 울었다.", desc: "`בְּכִיתֶם`(너희가 울었다, 어근 בכה, Qal 완료 2mp, 무거운 접미어 תֶּם으로 앞 모음 축약) + `כָּל־הַיּוֹם`(그 낮 전체) + `וְכָל־הַלַּיְלָה`(그리고 그 밤 전체)." },
+                        { id: "15-6-6", heb: "תַּעֲשֶׂה לֶחֶם־קֹדֶשׁ לַכֹּהֲנִים הַטְּהוֹרִים", pron: "타아세 레헴-코데쉬 라-코하님 하-테호림", trans: "그 여자(또는 너)는 거룩한 떡을 그 정결한 제사장들을 위해 만들 것이다.", desc: "`תַּעֲשֶׂה`(만들 것이다, 어근 עשה, 미완료 3fs/2ms, 페-후음 및 라메드-헤) + `לֶחֶם־קֹדֶשׁ`(거룩함의 떡) + `לַכֹּהֲנִים`(제사장들을 위해) + `הַטְּהוֹרִים`(그 정결한, 제사장 수식)." },
+                        { id: "15-6-7", heb: "מָצָאתִי אֶת־סֵפֶר הַבְּרִית בְּבֵית הַמֶּלֶךְ", pron: "마차티 에트-세페르 하-브리트 베베이트 하-멜레크", trans: "내가 언약의 책을 그 왕의 집에서 찾았다.", desc: "`מָצָאתִי`(내가 찾았다, 어근 מצא, Qal 완료 1cs, א 묵음화) + `אֶת־`(목적격) + `סֵפֶר הַבְּרִית`(언약의 책) + `בְּבֵית הַמֶּלֶךְ`(그 왕의 집 안에)." },
+                        { id: "15-6-8", heb: "יִסַּע עַם־הָאָרֶץ הֶחָזָק עַל־הַדֶּרֶךְ לַמִּלְחָמָה", pron: "잇사 암 하-아레츠 헤-하자크 알 하-데레크 라-밀하마", trans: "그 땅의 힘센 백성이 전투를 위해 길을 나설 것이다.", desc: "`יִסַּע`(출발할 것이다, 어근 נסע, 페-눈 미완료 3ms, נ 동화) + `עַם־הָאָרֶץ`(그 땅의 백성) + `הֶחָזָק`(그 힘센, 남성명사 '백성' 수식) + `עַל־הַדֶּרֶךְ לַמִּלְחָמָה`(전투를 향해 길 위로)." }
+                    ]
+                }
+            ],
+            16: [
+                {
+                    section: "3) 소유 대명접미어가 붙은 낱말들 익히기",
+                    items: [
+                        { id: "16-3-1", heb: "בָּנִיתִי אֶת־בֵּיתִי", pron: "바니티 에트-베이티", trans: "나는 내 집을 지었다.", desc: "`בָּנִיתִי`: 지었다 (Qal 완료 1cs, 라메드-헤 `ה`->`י`). / `אֶת־בֵּיתִי`: 목적격 + `בַּיִת`(집)의 연계형 `בֵּית` + 1cs 접미어 `ִי`(나의)." },
+                        { id: "16-3-2", heb: "נָתַן אָבִינוּ אֶת הַכֶּסֶף", pron: "나탄 아비누 에트 하-케세프", trans: "우리의 아버지께서 돈(은)을 주셨다.", desc: "`אָבִינוּ`: 명사 `אָב`(아버지) + 불규칙 연계 모음 `ִי` + 1cp 접미어 `נוּ`(우리의). / `הַכֶּסֶף`: 정관사 + 세골형 명사(은, 돈)." },
+                        { id: "16-3-3", heb: "דָּרַשׁ לִבְּךָ הַטָּהוֹר לֵאלֹהִים", pron: "다라쉬 립브카 하-타호르 렐-로힘", trans: "너의 순결한 마음이 하나님을 찾았다.", desc: "`לִבְּךָ`: `לֵב`(마음) + 2ms 접미어 `ְךָ`(너의 남성). 중복 어근 명사라 `בּ`에 경강점이 생기고 모음이 짧아짐. / `הַטָּהוֹר`: 대명접미어가 붙어 한정된 명사를 수식하므로 정관사 필수." },
+                        { id: "16-3-4", heb: "לָקַח אֶת־הַזָּהָב אֶל־אַרְצוֹ", pron: "라카흐 에트-하-자하브 엘-아르초", trans: "그가 그 금을 그의 땅으로 가져갔다.", desc: "`אֶל־אַרְצוֹ`: 전치사 `אֶל`(~로) + `אַרְצוֹ`(그의 땅). 세골형 명사 `אֶרֶץ`(땅)에 3ms 접미어 `ֹ`가 붙을 때 원래 단모음 파타흐가 부활하여 `אַרְצ` 형태가 됨." },
+                        { id: "16-3-5", heb: "הֲלַכְתֶּם לְדַרְכְּכֶם הָרָשָׁע", pron: "할라크템 레다르크켐 하-라샤", trans: "너희들(남성)이 너희들의 악한 길을 갔다.", desc: "`הֲלַכְתֶּם`: 무거운 접미어 `תֶּם`에 의해 첫 모음이 하텝 파타흐로 축약. / `לְדַרְכְּכֶם`: `לְ` + `דֶּרֶךְ`(길)의 연계형 + 무거운 접미어 `כֶם`." },
+                        { id: "16-3-6", heb: "יָדַעְנוּ אֶת בַּת אִמָּהּ", pron: "야다누 에트 바트 임마흐", trans: "우리가 그 여자의 어머니의 딸을 알았다.", desc: "`בַּת`: `בָּת`(딸)의 단수 연계형. / `אִמָּהּ`: `אֵם`(어머니, 중복어근) + 3fs 접미어 `ָהּ`(그 여자의). 끝의 `הּ` 안의 점은 발음되는 자음임을 알리는 맙픽(Mappiq)." }
+                    ]
+                },
+                {
+                    section: "5) 다음 동사들을 분해하십시오.",
+                    items: [
+                        { id: "16-5-1", heb: "הֲלַכְתֶּם", pron: "할라크템", trans: "너희들이 갔다", root: "הָלַךְ (가다)", parse: "Qal, Pf, 2mp", desc: "완료형에 무거운 접미어 `תֶּם`(너희 남성)이 붙어 강세가 뒤로 이동. 전전강세 음절 모음이 급단모음화 되어 후음 `ה`로 인해 하텝 파타흐(`ֲ`)를 취함." },
+                        { id: "16-5-2", heb: "אֶגְלֶה", pron: "에글레", trans: "내가 드러날 것이다", root: "גָּלָה (드러나다)", parse: "Qal, Impf, 1cs", desc: "라메드-헤 동사 미완료형. 1cs 접두어 `אֶ`. 끝 모음이 세골-헤(`ֶ ה`)로 끝납니다." },
+                        { id: "16-5-3", heb: "נִמְצָא", pron: "님차", trans: "우리가 찾을 것이다", root: "מָצָא (찾다)", parse: "Qal, Impf, 1cp", desc: "1cp 미완료 접두어 `נִ` + 라메드-알렙 동사. `א`가 묵음이라 앞의 카메츠(`ָ`)가 유지됨." },
+                        { id: "16-5-4", heb: "עָשִׂיתִי", pron: "아시티", trans: "내가 만들었다", root: "עָשָׂה (만들다)", parse: "Qal, Pf, 1cs", desc: "라메드-헤 동사 완료형. 자음 접미어 `תִּי` 앞에서 `ה`가 본래의 `י`로 복귀하여 히렉-요드(`ִי`) 형성." },
+                        { id: "16-5-5", heb: "יַעַבְדוּ", pron: "야아브두", trans: "그들이 일할 것이다", root: "עָבַד (일하다)", parse: "Qal, Impf, 3mp", desc: "페-후음(`ע`) 동사. `ע`가 하텝 파타흐(`ֲ`)를 취하고, 접두어 `יִ`도 그에 동화되어 파타흐 `יַ`로 변함." },
+                        { id: "16-5-6", heb: "יִגַּשׁ", pron: "이가쉬", trans: "그가 다가갈 것이다", root: "נָגַשׁ (다가가다)", parse: "Qal, Impf, 3ms", desc: "페-눈(`נ`) 동사. 미완료 접두어 뒤에서 `נ`이 탈락하고 두 번째 자음 `ג`에 경강점 생성 (יִנְגַּשׁ -> יִגַּשׁ)." },
+                        { id: "16-5-7", heb: "חָטָאתָ", pron: "하타타", trans: "네가 죄지었다", root: "חָטָא (죄를 짓다)", parse: "Qal, Pf, 2ms", desc: "라메드-알렙 동사 완료형. 자음 접미어 `תָּ` 앞에서 `א`가 묵음화되고 앞 파타흐가 카메츠로 보상 장음화." },
+                        { id: "16-5-8", heb: "גָּאֲלָה", pron: "가알라", trans: "그녀가 구속했다", root: "גָּאַל (구속하다)", parse: "Qal, Pf, 3fs", desc: "아인-후음(`א`) 동사. 무성 쉐바가 되어야 하는 자리에서 후음 `א` 때문에 하텝 파타흐(`ֲ`)를 취함." },
+                        { id: "16-5-9", heb: "עֲבַרְתֶּן", pron: "아바르텐", trans: "너희(여성)가 건넜다", root: "עָבַר (건너다)", parse: "Qal, Pf, 2fp", desc: "무거운 접미어 `תֶּן`이 붙어 강세 이동. 첫 음절 `ע` 모음이 축약되어 후음 규칙에 따라 하텝 파타흐(`ֲ`)가 됨." },
+                        { id: "16-5-10", heb: "תִּשָּׂא", pron: "티사", trans: "그녀가/네가 들어올릴 것이다", root: "נָשָׂא (들어올리다)", parse: "Qal, Impf, 3fs/2ms", desc: "이중 약변화 동사. 페-눈(`נ` 탈락 및 `ש` 경강점) + 라메드-알렙(`א` 묵음 및 보상 장음화)." }
+                    ]
+                },
+                {
+                    section: "6) 다음을 우리말로 옮기십시오.",
+                    items: [
+                        { id: "16-6-1", heb: "מָצָאתִי אֲנִי אֶת־סִפְרֵךְ הַטּוֹב", pron: "마차티 아니 에트-시프레크 하-토브", trans: "내가 너(여성)의 좋은 책을 찾았다.", desc: "`מָצָאתִי אֲנִי`: 내가 찾았다 (독립대명사로 강조) / `אֶת־סִפְרֵךְ`: 세골형 명사 `סֵפֶר` 연계형 + 2fs 접미어 `ֵךְ` / `הַטּוֹב`: 소유격 명사 수식하는 정관사 포함 형용사." },
+                        { id: "16-6-2", heb: "תִּשָּׂא בַּת־מַלְכֵּנוּ אֶת־בְּנָהּ לַכּוֹהֵן", pron: "티사 바트-말케누 에트-브나흐 라-코헨", trans: "우리 왕의 따님이 자기 아들을 그 제사장에게 데려갈 것이다.", desc: "`תִּשָּׂא`: 들어올릴 것이다 (Qal 미완료 3fs) / `בַּת־מַלְכֵּנוּ`: 왕(`מֶלֶךְ`) + 1cp 접미어(`ֵנוּ`)의 딸 / `אֶת־בְּנָהּ`: 아들(`בֵּן`) + 3fs 접미어(`ָהּ`)." },
+                        { id: "16-6-3", heb: "לֹא שְׁמַעְתֶּם אֶת דְּבַר הַנָּבִיא", pron: "로 쉐마템 에트 데바르 하-나비", trans: "너희들(남성)이 그 예언자의 말씀을 듣지 않았다.", desc: "`שְׁמַעְתֶּם`: 들었다 (무거운 접미어로 첫 모음 무성 쉐바 축약) / `דְּבַר`: `דָּבָר`(말씀)의 단수 연계형." },
+                        { id: "16-6-4", heb: "יִשְׁמְרוּ עַם־הָאָרֶץ אֶת־תּוֹרַת יְהוָה הַקְּדוֹשָׁה", pron: "이쉬메루 암-하-아레츠 에트-토라트 야훼 하-크도샤", trans: "그 땅의 백성들은 야훼의 거룩한 율법을 지킬 것이다.", desc: "`תּוֹרַת`: 율법(`תּוֹרָה`)의 여성 단수 연계형 / `הַקְּדוֹשָׁה`: 거룩한 (여성형, '율법' 수식)." },
+                        { id: "16-6-5", heb: "חָזָק הַזָּקֵן מִן־הַנַּעַר", pron: "하자크 하-자켄 민-하-나아르", trans: "그 노인은 그 소년보다 더 강하다.", desc: "`הַזָּקֵן`: 그 늙은 사람 (형용사 명사화) / `מִן־הַנַּעַר`: 전치사 `מִן`(~보다)를 사용한 비교급 구문." },
+                        { id: "16-6-6", heb: "לֹא תִּדְרֹשׁ אֵלִים אֲחֵרִים בְּכָל־נַפְשְׁךָ", pron: "로 티드로쉬 엘림 아헤림 베콜-나프쉐카", trans: "너(남성)는 네 온 영혼으로 다른 신들을 찾아서는 안 된다.", desc: "`אֵלִים אֲחֵרִים`: 다른 신들 / `בְּכָל־נַפְשְׁךָ`: 전치사 `בְּ` + `כֹּל` + `נֶפֶשׁ`(영혼) 연계형 + 2ms 접미어 `ְךָ`." },
+                        { id: "16-6-7", heb: "בְּכוּ הַבָּנִים וְהַבָּנוֹת בְּאָהֳלָם", pron: "베쿠 하-바님 베하-바노트 베오홀람", trans: "그 아들들과 그 딸들은 자기들의 천막에서 울었다.", desc: "`בְּכוּ`: 울었다 (라메드-헤 모음탈락) / `בְּאָהֳלָם`: 천막(`אֹהֶל`) + 3mp 접미어(`ָם`). 세골형 명사라 모음 단축되어 하텝 카메츠(`ֳ`) 취함." },
+                        { id: "16-6-8", heb: "כָּלְתָה מִלְחֶמֶת הָעַמִּים הַגְּדוֹלָה", pron: "칼르타 밀헤메트 하-암밈 하-그돌라", trans: "그 백성들의 큰 전투가 끝났다.", desc: "`כָּלְתָה`: 끝났다 (Qal 완료 3fs) / `מִלְחֶמֶת הָעַמִּים`: 전투(`מִלְחָמָה`) 연계형 + 백성들 / `הַגְּדוֹלָה`: 여성형 형용사 (전투 수식)." }
+                    ]
+                }
+            ],
+            17: [
+                {
+                    section: "3) 지시대명사 용법 익히기 (한정적/서술적)",
+                    items: [
+                        { id: "17-3-1", heb: "הָאִשָּׁה הַזֹּאת", pron: "하-잇샤 하-조트", trans: "이 여자", desc: "한정적(a), 여성(f), 단수(s). 명사 뒤 위치, 정관사 일치." },
+                        { id: "17-3-2", heb: "זֶה הָאָדָם", pron: "제 하-아담", trans: "이 사람은 그 사람이다", desc: "서술적(p), 남성(m), 단수(s). 명사 앞 위치, 지시대명사에 정관사 없음." },
+                        { id: "17-3-3", heb: "הַמִּזְבֵּחַ הַזֶּה", pron: "하-미즈베아흐 하-제", trans: "이 제단", desc: "한정적(a), 남성(m), 단수(s)." },
+                        { id: "17-3-4", heb: "הַבַּת הַהִיא", pron: "하-바트 하-히", trans: "저 딸", desc: "한정적(a), 여성(f), 단수(s)." },
+                        { id: "17-3-5", heb: "אֵלֶּה הָאֵלִים", pron: "엘레 하-엘림", trans: "이것들은 그 신들이다", desc: "서술적(p), 공성(c), 복수(p). `אֵלֶּה`는 남/여 모두 쓰는 공성." },
+                        { id: "17-3-6", heb: "הַבְּגָדִים הָהֵם", pron: "하-브가딤 하-헴", trans: "저 옷들", desc: "한정적(a), 남성(m), 복수(p)." },
+                        { id: "17-3-7", heb: "הָרֹאשׁ הַזֶּה", pron: "하-로쉬 하-제", trans: "이 머리", desc: "한정적(a), 남성(m), 단수(s)." },
+                        { id: "17-3-8", heb: "זֹאת הַמַּלְכוּת", pron: "조트 하-말쿠트", trans: "이것은 그 왕국이다", desc: "서술적(p), 여성(f), 단수(s)." },
+                        { id: "17-3-9", heb: "הָאֹהֶל הַהוּא", pron: "하-오헬 하-후", trans: "저 천막", desc: "한정적(a), 남성(m), 단수(s)." },
+                        { id: "17-3-10", heb: "הָאֲרָצוֹת הָאֵלֶּה", pron: "하-아라초트 하-엘레", trans: "이 땅들", desc: "한정적(a), 여성(f), 복수(p). `אֶרֶץ`(땅)은 불규칙 여성 명사라 `וֹת` 복수 어미 취함." }
+                    ]
+                },
+                {
+                    section: "5) 다음 동사들을 분해하십시오.",
+                    items: [
+                        { id: "17-5-1", heb: "שְׁמַרְתֶּם", pron: "쉐마르템", trans: "너희가 지켰다", root: "שָׁמַר (지키다)", parse: "Qal, Pf, 2mp", desc: "무거운 접미어 `תֶּם`에 의해 첫 모음 카메츠가 무성 쉐바(`שְׁ`)로 축약됨." },
+                        { id: "17-5-2", heb: "בָּנִיתִי", pron: "바니티", trans: "내가 지었다", root: "בָּנָה (짓다)", parse: "Qal, Pf, 1cs", desc: "라메드-헤 동사 완료형. 자음 접미어 `תִּי`가 오면서 끝의 `ה`가 `י`로 변함." },
+                        { id: "17-5-3", heb: "יִפֹּל", pron: "이폴", trans: "그가 떨어질 것이다", root: "נָפַל (떨어지다)", parse: "Qal, Impf, 3ms", desc: "페-눈 동사 미완료. 접두어 `יִ` 뒤에서 `נ`이 탈락하고 `פ`에 경강점이 찍힘 (יִנְפֹּל -> יִפֹּל)." },
+                        { id: "17-5-4", heb: "תַּעֲלֶה", pron: "타알레", trans: "그녀가/네가 올라갈 것이다", root: "עָלָה (올라가다)", parse: "Qal, Impf, 3fs/2ms", desc: "이중 약변화(페-후음 + 라메드-헤). 첫 자음 후음 `ע`로 하텝 파타흐(`ֲ`), 끝은 세골-헤(`ֶ ה`)." },
+                        { id: "17-5-5", heb: "יִגְּעוּ", pron: "익구", trans: "그들이 만질 것이다", root: "נָגַע (만지다)", parse: "Qal, Impf, 3mp", desc: "페-눈 + 후음 종성. `נ`이 동화되어 `ג`에 경강점." },
+                        { id: "17-5-6", heb: "כָּלִינוּ", pron: "칼리누", trans: "우리가 끝냈다", root: "כָּלָה (끝나다)", parse: "Qal, Pf, 1cp", desc: "라메드-헤 동사. 자음 접미어 `נוּ` 앞에서 `ה`가 `י`로 변함." },
+                        { id: "17-5-7", heb: "חֲטָאתֶם", pron: "하타템", trans: "너희가 죄지었다", root: "חָטָא (죄짓다)", parse: "Qal, Pf, 2mp", desc: "라메드-알렙 완료형. 무거운 접미어로 모음 축약시, 첫 자음이 후음(`ח`)이라 하텝 파타흐(`ֲ`)가 됨. `א` 묵음." },
+                        { id: "17-5-8", heb: "אֶגְלֶה", pron: "에글레", trans: "내가 드러날 것이다", root: "גָּלָה (드러나다)", parse: "Qal, Impf, 1cs", desc: "라메드-헤 미완료 1cs형. 세골-헤(`ֶ ה`)로 끝남." },
+                        { id: "17-5-9", heb: "יִשָּׂא", pron: "잇사", trans: "그가 들 것이다", root: "נָשָׂא (들다)", parse: "Qal, Impf, 3ms", desc: "이중 약변화(페-눈+라메드-알렙). `נ` 탈락(경강점) 및 `א` 묵음화(보상장음화). (תִּנְשָׂא -> תִּשָּׂא)" },
+                        { id: "17-5-10", heb: "גָּאֲלָה", pron: "가알라", trans: "그녀가 구속했다", root: "גָּאַל (구속하다)", parse: "Qal, Pf, 3fs", desc: "아인-후음. 무성 쉐바 자리에 후음 `א`가 오면서 하텝 파타흐 취함." }
+                    ]
+                },
+                {
+                    section: "6) 약변화 동사 익히기",
+                    items: [
+                        { id: "17-6-1", heb: "בָּכוּ הַנְּעָרִים", pron: "바쿠 하-느아림", trans: "그 소년들이 울었다.", desc: "`בָּכוּ`: 어근 בָּכָה, 라메드-헤 완료 3cp. 모음 접미어 `וּ` 앞에서 `ה` 탈락." },
+                        { id: "17-6-2", heb: "אֶרְאֶה אֶת־הָאוֹיֵב", pron: "에르에 에트 하-오옙", trans: "내가 그 원수를 볼 것이다.", desc: "`אֶרְאֶה`: 어근 רָאָה, 라메드-헤 미완료 1cs." },
+                        { id: "17-6-3", heb: "קָרָאתָ אֶת־הַתּוֹרָה", pron: "카라타 에트 하-토라", trans: "네가 그 율법을 읽었다.", desc: "`קָרָאתָ`: 어근 קָרָא, 라메드-알렙 완료 2ms, `א` 묵음화로 카메츠 유지." },
+                        { id: "17-6-4", heb: "בְּנִיתֶם בַּיִת", pron: "브니템 바이트", trans: "너희들이 집을 지었다.", desc: "`בְּנִיתֶם`: 어근 בָּנָה, 라메드-헤 완료 2mp, 자음 접미어 앞에서 `ה`가 `י`로 변함." },
+                        { id: "17-6-5", heb: "יִסַּע הָעָם", pron: "잇사 하-암", trans: "그 백성이 길을 떠날 것이다.", desc: "`יִסַּע`: 어근 נָסַע, 페-눈 미완료 3ms, `נ` 탈락 및 동화." },
+                        { id: "17-6-6", heb: "נִמְצָא אָב", pron: "님차 아브", trans: "우리가 아버지를 찾을 것이다. (또는 아버지가 발견되었다)", desc: "형태상 Niphal 완료 3ms와 Qal 미완료 1cp가 동일함. `א` 묵음." },
+                        { id: "17-6-7", heb: "יִפֹּל הָאָח", pron: "이폴 하-아흐", trans: "그 형제가 떨어질 것이다.", desc: "`יִפֹּל`: 어근 נָפַל, 페-눈 미완료 3ms, `נ` 동화로 `פ`에 경강점." },
+                        { id: "17-6-8", heb: "יִשְׂאוּ לֶחֶם", pron: "이세우 레헴", trans: "그들이 떡을 나를 것이다.", desc: "`יִשְׂאוּ`: 어근 נָשָׂא, 페-눈+라메드-알렙 3mp. `נ` 동화, `א`는 접미어 앞에서 묵음." },
+                        { id: "17-6-9", heb: "נִכְלֶה", pron: "니클레", trans: "우리가 끝낼 것이다.", desc: "`נִכְלֶה`: 어근 כָּלָה, 라메드-헤 미완료 1cp." },
+                        { id: "17-6-10", heb: "תַּעֲשׂוּ מִזְבֵּחַ", pron: "타아수 미즈베아흐", trans: "너희들이 제단을 만들 것이다.", desc: "`תַּעֲשׂוּ`: 어근 עָשָׂה, 페-후음+라메드-헤 미완료 2mp. 모음 접미어 앞 `ה` 탈락." },
+                        { id: "17-6-11", heb: "יְצָאתֶם", pron: "예차템", trans: "너희들이 나갔다.", desc: "`יְצָאתֶם`: 어근 יָצָא, 페-요드+라메드-알렙 완료 2mp. 무거운 접미어로 축약." },
+                        { id: "17-6-12", heb: "חָטָאתִי", pron: "하타티", trans: "내가 죄를 지었다.", desc: "`חָטָאתִי`: 어근 חָטָא, 라메드-알렙 완료 1cs. `א` 묵음화." }
+                    ]
+                },
+                {
+                    section: "7) 종합 연습 (관계대명사 אֲשֶׁר 포함)",
+                    items: [
+                        { id: "17-7-1", heb: "בָּנוּ הָאָב וְהַבֵּן אֶת־הַבַּיִת הַזֶּה", pron: "바누 하-아브 베하-벤 에트-하-바이트 하-제", trans: "그 아버지와 그 아들이 이 집을 지었다.", desc: "`בָּנוּ`: 지었다 (Qal 완료 3cp) / `אֶת־הַבַּיִת הַזֶּה`: 목적격 + 그 집 + 이(지시대명사 한정적)." },
+                        { id: "17-7-2", heb: "לֹא תִגַּע אֶת־זִבְחִי אֲשֶׁר עַל־הַמִּזְבֵּחַ", pron: "로 티가 에트-지브히 아셰르 알-하-미즈베아흐", trans: "너(남성)는 제단 위에 있는 내 제물에 손 대어서는 안 된다.", desc: "`לֹא תִגַּע`: 만지지 말라 (페-눈 미완료 2ms 금지) / `אֲשֶׁר עַל־הַמִּזְבֵּחַ`: 관계대명사절 '제단 위에 있는(~하는 것)'." },
+                        { id: "17-7-3", heb: "מָצָאתִי אֶת־הַכֶּסֶף אֲשֶׁר בַּמָּקוֹם הַהוּא", pron: "마차티 에트-하-케세프 아셰르 바-마콤 하-후", trans: "나는 저 장소에 있는 은을 찾아냈다.", desc: "`אֲשֶׁר בַּמָּקוֹם הַהוּא`: 관계대명사 구문. '그(저) 장소(`הַמָּקוֹם הַהוּא`) 안에(`בְּ`) 있는(`אֲשֶׁר`)'." },
+                        { id: "17-7-4", heb: "קָרָא נְבִיא יְהוָה בְּקוֹל גָּדוֹל", pron: "카라 나비 야훼 베콜 가돌", trans: "야훼의 그 예언자가 큰 소리로 외쳤다.", desc: "`קָרָא`: 불렀다, 외쳤다 (Qal 완료 3ms) / `בְּקוֹל גָּדוֹל`: 전치사 `בְּ`(~으로) + 소리 + 큰." },
+                        { id: "17-7-5", heb: "בָּעֵת הַהִיא תִּדְרֹשׁ אֶת־הָאֱלֹהִים הַחַיִּים בְּכָל־לִבְּךָ וּבְכָל־נַפְשְׁךָ", pron: "바-에트 하-히 티드로쉬 에트-하-엘로힘 하-하임 베콜-립브카 우베콜-나프쉐카", trans: "그때에, 너는 네 온 마음과 네 온 영혼으로 살아계신 하나님을 찾을 것이다.", desc: "`בָּעֵת הַהִיא`: 그 때에 / `תִּדְרֹשׁ`: 찾을 것이다 / `הָאֱלֹהִים הַחַיִּים`: 살아계신 하나님 (복수 장엄형)." },
+                        { id: "17-7-6", heb: "חֲזָקִים עַבְדֵי הַמֶּלֶךְ מֵעַבְדֵי הַכֹּהֵן", pron: "하자기임 아브데이 하-멜레크 메-아브데이 하-코헨", trans: "그 왕의 종들은 그 제사장의 종들보다 더 강하다.", desc: "`חֲזָקִים`: 강하다 (복수 서술적) / `מֵעַבְדֵי הַכֹּהֵן`: 전치사 `מִן`(~보다) + 종들 + 제사장. 비교급 구문." },
+                        { id: "17-7-7", heb: "לֹא עָבַר עַמִּי אֶת־בְּרִיתִי הַקְּדוֹשָׁה", pron: "로 아바르 암미 에트-브리티 하-크도샤", trans: "내 백성은 내 거룩한 언약을 어기지 않았다.", desc: "`עָבַר`: 지나갔다, 어겼다 / `עַמִּי`: 내 백성 / `בְּרִיתִי`: 내 언약 / `הַקְּדוֹשָׁה`: 거룩한 (여성형, 한정적 용법)." },
+                        { id: "17-7-8", heb: "זֶה זְהַב אִמֵּנוּ אֲשֶׁר נָתְנָה לַאֲדוֹנָהּ", pron: "제 제하브 임메누 아셰르 나트나 라-아도나흐", trans: "이것은 우리 어머니가 그분의 주인께 드렸던 우리 어머니의 금이다.", desc: "`זֶה`: 이것은(서술적) / `זְהַב אִמֵּנוּ`: 금 연계형 + 우리 어머니 / `אֲשֶׁר נָתְנָה`: 그녀가 주었던 것 / `לַאֲדוֹנָהּ`: 그녀의 주인에게." }
+                    ]
+                }
+            ]
+        };
+
+        // ==========================================
+        // 2. React Components
+        // ==========================================
+        const { useState } = React;
+
+        const BookOpen = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        );
+        const ChevronDown = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="6 9 12 15 18 9"></polyline></svg>
+        );
+        const ChevronUp = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="18 15 12 9 6 15"></polyline></svg>
+        );
+        const CheckCircle = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        );
+        const BookA = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path><path d="m8 13 4-7 4 7"></path><path d="M9.1 11h5.8"></path></svg>
+        );
+        const Lightbulb = ({ size = 24, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
+        );
+
+        function Flashcard({ item }) {
+            const [isExpanded, setIsExpanded] = useState(false);
+
+            return (
+                <div 
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className={`bg-white border rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-md ${isExpanded ? 'border-blue-300 shadow-md ring-1 ring-blue-100' : 'border-slate-200'}`}
+                >
+                    <div className="p-6 text-center bg-slate-50 relative">
+                        {/* 폰트 문제를 해결하기 위해 hebrew-print 클래스 강제 지정 */}
+                        <div className="hebrew-print hebrew-large mb-2" dir="rtl">{item.heb}</div>
+                        <div className="text-slate-500 font-medium tracking-wide">[{item.pron}]</div>
+                        
+                        <div className="absolute top-4 right-4 text-slate-300">
+                            {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                        </div>
+                    </div>
+
+                    {isExpanded && (
+                        <div className="p-6 border-t border-slate-100 card-enter">
+                            <div className="mb-4">
+                                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center">
+                                    <CheckCircle size={14} className="mr-1 inline text-green-500"/>
+                                    의미 (번역)
+                                </h4>
+                                <p className="text-lg text-slate-800 font-semibold">{item.trans}</p>
+                            </div>
+
+                            {item.parse && (
+                                <div className="mb-4 bg-blue-50 p-3 rounded-lg border border-blue-100">
+                                    <h4 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-1 flex items-center">
+                                        <BookA size={14} className="mr-1 inline"/>
+                                        형태 분해 (Parsing)
+                                    </h4>
+                                    <p className="text-blue-900 font-medium mb-1">
+                                        <span className="text-slate-500 mr-2">어근:</span> 
+                                        <span className="hebrew-inline mr-1 text-lg">{item.root.split(' ')[0]}</span> 
+                                        <span className="text-sm">{item.root.replace(item.root.split(' ')[0], '')}</span>
+                                    </p>
+                                    <p className="text-blue-900 text-sm font-bold bg-white inline-block px-2 py-1 rounded shadow-sm">
+                                        {item.parse}
+                                    </p>
+                                </div>
+                            )}
+
+                            <div>
+                                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center">
+                                    <Lightbulb size={14} className="mr-1 inline text-amber-500"/>
+                                    상세 해설 (문법)
+                                </h4>
+                                <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-wrap bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                    {item.desc}
+                                </p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        function App() {
+            const [chapter, setChapter] = useState(15);
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Header */}
+                    <header className="bg-blue-900 text-white shadow-lg sticky top-0 z-10">
+                        <div className="max-w-4xl mx-auto px-4 py-6">
+                            <div className="flex justify-between items-center mb-4">
+                                <h1 className="text-2xl font-extrabold flex items-center">
+                                    <BookOpen className="mr-3" size={28} />
+                                    구약 히브리어 마스터
+                                </h1>
+                                <span className="text-xs bg-blue-800 px-2 py-1 rounded-md text-blue-200 border border-blue-700">
+                                    인쇄체(Print) 폰트 적용됨
+                                </span>
+                            </div>
+                            
+                            {/* Tabs */}
+                            <div className="flex space-x-2">
+                                {[15, 16, 17].map(ch => (
+                                    <button 
+                                        key={ch}
+                                        onClick={() => setChapter(ch)}
+                                        className={`px-5 py-2 font-bold rounded-t-lg transition-colors ${chapter === ch ? 'bg-white text-blue-900' : 'bg-blue-800 text-blue-300 hover:bg-blue-700'}`}
+                                    >
+                                        제 {ch} 장
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
+                        <div className="mb-6 bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg text-slate-700 shadow-sm text-sm">
+                            <p><strong>학습 안내:</strong> 카드를 클릭하면 정답과 상세한 문법 분해가 나타납니다. 폰트는 성경과 교재에서 사용하는 표준 <b>명조/인쇄체(Frank Ruhl Libre / Ezra SIL)</b>를 강제 적용하여 모음(니쿠드)이 아주 선명하게 보입니다.</p>
+                        </div>
+
+                        {hebrewData[chapter].map((sectionData, idx) => (
+                            <div key={idx} className="mb-10">
+                                <h2 className="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2 mb-6 flex items-center">
+                                    <span className="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">
+                                        {idx + 1}
+                                    </span>
+                                    {sectionData.section}
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {sectionData.items.map((item) => (
+                                        <Flashcard key={item.id} item={item} />
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </main>
+
+                    <footer className="bg-slate-800 text-center text-slate-400 py-6 text-sm">
+                        <p>구약성서 히브리어 시작하기 연습문제 상세 해설 앱 (15~17과)</p>
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
