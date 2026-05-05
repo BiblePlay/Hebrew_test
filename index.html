@@ -1,1561 +1,561 @@
 <!DOCTYPE html>
-<html lang="ko" dir="ltr">
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>구약성서 히브리어 플래시카드 | 18-20과</title>
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Noto+Serif+Hebrew:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0f0e17;
-    --surface: #1a1828;
-    --card: #221f35;
-    --card2: #2a2642;
-    --accent: #e8c96d;
-    --accent2: #7eb8c9;
-    --accent3: #c97eb8;
-    --text: #f0ede6;
-    --text-dim: #9b96b0;
-    --hebrew: #f5e6c0;
-    --border: rgba(232,201,109,0.18);
-    --green: #7ec97e;
-    --red: #c97e7e;
-    --blue: #7eb8c9;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  /* Starfield background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(126,184,201,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(201,126,184,0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 60% 80%, rgba(232,201,109,0.04) 0%, transparent 40%);
-    pointer-events: none;
-    z-index: 0;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>히브리어 21-23과 완벽 해설 & 단어장 앱</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #faf8f2;
+      --text-color: #2c2c2c;
+      --card-bg: #ffffff;
+      --panel-bg: #fffbf0;
+      --border-color: #e0dcd3;
+      --primary-color: #2d7a45;
+      --secondary-color: #d84b2a;
+      --pronun-color: #1a56a8;
+      --vocab-bg: #eaf4eb;
+      --vocab-border: #92c7a3;
+      --tab-bg: #eaddc5;
+      --tab-active: #2d7a45;
+      --tab-text: #ffffff;
+      --btn-bg: #f0eee1;
+      --btn-hover: #e2dfcd;
+      --table-header: #efebdc;
+      --shadow: rgba(0,0,0,0.06);
+    }
 
-  /* ── HEADER ── */
-  header {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(15,14,23,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 24px;
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    flex-wrap: wrap;
-  }
-  header h1 {
-    font-family: 'Noto Serif Hebrew', serif;
-    font-size: 1.25rem;
-    color: var(--accent);
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-  }
-  header h1 span { color: var(--text-dim); font-family: 'Noto Sans KR', sans-serif; font-size: 0.8rem; display:block; }
-  .progress-bar-wrap {
-    flex: 1; min-width: 140px; max-width: 320px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 99px; height: 7px;
-  }
-  .progress-bar { height: 7px; border-radius: 99px; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width 0.4s; }
-  #progress-text { font-size: 0.75rem; color: var(--text-dim); white-space: nowrap; }
+    body.dark-mode {
+      --bg-color: #1e1e1e;
+      --text-color: #e4e4e4;
+      --card-bg: #2a2a2a;
+      --panel-bg: #333129;
+      --border-color: #4a4a4a;
+      --primary-color: #5ab578;
+      --secondary-color: #ff7e60;
+      --pronun-color: #82baff;
+      --vocab-bg: #2b3a30;
+      --vocab-border: #4d825f;
+      --tab-bg: #3a3a3a;
+      --tab-active: #5ab578;
+      --btn-bg: #3f3f3f;
+      --btn-hover: #555555;
+      --table-header: #383838;
+      --shadow: rgba(0,0,0,0.3);
+    }
 
-  /* ── TABS ── */
-  .tabs {
-    display: flex; gap: 6px;
-    padding: 16px 20px 0;
-    overflow-x: auto;
-    position: relative; z-index: 1;
-  }
-  .tab {
-    padding: 7px 16px; border-radius: 8px 8px 0 0;
-    border: 1px solid var(--border); border-bottom: none;
-    background: var(--surface);
-    color: var(--text-dim); font-size: 0.82rem;
-    cursor: pointer; white-space: nowrap;
-    transition: all 0.2s;
-  }
-  .tab.active { background: var(--card); color: var(--accent); border-color: rgba(232,201,109,0.35); }
-  .tab:hover:not(.active) { color: var(--text); background: var(--card2); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Noto Sans KR', sans-serif; background-color: var(--bg-color);
+      color: var(--text-color); line-height: 1.6; transition: all 0.3s ease; padding: 10px;
+    }
 
-  /* ── MAIN ── */
-  main {
-    position: relative; z-index: 1;
-    padding: 0 20px 40px;
-    max-width: 900px; margin: 0 auto;
-  }
-  .section {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 0 12px 12px 12px;
-    padding: 24px;
-    margin-bottom: 0;
-  }
-  .section-title {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--accent2);
-    margin-bottom: 18px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .section-title::after { content:''; flex:1; height:1px; background: var(--border); }
+    header { max-width: 900px; margin: 0 auto 20px auto; text-align: center; padding: 20px 0; }
+    h1 { font-size: 1.6rem; margin-bottom: 15px; color: var(--text-color); }
 
-  /* ── FLASHCARD ── */
-  .flashcard-area {
-    display: flex; flex-direction: column; align-items: center; gap: 20px;
-  }
-  .card-counter { font-size: 0.8rem; color: var(--text-dim); }
-  .card-wrap {
-    width: 100%;
-    perspective: 1200px;
-  }
-  .card-inner {
-    position: relative;
-    width: 100%; min-height: 280px;
-    transform-style: preserve-3d;
-    transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
-    cursor: pointer;
-  }
-  .card-inner.flipped { transform: rotateY(180deg); }
-  .card-front, .card-back {
-    position: absolute; inset: 0;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border-radius: 16px;
-    padding: 32px 28px;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    text-align: center;
-    gap: 14px;
-  }
-  .card-front {
-    background: linear-gradient(135deg, var(--card2) 0%, #1e1b30 100%);
-    border: 1px solid var(--border);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
-  }
-  .card-back {
-    background: linear-gradient(135deg, #1b2535 0%, #1a2030 100%);
-    border: 1px solid rgba(126,184,201,0.3);
-    transform: rotateY(180deg);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
-    overflow-y: auto;
-    justify-content: flex-start;
-    text-align: left;
-  }
-  .hebrew-main {
-    font-family: 'Frank Ruhl Libre', 'Noto Serif Hebrew', serif;
-    font-size: clamp(2.4rem, 8vw, 3.8rem);
-    font-weight: 700;
-    color: var(--hebrew);
-    line-height: 1.4;
-    direction: rtl;
-    text-shadow: 0 2px 12px rgba(232,201,109,0.2);
-    letter-spacing: 0.04em;
-  }
-  .hebrew-sm {
-    font-family: 'Frank Ruhl Libre', 'Noto Serif Hebrew', serif;
-    font-size: clamp(1.3rem, 4vw, 1.8rem);
-    color: var(--hebrew);
-    direction: rtl;
-    line-height: 1.6;
-  }
-  .hebrew-xs {
-    font-family: 'Frank Ruhl Libre', 'Noto Serif Hebrew', serif;
-    font-size: 1.1rem;
-    color: var(--accent);
-    direction: rtl;
-    line-height: 1.5;
-  }
-  .tag {
-    display: inline-flex; align-items: center;
-    padding: 3px 10px; border-radius: 99px;
-    font-size: 0.72rem; font-weight: 500;
-    letter-spacing: 0.05em;
-  }
-  .tag-chapter { background: rgba(232,201,109,0.12); color: var(--accent); border: 1px solid rgba(232,201,109,0.2); }
-  .tag-type { background: rgba(126,184,201,0.12); color: var(--accent2); border: 1px solid rgba(126,184,201,0.2); }
-  .hint { color: var(--text-dim); font-size: 0.82rem; }
-  .flip-hint {
-    font-size: 0.73rem;
-    color: var(--text-dim);
-    opacity: 0.7;
-    display: flex; align-items: center; gap: 4px;
-  }
+    .controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
 
-  /* Back card content */
-  .back-section { width: 100%; margin-bottom: 16px; }
-  .back-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent2);
-    margin-bottom: 6px;
-  }
-  .back-value { font-size: 0.95rem; color: var(--text); line-height: 1.7; }
-  .back-value.big { font-size: 1.15rem; font-weight: 500; color: var(--accent); }
-  .morpheme-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.82rem;
-    margin-top: 8px;
-  }
-  .morpheme-table th {
-    background: rgba(255,255,255,0.05);
-    color: var(--accent2);
-    padding: 5px 8px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-    font-weight: 500;
-  }
-  .morpheme-table td {
-    padding: 5px 8px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    color: var(--text);
-    vertical-align: top;
-  }
-  .morpheme-table tr:last-child td { border-bottom: none; }
-  .morpheme-table .heb-cell {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 1.1rem;
-    direction: rtl;
-    color: var(--hebrew);
-  }
-  .explain-box {
-    background: rgba(232,201,109,0.06);
-    border: 1px solid rgba(232,201,109,0.15);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 0.82rem;
-    color: var(--text);
-    line-height: 1.7;
-    margin-top: 8px;
-  }
-  .explain-box strong { color: var(--accent); }
-  .explain-box em { color: var(--accent2); font-style: normal; }
+    button {
+      font-family: inherit; cursor: pointer; border: none; border-radius: 8px;
+      padding: 8px 16px; background-color: var(--btn-bg); color: var(--text-color);
+      font-weight: 700; transition: background-color 0.2s;
+    }
+    button:hover { background-color: var(--btn-hover); }
 
-  /* Word breakdown grid */
-  .word-grid {
-    display: flex; flex-wrap: wrap; gap: 6px; direction: rtl;
-    margin: 6px 0;
-  }
-  .word-chip {
-    background: rgba(126,184,201,0.1);
-    border: 1px solid rgba(126,184,201,0.2);
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 1.15rem;
-    color: var(--hebrew);
-    direction: rtl;
-    cursor: default;
-  }
+    .status-bar { font-weight: 700; color: var(--primary-color); margin-bottom: 15px; }
 
-  /* ── NAVIGATION ── */
-  .nav-buttons {
-    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
-  }
-  .btn {
-    padding: 10px 22px;
-    border-radius: 8px; border: none;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.88rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-weight: 500;
-  }
-  .btn-ghost {
-    background: rgba(255,255,255,0.06);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent) 0%, #d4a843 100%);
-    color: #0f0e17;
-  }
-  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-  .btn-secondary {
-    background: rgba(126,184,201,0.15);
-    color: var(--accent2);
-    border: 1px solid rgba(126,184,201,0.25);
-  }
-  .btn-secondary:hover { background: rgba(126,184,201,0.25); }
-  .btn-sm { padding: 6px 14px; font-size: 0.78rem; }
-  .btn-danger {
-    background: rgba(201,126,126,0.15);
-    color: var(--red);
-    border: 1px solid rgba(201,126,126,0.25);
-  }
+    .tabs {
+      display: flex; max-width: 900px; margin: 0 auto;
+      border-radius: 12px 12px 0 0; overflow: hidden; background-color: var(--tab-bg);
+    }
+    .tab-btn {
+      flex: 1; padding: 15px 10px; background: none; border-radius: 0;
+      font-weight: 700; color: #333; font-size: 1.1rem;
+    }
+    body.dark-mode .tab-btn { color: #eee; }
+    .tab-btn.active { background-color: var(--tab-active); color: var(--tab-text); }
 
-  /* ── TABLE VIEW ── */
-  .table-view { overflow-x: auto; }
-  .data-table {
-    width: 100%; border-collapse: collapse; font-size: 0.85rem;
-  }
-  .data-table th {
-    background: rgba(255,255,255,0.05);
-    color: var(--accent2);
-    padding: 8px 10px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    font-weight: 500;
-  }
-  .data-table td {
-    padding: 9px 10px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    text-align: center;
-    vertical-align: middle;
-  }
-  .data-table tr:hover td { background: rgba(255,255,255,0.03); }
-  .data-table .heb { font-family: 'Frank Ruhl Libre', serif; font-size: 1.3rem; color: var(--hebrew); direction: rtl; }
-  .data-table .ans { color: var(--green); font-size: 0.82rem; }
-  .data-table .num { color: var(--text-dim); font-size: 0.8rem; }
+    .tab-content {
+      display: none; max-width: 900px; margin: 0 auto; background-color: var(--bg-color); padding: 20px 0;
+    }
+    .tab-content.active { display: block; }
 
-  /* ── SENTENCE VIEW ── */
-  .sentence-card {
-    background: var(--card2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 12px;
-  }
-  .sentence-heb {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 1.6rem;
-    direction: rtl;
-    color: var(--hebrew);
-    line-height: 1.7;
-    margin-bottom: 10px;
-    text-align: right;
-  }
-  .sentence-ko {
-    color: var(--accent);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    border-top: 1px solid var(--border);
-    padding-top: 8px;
-    margin-top: 8px;
-  }
-  .sentence-detail {
-    display: none;
-    margin-top: 12px;
-    border-top: 1px solid var(--border);
-    padding-top: 12px;
-  }
-  .sentence-detail.open { display: block; }
-  .word-analysis {
-    background: rgba(255,255,255,0.03);
-    border-radius: 8px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-    border-left: 3px solid var(--accent2);
-  }
-  .word-heb-label {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 1.2rem;
-    color: var(--hebrew);
-    direction: rtl;
-    display: inline-block;
-    margin-right: 8px;
-  }
-  .word-ko-gloss {
-    font-size: 0.82rem;
-    color: var(--accent);
-    display: inline-block;
-    margin-right: 6px;
-  }
-  .word-info { font-size: 0.78rem; color: var(--text-dim); line-height: 1.7; margin-top: 4px; }
-  .word-info span { color: var(--text); }
+    .section-title {
+      font-size: 1.3rem; margin: 25px 0 15px 0; padding-bottom: 8px;
+      border-bottom: 3px solid var(--border-color); color: var(--primary-color);
+    }
 
-  /* Toggle reveal */
-  .reveal-toggle {
-    background: none; border: 1px dashed var(--border);
-    border-radius: 6px; padding: 5px 12px;
-    color: var(--text-dim); font-size: 0.78rem;
-    cursor: pointer; margin-top: 6px;
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-  .reveal-toggle:hover { border-color: var(--accent2); color: var(--accent2); }
+    /* 히브리어 요구사항 적용: 굵게, 크기 1.8rem */
+    .hebrew {
+      font-family: 'Frank Ruhl Libre', serif; font-weight: 700; font-size: 1.8rem;
+      direction: rtl; display: inline-block; letter-spacing: 1px;
+    }
+    .hebrew-small { font-family: 'Frank Ruhl Libre', serif; font-weight: 700; font-size: 1.5rem; direction: rtl; }
 
-  /* ── FILTER BAR ── */
-  .filter-bar {
-    display: flex; gap: 8px; flex-wrap: wrap;
-    margin-bottom: 18px;
-  }
-  .filter-btn {
-    padding: 5px 14px;
-    border-radius: 99px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text-dim);
-    font-size: 0.78rem;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-    transition: all 0.2s;
-  }
-  .filter-btn.active { background: rgba(232,201,109,0.15); color: var(--accent); border-color: rgba(232,201,109,0.3); }
-  .filter-btn:hover:not(.active) { color: var(--text); border-color: rgba(255,255,255,0.2); }
+    details.question-card {
+      background-color: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 12px; margin-bottom: 18px; box-shadow: 0 4px 8px var(--shadow); overflow: hidden;
+    }
 
-  /* ── QUIZ MODE ── */
-  .quiz-input {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 16px;
-    color: var(--text);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.95rem;
-    width: 100%;
-    outline: none;
-    transition: border-color 0.2s;
-    direction: rtl;
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 1.2rem;
-  }
-  .quiz-input:focus { border-color: var(--accent2); }
-  .quiz-result {
-    padding: 8px 14px; border-radius: 6px;
-    font-size: 0.88rem; font-weight: 500;
-    margin-top: 8px;
-  }
-  .quiz-correct { background: rgba(126,201,126,0.1); color: var(--green); border: 1px solid rgba(126,201,126,0.2); }
-  .quiz-wrong { background: rgba(201,126,126,0.1); color: var(--red); border: 1px solid rgba(201,126,126,0.2); }
+    summary.q-summary {
+      list-style: none; cursor: pointer; padding: 18px; display: flex; flex-direction: column; gap: 12px;
+    }
+    summary.q-summary::-webkit-details-marker { display: none; }
 
-  /* stats bar */
-  .stats { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 16px; }
-  .stat { text-align: center; }
-  .stat-num { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
-  .stat-label { font-size: 0.72rem; color: var(--text-dim); }
+    .q-header { display: flex; align-items: center; gap: 15px; }
+    .q-num { font-weight: 900; color: var(--secondary-color); font-size: 1.3rem; min-width: 30px;}
 
-  /* scrollbar */
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+    .toggle-indicator {
+      background-color: var(--btn-bg); text-align: center; padding: 10px;
+      border-radius: 8px; font-size: 0.95rem; font-weight: 700; color: var(--text-color);
+    }
+    summary.q-summary:hover .toggle-indicator { background-color: var(--btn-hover); }
+    details[open] .toggle-indicator { background-color: var(--border-color); content: "▲ 해설 접기"; }
 
-  @media (max-width: 600px) {
-    .section { padding: 16px; }
-    .card-front, .card-back { padding: 20px 16px; }
-  }
-</style>
+    .explanation-panel {
+      background-color: var(--panel-bg); padding: 25px; border-top: 1px dashed var(--border-color); font-size: 1rem;
+    }
+
+    .exp-box {
+      background-color: var(--card-bg); border-left: 4px solid var(--primary-color);
+      padding: 15px; margin-bottom: 15px; border-radius: 0 8px 8px 0;
+    }
+    
+    .exp-title { font-weight: 700; color: var(--primary-color); margin-bottom: 8px; font-size: 1.05rem;}
+    .ans-highlight { color: var(--secondary-color); font-weight: 900; font-size: 1.15rem; }
+    .pronun { color: var(--pronun-color); font-style: italic; font-weight: 700; }
+    
+    /* 📝 단어장 전용 스타일 (새로 추가됨) */
+    .vocab-box {
+      background-color: var(--vocab-bg); border: 1px solid var(--vocab-border);
+      padding: 15px; border-radius: 8px; margin-bottom: 15px;
+    }
+    .vocab-title { font-weight: 700; color: var(--primary-color); margin-bottom: 10px; font-size: 1.05rem;}
+    .vocab-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .vocab-word-item {
+      background-color: var(--card-bg); padding: 5px 12px; border-radius: 20px;
+      border: 1px solid var(--vocab-border); font-size: 0.95rem; display: flex; align-items: center; gap: 5px;
+    }
+    .vocab-pronun { color: var(--pronun-color); font-size: 0.85rem; font-weight: bold; }
+
+    table.detail-table {
+      width: 100%; border-collapse: collapse; margin-top: 10px; background-color: var(--card-bg); font-size: 0.95rem;
+    }
+    table.detail-table th, table.detail-table td { border: 1px solid var(--border-color); padding: 10px; text-align: center; }
+    table.detail-table th { background-color: var(--table-header); font-weight: 700; }
+    
+    .grammar-point { background-color: rgba(45, 122, 69, 0.1); border-radius: 8px; padding: 15px; margin-top: 15px; font-weight: 500; }
+
+    @media (max-width: 600px) {
+      .hebrew { font-size: 1.5rem; } .q-header { flex-direction: column; align-items: flex-end; width: 100%; }
+      .q-num { align-self: flex-start; } .tab-btn { font-size: 0.9rem; padding: 12px 5px; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>히브리어 플래시카드 <span>구약성서 히브리어 시작하기 18-20과</span></h1>
-  <div class="progress-bar-wrap"><div class="progress-bar" id="pbar" style="width:0%"></div></div>
-  <span id="progress-text">0 / 0</span>
-</header>
-
-<div class="tabs" id="tabs">
-  <div class="tab active" onclick="showTab('flash')">🃏 플래시카드</div>
-  <div class="tab" onclick="showTab('table18')">18과 동사분해</div>
-  <div class="tab" onclick="showTab('table19')">19과 동사분해</div>
-  <div class="tab" onclick="showTab('table20')">20과 동사분해</div>
-  <div class="tab" onclick="showTab('sent18')">18과 종합문제</div>
-  <div class="tab" onclick="showTab('sent19')">19과 종합문제</div>
-  <div class="tab" onclick="showTab('sent20')">20과 종합문제</div>
-  <div class="tab" onclick="showTab('inf20')">20과 부정사</div>
-</div>
-
-<main>
-
-<!-- ════════════════════════════════════════════
-     FLASHCARD TAB
-════════════════════════════════════════════ -->
-<div id="tab-flash" class="section">
-  <div class="section-title">플래시카드 모드</div>
-  <div class="filter-bar" id="fc-filter">
-    <button class="filter-btn active" onclick="setFilter('all',this)">전체</button>
-    <button class="filter-btn" onclick="setFilter('18',this)">18과</button>
-    <button class="filter-btn" onclick="setFilter('19',this)">19과</button>
-    <button class="filter-btn" onclick="setFilter('20',this)">20과</button>
-    <button class="filter-btn" onclick="setFilter('verb',this)">동사</button>
-    <button class="filter-btn" onclick="setFilter('inf',this)">부정사</button>
-    <button class="filter-btn" onclick="setFilter('sent',this)">문장</button>
-  </div>
-  <div class="flashcard-area">
-    <div class="stats">
-      <div class="stat"><div class="stat-num" id="fc-total">0</div><div class="stat-label">전체</div></div>
-      <div class="stat"><div class="stat-num" id="fc-done" style="color:var(--green)">0</div><div class="stat-label">완료</div></div>
-      <div class="stat"><div class="stat-num" id="fc-remain" style="color:var(--accent2)">0</div><div class="stat-label">남음</div></div>
+  <header>
+    <h1>📖 히브리어 21-23과 완벽 해설 & 단어장</h1>
+    <div class="controls">
+      <button id="themeToggle">🌙 다크 모드</button>
+      <button id="expandAll">🔽 전체 펼치기</button>
+      <button id="collapseAll">🔼 전체 접기</button>
     </div>
-    <div class="card-counter" id="fc-counter">1 / 1</div>
-    <div class="card-wrap">
-      <div class="card-inner" id="fc-card" onclick="flipCard()">
-        <div class="card-front" id="fc-front">
-          <div class="hebrew-main" id="fc-heb">—</div>
-          <div id="fc-tags"></div>
-          <div class="flip-hint">↕ 클릭하여 뒤집기</div>
+    <div class="status-bar" id="statusCounter">0 / 0 해설 열림</div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-target="lesson21">21과: 분사</button>
+    <button class="tab-btn" data-target="lesson22">22과: 전치사 대명접미어</button>
+    <button class="tab-btn" data-target="lesson23">23과: 존재/소유</button>
+  </div>
+
+  <main>
+    <div id="lesson21" class="tab-content active"></div>
+    <div id="lesson22" class="tab-content"></div>
+    <div id="lesson23" class="tab-content"></div>
+  </main>
+
+  <script>
+    // ==========================================
+    // 데이터 (v 속성에 단어|발음|뜻 형식으로 단어장 추가)
+    // ==========================================
+    const data21 = [
+      { title: "1) 분사 형태 분해", type: "verb", items: [
+        { q: "כֹּרֵת", a: "qal ptc ms", p: "코렛", r: "כרת", rm: "자르다", t: ["qal","ptc","-","m","s","כרת"], d: "칼 능동분사 규칙형 남성 단수. 어근에 홀렘(ֹ)과 체레(ֵ) 결합.", pt: "분사 남성 단수는 כֹּתֵב 형태를 취합니다.", v: "כָּרַת(카라트): 자르다" },
+        { q: "הֹלֶכֶת", a: "qal ptc fs", p: "홀레켓", r: "הלך", rm: "가다", t: ["qal","ptc","-","f","s","הלך"], d: "여성 단수 어미 ֶת 결합.", pt: "여성 단수 분사는 보통 ֶת 또는 ָה로 끝납니다.", v: "הָלַךְ(할라크): 가다" },
+        { q: "עֹבְרִים", a: "qal ptc mp", p: "오브림", r: "עבר", rm: "지나가다", t: ["qal","ptc","-","m","p","עבר"], d: "남성 복수 어미 ִים 결합.", pt: "복수 어미가 붙으면 강세가 이동하여 중간 모음이 짧아집니다.", v: "עָבַר(아바르): 지나가다" },
+        { q: "שֹׁלְחוֹת", a: "qal ptc fp", p: "숄호트", r: "שלח", rm: "보내다", t: ["qal","ptc","-","f","p","שלח"], d: "여성 복수 어미 וֹת 결합.", pt: "여성 복수 명사/분사의 특징적인 끝 모양인 וֹת를 기억하세요.", v: "שָׁלַח(샬라흐): 보내다" },
+        { q: "שֹׁלֵחַ", a: "qal ptc ms (후음)", p: "숄레아흐", r: "שלח", rm: "보내다", t: ["qal","ptc","-","m","s","שלח"], d: "어근 마지막 자음이 후음(ח)이라 파타흐-푸르티브(훔쳐온 아) 발생.", pt: "후음(ח, ע)으로 끝나는 단어는 끝에 숨겨진 '아' 발음이 추가됩니다.", v: "שָׁלַח(샬라흐): 보내다" },
+        { q: "נֹשֵׂאת", a: "qal ptc fs", p: "노세트", r: "נשא", rm: "들다/나르다", t: ["qal","ptc","-","f","s","נשא"], d: "라메드-알렙(א) 동사의 특수한 여성 단수 형태.", pt: "끝이 א인 동사는 분사 여성형을 만들 때 ֵאת 형태를 취합니다.", v: "נָשָׂא(나사): 들다/나르다" },
+        { q: "בֹּנִים", a: "qal ptc mp", p: "보님", r: "בנה", rm: "짓다", t: ["qal","ptc","-","m","p","בנה"], d: "라메드-헤(ה) 동사. 복수 어미(ִים) 결합 시 끝의 헤 탈락.", pt: "끝이 ה로 끝나는 약동사는 어미가 붙으면 ה가 도망갑니다.", v: "בָּנָה(바나): 짓다" },
+        { q: "בֹּכֶה", a: "qal ptc ms (라메드-헤)", p: "보케", r: "בכה", rm: "울다", t: ["qal","ptc","-","m","s","בכה"], d: "라메드-헤(ה) 동사는 분사 남성단수에서 끝이 ֶה 로 끝납니다.", pt: "규칙동사와 달리 끝이 체레가 아닌 세골(ֶ) 헤(ה)로 끝납니다.", v: "בָּכָה(바카): 울다" },
+        { q: "גֹּלוֹת", a: "qal ptc fp (라메드-헤)", p: "골로트", r: "גלה", rm: "추방되다", t: ["qal","ptc","-","f","p","גלה"], d: "라메드-헤 동사에 여성 복수 어미 וֹת 결합 시 ה 탈락.", pt: "복수 어미 앞에서 ה가 사라지는 현상입니다.", v: "גָּלָה(갈라): 추방되다/드러나다" },
+        { q: "רֹאֶה", a: "qal ptc ms (라메드-알렙)", p: "로에", r: "ראה", rm: "보다", t: ["qal","ptc","-","m","s","ראה"], d: "라메드-헤 특성이 강하게 반영된 불규칙 분사 남성 단수.", pt: "ראה는 매우 자주 쓰이므로 형태를 외우는 것이 좋습니다.", v: "רָאָה(라아): 보다" }
+      ]},
+      { title: "2) 분사 용법 구별", type: "text", items: [
+        { q: "הַמֶּלֶךְ הַיֹּשֵׁב", a: "한정적(a): 앉아 있는 그 왕", d: "명사와 분사 모두 정관사(ה)가 있어 형용사처럼 명사를 직접 수식합니다.", v: "מֶלֶךְ(멜레크): 왕 | יָשַׁב(야샤브): 앉다" },
+        { q: "הַמֶּלֶךְ יֹשֵׁב", a: "서술적(p): 그 왕은 앉아 있다", d: "명사는 정관사가 있고, 분사는 없어 '~은 ~하다'의 문장이 됩니다.", v: "מֶלֶךְ(멜레크): 왕 | יָשַׁב(야샤브): 앉다" },
+        { q: "יֹשְׁבֵי הָעִיר", a: "명사적(s): 그 도시의 거주민들", d: "분사가 명사처럼 쓰여 뒤의 명사와 연계상태(A of B)를 이룹니다.", v: "יָשַׁב(야샤브): 앉다/거주하다 | עִיר(이르): 성읍/도시" },
+        { q: "אֲנַחְנוּ אֹכְלִים", a: "서술적(p): 우리는 먹고 있다", d: "인칭대명사 주어 뒤에 분사가 서술어로 쓰였습니다.", v: "אֲנַחְנוּ(아나흐누): 우리는 | אָכַל(아칼): 먹다" },
+        { q: "הִנֵּה אֲנַחְנוּ אֹכְלִים", a: "서술적(p): 우리가 곧 먹는다", d: "הִנֵּה(보라/곧) + 분사 구조는 막 일어날 '인접한 미래'를 의미합니다.", v: "הִנֵּה(힌네): 보라/곧 | אָכַל(아칼): 먹다" },
+        { q: "הָעֲבָדִים בֹּנִים", a: "서술적(p): 그 종들이 짓고 있다", d: "정관사 있는 명사 주어 + 정관사 없는 분사 서술어.", v: "עֶבֶד(에베드): 종/노예 | בָּנָה(바나): 짓다" },
+        { q: "הָעֲבָדִים הַבֹּנִים", a: "한정적(a): 그 짓고 있는 종들", d: "양쪽 모두 정관사가 일치하므로 한정적 수식구입니다.", v: "עֶבֶד(에베드): 종 | בָּנָה(바나): 짓다" },
+        { q: "הָאֵם בֹּכָה", a: "서술적(p): 그 어머니가 울고 있다", d: "어머니가 여성 단수이므로 여성 분사 בֹּכָה를 사용했습니다.", v: "אֵם(엠): 어머니 | בָּכָה(바카): 울다" },
+        { q: "הָאֵם יוֹצֵאת", a: "서술적(p): 그 어머니가 나가고 있다", d: "마찬가지로 서술적 용법의 여성 단수 분사입니다.", v: "אֵם(엠): 어머니 | יָצָא(야차): 나가다" },
+        { q: "שֹׁפְטֵי הָרְשָׁעִים", a: "명사적(s): 그 악한 심판관들", d: "분사(재판하는 자들)가 명사화되어 연계상태를 구성합니다.", v: "שָׁפַט(샤파트): 심판하다 | רָשָׁע(라샤): 악한 자" }
+      ]},
+      { title: "3) 소유 대명접미어 번역", type: "text", items: [
+        { q: "אוֹרִי", a: "나의 빛", d: "אוֹר(빛) + 1cs 접미어(ִי)", v: "אוֹר(오르): 빛 | ִי(이): 나의" },
+        { q: "אֶלֶךְ", a: "너(fs)의 신", d: "אֵל(신) + 2fs 접미어(ֵךְ)", v: "אֵל(엘): 신 | ֵךְ(에크): 너(여)의" },
+        { q: "זְרוֹעֹתֶיךָ", a: "너(ms)의 팔들", d: "복수명사 זְרוֹעֹת + 2ms 접미어(ֶיךָ)", v: "זְרוֹעַ(제로아): 팔 | ֶיךָ(에이카): 너(남)의(복수형에)" },
+        { q: "קוֹלָהּ", a: "그 여자의 목소리", d: "단수명사 + 3fs 접미어(ָהּ)", v: "קוֹל(콜): 목소리 | ָהּ(아흐): 그녀의" },
+        { q: "קוֹלֶיהָ", a: "그 여자의 목소리들", d: "복수명사 접미어 규칙(ֶיהָ)", v: "קוֹל(콜): 목소리 | ֶיהָ(에이하): 그녀의(복수형에)" },
+        { q: "מִשְׁפַּחְתָּם", a: "그들의 가족", d: "여성명사 연계형 + 3mp 접미어(ָם)", v: "מִשְׁפָּחָה(미쉬파하): 가족 | ָם(암): 그들의" },
+        { q: "מִשְׁפְּחֹתֵיהֶם", a: "그들의 가족들", d: "복수 여성명사 + 3mp 접미어(ֵיהֶם)", v: "מִשְׁפָּחָה(미쉬파하): 가족 | ֵיהֶם(에이헴): 그들의(복수형에)" },
+        { q: "דְּבָרִי", a: "나의 말씀", d: "단수명사 + 1cs", v: "דָּבָר(다바르): 말씀 | ִי(이): 나의" },
+        { q: "דְּבָרַי", a: "나의 말씀들", d: "복수명사 + 1cs(ַי)", v: "דָּבָר(다바르): 말씀 | ַי(아이): 나의(복수형에)" },
+        { q: "זִבְחֵיכֶם", a: "너희들(mp)의 희생제물", d: "복수명사 연계형 + 2mp 접미어", v: "זֶבַח(제바흐): 제물 | כֶם(켐): 너희들의" },
+        { q: "סִפְרוֹ", a: "그의 책", d: "명사 סֵפֶר 단수 + 3ms(וֹ)", v: "סֵפֶר(세페르): 책 | וֹ(오): 그의" },
+        { q: "סְפָרָיו", a: "그의 책들", d: "복수명사 + 3ms 접미어(ָיו)", v: "סֵפֶר(세페르): 책 | ָיו(아브): 그의(복수형에)" },
+        { q: "מַלְכֵינוּ", a: "우리의 왕들", d: "복수명사 연계형 + 1cp 접미어", v: "מֶלֶךְ(멜레크): 왕 | נוּ(누): 우리의" },
+        { q: "מַלְכֵּנוּ", a: "우리의 왕", d: "단수명사 연계형 + 1cp 접미어", v: "מֶלֶךְ(멜레크): 왕 | נוּ(누): 우리의" },
+        { q: "עֵינֶךָ", a: "너(ms)의 눈", d: "특수 형태 (눈은 쌍수명사)", v: "עַיִן(아인): 눈 | ֶךָ(에카): 너(남)의" },
+        { q: "עֵינַיִךְ", a: "너(fs)의 눈들", d: "복수명사 + 2fs 접미어", v: "עַיִן(아인): 눈 | ַיִךְ(아이크): 너(여)의(복수형에)" }
+      ]},
+      { title: "4) 동사 분해 혼합", type: "verb", items: [
+        { q: "עֲבַדְתֶּם", a: "qal pf 2mp", p: "아바드템", r: "עבד", rm: "섬기다/일하다", t: ["qal","pf","2","m","p","עבד"], d: "칼 완료 2인칭 남성 복수 어미 תֶּם 결합.", pt: "완료형은 뒤에 어미가 붙어 인칭을 결정합니다.", v: "עָבַד(아바드): 섬기다/일하다 | תֶּם(템): 너희들(완료어미)" },
+        { q: "אֶמְצָא", a: "qal impf 1cs", p: "엠차", r: "מצא", rm: "찾다", t: ["qal","impf","1","c","s","מצא"], d: "미완료 1인칭 단수 접두어 א 결합.", pt: "미완료 1인칭 단수는 항상 א로 시작합니다.", v: "מָצָא(마차): 찾다/발견하다 | א(알렙): 내가(미완료접두어)" },
+        { q: "יִתֵּן", a: "qal impf 3ms", p: "이텐", r: "נתן", rm: "주다", t: ["qal","impf","3","m","s","נתן"], d: "페-눈(נ) 동사. 첫 נ이 동화되어 두 번째 자음에 다게쉬 발생.", pt: "어근의 첫 נ은 미완료에서 사라지고 점(다게쉬)으로 변합니다.", v: "נָתַן(나탄): 주다 | י(요드): 그가(미완료접두어)" },
+        { q: "גָּלִינוּ", a: "qal pf 1cp", p: "갈리누", r: "גלה", rm: "추방되다", t: ["qal","pf","1","c","p","גלה"], d: "라메드-헤 동사 완료형. 끝의 ה가 י(요드)로 변함.", pt: "끝이 ה인 약동사는 완료에서 ה가 요드로 바뀝니다.", v: "גָּלָה(갈라): 추방되다 | נוּ(누): 우리가(완료어미)" },
+        { q: "שְׁפֹט", a: "qal inf const", p: "쉐포트", r: "שפט", rm: "심판하다", t: ["qal","inf const","-","-","-","שפט"], d: "연계형 부정사(Infinitive Construct)의 기본 형태 구조.", pt: "부정사 연계형은 슈바-홀렘 구조입니다.", v: "שָׁפַט(샤파트): 심판하다" },
+        { q: "שֹׁמְרִים", a: "qal ptc mp", p: "쇼므림", r: "שמר", rm: "지키다", t: ["qal","ptc","-","m","p","שמר"], d: "능동분사 남성 복수 규칙형 (첫 모음 홀렘).", pt: "분사는 형용사처럼 성/수에 따라 변화합니다.", v: "שָׁמַר(샤마르): 지키다" },
+        { q: "בְּנוֹת", a: "qal inf const", p: "베노트", r: "בנה", rm: "짓다", t: ["qal","inf const","-","-","-","בנה"], d: "라메드-헤 동사 연계형 부정사는 특수하게 וֹת 형태를 취함.", pt: "여성 복수 어미와 똑같이 생겼으니 주의하세요.", v: "בָּנָה(바나): 짓다" },
+        { q: "בְּנוֹת", a: "qal ptc fp", p: "베노트", r: "בנה", rm: "짓다", t: ["qal","ptc","-","f","p","בנה"], d: "위와 형태는 같으나 문맥에 따라 여성 복수 분사로 쓰임.", pt: "동일 형태가 두 가지 역할을 할 수 있습니다.", v: "בָּנָה(바나): 짓다" },
+        { q: "יֵרְדוּ", a: "qal impf 3mp", p: "예레두", r: "ירד", rm: "내려가다", t: ["qal","impf","3","m","p","ירד"], d: "페-요드 동사 미완료형. 요드(י)가 유지됨.", pt: "요드로 시작하는 동사는 특수한 모음 패턴을 가집니다.", v: "יָרַד(야라드): 내려가다" },
+        { q: "שֶׁבֶת", a: "qal inf const", p: "셰베트", r: "ישב", rm: "앉다/거주하다", t: ["qal","inf const","-","-","-","ישב"], d: "페-요드 동사의 연계형 부정사 특수 형태 (앞의 י 탈락).", pt: "불규칙 부정사 형태입니다.", v: "יָשַׁב(야샤브): 앉다" }
+      ]},
+      { title: "5) 번역 종합", type: "text", items: [
+        { q: "יָדַעְתִּי אֶת־הָאֲנָשִׁים הַשֹּׁמְעִים בִּדְבַר־יְהוָה", a: "나는 야훼의 말씀을 순종하는 그 사람들을 알았다.", d: "הַשֹּׁמְעִים은 분사의 한정적 용법입니다. שָׁמַע בְּ~ 구조는 '~에 순종하다'라는 숙어입니다.", v: "יָדַע(야다): 알다 | אִישׁ(이쉬): 사람 / אֲנָשִׁים(아나쉼): 사람들 | שָׁמַע(샤마): 듣다/순종하다 | דָּבָר(다바르): 말씀" },
+        { q: "יָדַעְתִּי אֶת־הָאֲנָשִׁים אֲשֶׁר שָׁמְעוּ בִּדְבַר־יְהוָה", a: "나는 야훼의 말씀을 순종했던 그 사람들을 알았다.", d: "1번 문장과 뜻은 같으나, 분사 대신 관계대명사(אֲשֶׁר)와 완료 동사(שָׁמְעוּ)를 사용했습니다.", v: "אֲשֶׁר(아셰르): ~하는(관계대명사) | שָׁמַע(샤마): 듣다(완료형)" },
+        { q: "הִנֵּה הוּא עֹלֶה אֶל־הַר־הָאֱלֹהִים לִזְבֹּחַ שָׁם", a: "그는 곧 하나님의 산으로 올라간다. 거기서 제사드리기 위해서이다.", d: "הִנֵּה + 분사(עֹלֶה)는 막 일어날 인접한 미래입니다. לִזְבֹּחַ는 전치사 לְ + 부정사로 목적(~하기 위해)을 표현합니다.", v: "הִנֵּה(힌네): 보라/곧 | עָלָה(알라): 올라가다 | הַר(하르): 산 | זָבַח(자바흐): 제사하다 | שָׁם(샴): 거기서" },
+        { q: "לֹא תֵשֵׁב מִשְׁפַּחַת הַמֶּלֶךְ הַגְּדוֹלָה בִּמְקוֹם הַמִּלְחָמָה", a: "그 왕의 그 위대한 가족은 그 전쟁터(근처)에 거주하지 않을 것이다.", d: "형용사 הַגְּדוֹלָה(위대한, 여성)가 꾸미는 것은 왕이 아니라 가족(여성명사)입니다.", v: "יָשַׁב(야샤브): 거주하다 | מִשְׁפָּחָה(미쉬파하): 가족 | מֶלֶךְ(멜레크): 왕 | גָּדוֹל(가돌): 큰/위대한 | מָקוֹם(마콤): 장소 | מִלְחָמָה(밀하마): 전쟁" },
+        { q: "אָבִיהֶם לִשְׁפֹּךְ דָּם כִּי לֹא יְרֵאתֶם אֶת־הָאֱלֹהִים הַחַיִּים", a: "너희들은 피 흘리기를 원하였다. 왜냐하면 너희들은 살아계신 하나님을 두려워하지 않았기 때문이다.", d: "לִשְׁפֹּךְ(흘리기 위해) 부정사 연계형이 쓰였고, כִּי(왜냐하면)로 이유를 설명합니다.", v: "אָבָה(아바): 원하다 | שָׁפַךְ(샤파크): 쏟다/흘리다 | דָּם(담): 피 | כִּי(키): 왜냐하면 | יָרֵא(야레): 두려워하다 | חַי(하이): 살아있는" },
+        { q: "הַנָּבִיא הַקָּדוֹשׁ כָּתַב אֶת סִפְרוֹ לַמֶּלֶךְ הָרָשָׁע הַהוּא", a: "그 거룩한 제사장은 그 사악한 왕에게 자기의 책을 쓰고 있다.", d: "כָּתַב가 문맥상 분사(쓰고 있다)로 해석됩니다. הַהוּא는 지시대명사(그/저)입니다.", v: "נָבִיא(나비): 예언자(제사장) | קָדוֹשׁ(카도쉬): 거룩한 | כָּתַב(카타브): 쓰다 | סֵפֶר(세페르): 책 | רָשָׁע(라샤): 악한 | הוּא(후): 그(지시대명사)" },
+        { q: "נִזְכֹּר אֶת־תּוֹרַת אֱלֹהֵינוּ וּמִשְׁפָּטָיו לְעוֹלָם כִּי טוֹבִים הֵם", a: "우리는 우리 하나님의 율법과 그분의 공의를 영원히 기억할 것이다. 왜냐하면 그것들은 좋기 때문이다.", d: "נִזְכֹּר는 미완료 1cp 동사입니다. 율법(토라)은 연계상태로 쓰였습니다.", v: "זָכַר(자카르): 기억하다 | תּוֹרָה(토라): 율법 | מִשְׁפָּט(미슈파트): 공의/재판 | עוֹלָם(올람): 영원 | טוֹב(토브): 좋은 | הֵם(헴): 그것들은" },
+        { q: "יֵרֵד הָאוֹיֵב לָקַחַת אֶת־בָּנֶיךָ וּבְנוֹתֶיךָ לְעִירָם", a: "그 원수는 너의 아들들과 너의 딸들을 자기네 성읍으로 데려가기 위해 내려올 것이다.", d: "יֵרֵד는 미완료 동사, לָקַחַת(취하기 위해)는 특수 부정사 연계형입니다.", v: "יָרַד(야라드): 내려가다 | אוֹיֵב(오예브): 원수 | לָקַח(라카흐): 취하다 | בֵּן(벤): 아들 | בַּת(바트): 딸 | עִיר(이르): 성읍" }
+      ]},
+      { title: "6) 성경 읽기", type: "text", items: [
+        { q: "וְהִנֵּה אָנֹכִי הוֹלֵךְ הַיּוֹם בְּדֶרֶךְ כָּל־הָאָרֶץ", a: "나는 오늘 곧 세상 길을 갈 것이다. [수 23:14]", d: "הִנֵּה + 분사 구문으로 임박한 미래(죽음)를 비유적으로 표현했습니다.", v: "הִנֵּה(힌네): 보라/곧 | אָנֹכִי(아노키): 나는 | הָלַךְ(할라크): 가다 | יוֹם(욤): 날/오늘 | דֶּרֶךְ(데레크): 길 | אֶרֶץ(에레츠): 땅/세상" },
+        { q: "אַתָּה נָתַן אֶת־עַבְדְּךָ בְּיַד אַחְאָב", a: "바로 네가 네 종을 아합의 손에 넘겨준다. [왕상 18:9]", d: "נָתַן이 분사로 사용되어 현재 진행/지속되는 상태를 서술합니다.", v: "אַתָּה(아타): 너는 | נָתַן(나탄): 주다 | עֶבֶד(에베드): 종 | יָד(야드): 손" },
+        { q: "שָׁמַר יְהוָה אֶת־כָּל־אֹהֲבָיו", a: "야훼께서 그분을 사랑하는 모든 이들을 지키고 계신다. [시 145:20]", d: "אֹהֲבָיו(그를 사랑하는 자들)는 분사의 명사적 용법에 대명접미어가 붙은 형태입니다.", v: "שָׁמַר(샤마르): 지키다 | כֹּל(콜): 모든 | אָהַב(아하브): 사랑하다" }
+      ]}
+    ];
+
+    const data22 = [
+      { title: "1) 전치사구 번역", type: "text", items: [
+        { q: "לוֹ", a: "그(m)에게", d: "전치사 לְ + 3ms 접미어", v: "לְ(레): ~에게 | הוּא(후): 그(대명사)" },
+        { q: "בְּךָ", a: "네(m) 안에", d: "전치사 בְּ + 2ms 접미어", v: "בְּ(베): ~안에 | אַתָּה(아타): 너" },
+        { q: "עִמָּהּ", a: "그(f)와 함께", d: "전치사 עִם + 3fs 접미어", v: "עִם(임): 함께 | הִיא(히): 그녀" },
+        { q: "בְּתוֹכִי", a: "내 가운데", d: "전치사 בְּתוֹךְ + 1cs 접미어", v: "תָּוֶךְ(타베크/베토크): 가운데 | אֲנִי(아니): 나" },
+        { q: "לְךָ", a: "너(f)에게", d: "전치사 לְ + 2fs 접미어 (오기 주의: לָךְ)", v: "לְ(레): ~에게 | אַתְּ(아트): 너(여)" },
+        { q: "עִמָּהֶם", a: "그들(m)과 함께", d: "전치사 עִם + 3mp 접미어", v: "עִם(임): 함께 | הֵם(헴): 그들" },
+        { q: "בְּתוֹכֵנוּ", a: "우리 가운데", d: "전치사 בְּתוֹךְ + 1cp 접미어", v: "תָּוֶךְ(타베크): 가운데 | אֲנַחְנוּ(아나흐누): 우리" },
+        { q: "בָּכֶם", a: "너희들(m) 안에", d: "전치사 בְּ + 2mp 접미어", v: "בְּ(베): ~안에 | אַתֶּם(아템): 너희들(남)" },
+        { q: "לָכֵן", a: "너희들(f)에게", d: "전치사 לְ + 2fp 접미어", v: "לְ(레): ~에게 | אַתֵּן(아텐): 너희들(여)" },
+        { q: "אֵלָיו", a: "그(m)에게", d: "전치사 אֶל + 3ms 접미어 (복수형 기반)", v: "אֶל(엘): ~에게로" },
+        { q: "עָלֶיךָ", a: "네(m) 위에", d: "전치사 עַל + 2ms 접미어 (복수형 기반)", v: "עַל(알): ~위에" },
+        { q: "לִפְנֵי", a: "내 앞에", d: "לִפְנֵי 단독 연계형", v: "פָּנִים(파님/리프네): 앞/얼굴" },
+        { q: "תַּחְתֶּיהָ", a: "그(f) 아래에", d: "전치사 תַּחַת + 3fs 접미어", v: "תַּחַת(타하트): 아래에" },
+        { q: "אֵלֵינוּ", a: "우리에게", d: "전치사 אֶל + 1cp 접미어", v: "אֶל(엘): ~에게로" },
+        { q: "לִפְנֵיהֶם", a: "너희들(m) 앞에", d: "전치사 לִפְנֵי + 3mp 접미어", v: "פָּנִים(파님/리프네): 앞" },
+        { q: "תַּחְתֵּינוּ", a: "우리 아래에", d: "전치사 תַּחַת + 1cp 접미어", v: "תַּחַת(타하트): 아래에" },
+        { q: "עֲלֵיכֶם", a: "너희들(m) 위에", d: "전치사 עַל + 2mp 접미어", v: "עַל(알): ~위에" },
+        { q: "אֵלֶיךָ", a: "너(f)에게", d: "전치사 אֶל + 2fs 접미어", v: "אֶל(엘): ~에게로" },
+        { q: "לִפְנֵיהֶן", a: "그들(f) 앞에", d: "전치사 לִפְנֵי + 3fp 접미어", v: "פָּנִים(파님): 앞" },
+        { q: "אֲלֵיכֶן", a: "너희들(f)에게", d: "전치사 אֶל + 2fp 접미어", v: "אֶל(엘): ~에게로" },
+        { q: "עִמָּנוּ", a: "우리와 함께", d: "전치사 עִם + 1cp 접미어", v: "עִם(임): 함께" },
+        { q: "לִפְנֵינוּ", a: "우리 앞에", d: "전치사 לִפְנֵי + 1cp 접미어", v: "פָּנִים(파님): 앞" },
+        { q: "לִי", a: "나에게", d: "전치사 לְ + 1cs 접미어", v: "לְ(레): ~에게" },
+        { q: "אֵלַי", a: "나에게", d: "전치사 אֶל + 1cs 접미어", v: "אֶל(엘): ~에게로" },
+        { q: "בְּנוֹ", a: "우리 안에 / 그의 아들", d: "בְּ + 우리(1cp) 또는 בֵּן(아들) + 3ms", v: "בְּ(베): ~안에 | בֵּן(벤): 아들" }
+      ]},
+      { title: "2) 문장 번역", type: "text", items: [
+        { q: "נָתַן אֶת־הַזֶּבַח לָהֶם", a: "그는 그들(mp)에게 그 제물을 주었다.", d: "לָהֶם은 전치사 לְ와 대명사 결합형입니다.", v: "נָתַן(나탄): 주다 | זֶבַח(제바흐): 제물 | לְ(레): ~에게 | הֵם(헴): 그들" },
+        { q: "הָלְכוּ עִמָּנוּ", a: "그들은 우리와 함께 갔다.", d: "עִמָּנוּ는 전치사 עִם과 1인칭 복수 결합형입니다.", v: "הָלַךְ(할라크): 가다 | עִם(임): 함께 | אֲנַחְנוּ(아나흐누): 우리" },
+        { q: "לָקַחְתָּ אֶת־הַכֶּסֶף מִמֶּנִּי", a: "너는 내게서 그 은을 가져갔다.", d: "מִמֶּנִּי는 전치사 מִן이 나와 결합할 때의 확장 형태입니다.", v: "לָקַח(라카흐): 가져가다 | כֶּסֶף(케세프): 은/돈 | מִן(민): ~로부터 | אֲנִי(아니): 나" },
+        { q: "תַּחְתֶּיךָ זְרוֹעַ יְהוָה", a: "야훼의 팔이 네(ms) 아래에 있다.", d: "תַּחַת과 같은 전치사는 명사 복수형 접미어 변화를 따릅니다.", v: "תַּחַת(타하트): 아래에 | זְרוֹעַ(제로아): 팔" },
+        { q: "גָּדוֹל הָאִישׁ אֲשֶׁר עָמַדְנוּ לְפָנָיו", a: "우리가 대면하여 서 있던 그 남자는 위대하다.", d: "관계대명사(אֲשֶׁר) 절 끝에 수식하는 명사를 가리키는 '재서대명사' 구문입니다.", v: "גָּדוֹל(가돌): 위대한 | אִישׁ(이쉬): 남자 | אֲשֶׁר(아셰르): ~하는(관계사) | עָמַד(아마드): 서다 | פָּנִים(파님/리프네): 앞" },
+        { q: "בָּטַחְנוּ בוֹ", a: "우리는 그를 신뢰한다.", d: "בָּטַח 동사는 전치사 בְּ와 함께 씁니다.", v: "בָּטַח(바타흐): 신뢰하다 | בְּ(베): ~안에/를" },
+        { q: "יָצַק אֶת־הַמַּיִם עֲלֵיכֶם", a: "그는 너희들(mp) 위에 물을 부었다.", d: "עֲלֵיכֶם은 עַל 전치사 + 2mp 대명사 결합입니다.", v: "יָצַק(야차크): 붓다 | מַיִם(마임): 물 | עַל(알): ~위에" },
+        { q: "לָכְדוּ אֶת־הָעִיר מֵהֶם", a: "그들(mp)은 그들에게서 그 성읍을 점령하였다.", d: "מֵהֶם은 מִן 전치사와 3mp 접미어 결합입니다.", v: "לָכַד(라카드): 점령하다 | עִיר(이르): 성읍 | מִן(민): ~로부터" }
+      ]},
+      { title: "3) 연계상태 번역", type: "text", items: [
+        { q: "דְּבַר הַנָּבִיא", a: "그 예언자의 말씀", d: "דָּבָר의 단수 연계형(דְּבַר)", v: "דָּבָר(다바르): 말씀 | נָבִיא(나비): 예언자" },
+        { q: "דִּבְרֵי הַנָּבִיא", a: "그 예언자의 말씀들", d: "דָּבָר의 복수 연계형(דִּבְרֵי)", v: "דָּבָר(다바르): 말씀 | נָבִיא(나비): 예언자" },
+        { q: "צְבָא הַשָּׁמַיִם", a: "그 하늘의 군대", d: "명사 צָבָא의 연계상태", v: "צָבָא(차바): 군대 | שָׁמַיִם(샤마임): 하늘" },
+        { q: "תּוֹרַת הָאָרֶץ", a: "그 땅의 율법", d: "여성명사 연계형(ה → ת)", v: "תּוֹרָה(토라): 율법 | אֶרֶץ(에레츠): 땅" },
+        { q: "מִשְׁפַּחַת הַמֶּלֶךְ", a: "그 왕의 가족", d: "여성명사 연계형(ה → ת)", v: "מִשְׁפָּחָה(미쉬파하): 가족 | מֶלֶךְ(멜레크): 왕" },
+        { q: "זִבְחֵי הָאֱלֹהִים", a: "하나님의 제물들", d: "남성 복수 연계형(ים → י)", v: "זֶבַח(제바흐): 제물 | אֱלֹהִים(엘로힘): 하나님" },
+        { q: "נַפְשׁוֹת הָעַמִּים", a: "그 백성들의 혼들", d: "여성 복수 연계형(모음 단축)", v: "נֶפֶשׁ(네페쉬): 혼/생명 | עַם(암): 백성" },
+        { q: "יוֹם יְהוָה", a: "야훼의 날", d: "단수 연계형 고정모음 유지", v: "יוֹם(욤): 날 | יְהוָה(야훼): 하나님" },
+        { q: "יְמֵי הַשָּׁנָה", a: "그 해(年)의 날들", d: "יוֹם의 불규칙 복수 연계형", v: "יוֹם(욤): 날 | שָׁנָה(샤나): 해/년" },
+        { q: "אֲדוֹן כָּל־הָאָרֶץ", a: "그 땅 전체의 주인", d: "이중 연계상태", v: "אָדוֹן(아돈): 주인 | כֹּל(콜): 모든 | אֶרֶץ(에레츠): 땅" },
+        { q: "רֵאשִׁית דַּרְכּוֹ", a: "그의 길의 시작", d: "연계명사 + 소유접미어", v: "רֵאשִׁית(레쉬트): 시작 | דֶּרֶךְ(데레크): 길" },
+        { q: "בְּרִית אֱלֹהֵינוּ", a: "우리 하나님의 언약", d: "여성 단수 명사 연계형", v: "בְּרִית(베리트): 언약 | אֱלֹהִים(엘로힘): 하나님" }
+      ]},
+      { title: "4) 형용사 + 연계상태", type: "text", items: [
+        { q: "יוֹם יְהוָה הַגָּדוֹל", a: "그 위대한 야훼의 날", d: "הַגָּדוֹל(남성단수)은 야훼나 날을 수식할 수 있습니다.", v: "יוֹם(욤): 날 | גָּדוֹל(가돌): 큰/위대한" },
+        { q: "צְבָא הַשָּׁמַיִם הָרַב", a: "그 많은 하늘의 군대", d: "הָרַב(남성단수)는 군대를 꾸며줍니다.", v: "צָבָא(차바): 군대 | שָׁמַיִם(샤마임): 하늘 | רַב(라브): 많은" },
+        { q: "רֵאשִׁית דַּרְכּוֹ הַטּוֹבָה", a: "그의 길의 좋은 시작", d: "הַטּוֹבָה(여성단수)는 앞의 여성명사 רֵאשִׁית(시작)을 수식합니다.", v: "רֵאשִׁית(레쉬트): 시작 | דֶּרֶךְ(데레크): 길 | טוֹב(토브): 좋은" },
+        { q: "זִבְחֵי הַכֹּהֵן הַטָּמֵא", a: "그 부정한 제사장의 제물들", d: "הַטָּמֵא(남성단수)는 제사장을 꾸밉니다.", v: "זֶבַח(제바흐): 제물 | כֹּהֵן(코헨): 제사장 | טָמֵא(타메): 부정한" },
+        { q: "דְּבַר הַנְּבִיאִים הָרְשָׁעִים", a: "그 악한 예언자들의 말씀", d: "הָרְשָׁעִים(남성복수)은 예언자들을 꾸밉니다.", v: "דָּבָר(다바르): 말씀 | נָבִיא(나비): 예언자 | רָשָׁע(라샤): 악한" },
+        { q: "יְמֵי הַשָּׁנָה הַטּוֹבִים", a: "그 해(年)의 좋은 날들", d: "הַטּוֹבִים(남성복수)은 날들을 수식합니다.", v: "יוֹם(욤): 날 | שָׁנָה(샤나): 해 | טוֹב(토브): 좋은" },
+        { q: "תּוֹרַת יְהוָה הַטְּהוֹרָה", a: "야훼의 그 정결한 율법", d: "הַטְּהוֹרָה(여성단수)는 율법을 수식합니다.", v: "תּוֹרָה(토라): 율법 | טָהוֹר(타호르): 정결한" },
+        { q: "בְּרִית אֱלֹהֵינוּ הַזָּקֵן", a: "우리 하나님의 그 오래된 언약", d: "הַזָּקֵן(남성단수)이므로 하나님을 꾸밉니다.", v: "בְּרִית(베리트): 언약 | זָקֵן(자켄): 늙은/오래된" },
+        { q: "נַפְשׁוֹת הָעַמִּים הַטְּהוֹרוֹת", a: "그 백성들의 정결한 혼들", d: "여성복수 형용사이므로 혼들을 수식합니다.", v: "נֶפֶשׁ(네페쉬): 혼/생명 | עַם(암): 백성 | טָהוֹר(타호르): 정결한" },
+        { q: "דִּבְרֵי הַנָּבִיא הַגָּדוֹל", a: "그 위대한 예언자의 말씀들", d: "남성단수 형용사이므로 예언자를 꾸밉니다.", v: "דָּבָר(다바르): 말씀 | נָבִיא(나비): 예언자 | גָּדוֹל(가돌): 위대한" },
+        { q: "אֲדוֹן כָּל־הָאָרֶץ הַגָּדוֹל", a: "그 땅 전체의 위대한 주인", d: "남성단수 형용사이므로 주인을 꾸밉니다.", v: "אָדוֹן(아돈): 주인 | אֶרֶץ(에레츠): 땅 | גָּדוֹל(가돌): 위대한" },
+        { q: "מִשְׁפַּחַת הַמֶּלֶךְ הַגָּדוֹל", a: "그 위대한 왕의 가족", d: "남성단수 형용사이므로 왕을 꾸밉니다.", v: "מִשְׁפָּחָה(미쉬파하): 가족 | מֶלֶךְ(멜레크): 왕 | גָּדוֹל(가돌): 위대한" }
+      ]},
+      { title: "5) 동사 분해", type: "verb", items: [
+        { q: "כְּתַבְתֶּם", a: "qal pf 2mp", p: "케탑템", r: "כתב", rm: "쓰다", t: ["qal","pf","2","m","p","כתב"], d: "칼 완료 2인칭 복수 어미 תֶּם 결합.", pt: "완료 2인칭 복수 어미는 모음을 짧게 만듭니다.", v: "כָּתַב(카타브): 쓰다 | תֶּם(템): 너희들(완료어미)" },
+        { q: "יֵרֵד", a: "qal impf 3ms", p: "예레드", r: "ירד", rm: "내려가다", t: ["qal","impf","3","m","s","ירד"], d: "페-요드(י) 동사 미완료 특징적 모음 변화.", pt: "요드로 시작하는 동사는 특별한 모음 패턴을 가집니다.", v: "יָרַד(야라드): 내려가다 | י(요드): 그가(미완료접미어)" },
+        { q: "עֲשׂוֹת", a: "qal inf const", p: "아소트", r: "עשה", rm: "하다/만들다", t: ["qal","inf const","-","-","-","עשה"], d: "라메드-헤 동사 부정사 연계형(וֹת 어미).", pt: "약동사 부정사는 명사 여성 복수와 형태가 같습니다.", v: "עָשָׂה(아사): 하다/만들다" },
+        { q: "בָּנִים", a: "qal ptc mp", p: "바님", r: "בנה", rm: "짓다", t: ["qal","ptc","-","m","p","בנה"], d: "라메드-헤 동사 분사 복수. 혹은 명사 '아들들'.", pt: "문맥을 통해 분사인지 명사인지 파악해야 합니다.", v: "בָּנָה(바나): 짓다 | בֵּן(벤): 아들" },
+        { q: "מָצָאנוּ", a: "qal pf 1cp", p: "마차누", r: "מצא", rm: "찾다/발견하다", t: ["qal","pf","1","c","p","מצא"], d: "라메드-알렙 완료형 1인칭 공성 복수 어미 נוּ 결합.", pt: "완료 1인칭 복수형은 '누'로 끝납니다.", v: "מָצָא(마차): 찾다 | נוּ(누): 우리가(완료어미)" },
+        { q: "אֶתֵּן", a: "qal impf 1cs", p: "에텐", r: "נתן", rm: "주다", t: ["qal","impf","1","c","s","נתן"], d: "페-눈 동사 1인칭 접두어 א + 눈 동화(다게쉬).", pt: "미완료 1인칭 단수는 늘 א로 시작합니다.", v: "נָתַן(나탄): 주다 | א(알렙): 내가(접미어)" },
+        { q: "שֶׁבֶת", a: "qal inf const", p: "셰베트", r: "ישב", rm: "앉다/거주하다", t: ["qal","inf const","-","-","-","ישב"], d: "페-요드 동사 부정사 연계형 특수 구조.", pt: "요드가 떨어져 나가고 끝에 ת가 붙습니다.", v: "יָשַׁב(야샤브): 앉다" },
+        { q: "כְּתֹב", a: "qal inf const", p: "케토브", r: "כתב", rm: "쓰다", t: ["qal","inf const","-","-","-","כתב"], d: "규칙동사 칼 부정사 연계형 표준형태.", pt: "가장 기본이 되는 부정사 연계형입니다.", v: "כָּתַב(카타브): 쓰다" },
+        { q: "לִכְתֹּב", a: "qal inf abs", p: "리크토브", r: "כתב", rm: "쓰다", t: ["qal","inf abs","-","-","-","כתב"], d: "전치사 ל와 결합된 부정사 연계형(원문 오기 주의).", pt: "전치사 לְ와 결합하여 To-부정사 역할을 합니다.", v: "כָּתַב(카타브): 쓰다 | לְ(레): ~하기 위해" },
+        { q: "יַעֲלוּ", a: "qal impf 3mp", p: "야알루", r: "עלה", rm: "올라가다", t: ["qal","impf","3","m","p","עלה"], d: "페-후음 미완료 복수 변화 (복합 슈바 발생).", pt: "첫 자음이 후음이므로 특수 모음이 결합됩니다.", v: "עָלָה(알라): 올라가다 | י(요드): 그들이(접두어)" }
+      ]},
+      { title: "6) 종합 번역", type: "text", items: [
+        { q: "וַיֵּלְכוּ אַנְשֵׁי הָעִיר עִמּוֹ אֶל־בֵּית הַכֹּהֵן", a: "그 성읍의 남자들이 우리와 함께 그 제사장의 집으로 갔다.", d: "וַ(바브 연속법) + 미완료. עִמּוֹ(원문 오기 주의: 우리와 함께는 עִמָּנוּ).", v: "הָלַךְ(할라크): 가다 | אִישׁ(이쉬/복수:아나쉼): 남자들 | עִיר(이르): 성읍 | עִם(임): 함께 | בַּיִת(바이트): 집 | כֹּהֵן(코헨): 제사장" },
+        { q: "יְהוָה נָתַן אֶת־הָאָרֶץ לָנוּ לְעוֹלָם", a: "야훼께서 그 땅을 우리에게 영원히 주신다.", d: "לָנוּ: ל 전치사 + 1cp 접미어 (우리에게).", v: "נָתַן(나탄): 주다 | אֶרֶץ(에레츠): 땅 | לְ(레): ~에게 | עוֹלָם(올람): 영원" },
+        { q: "נָבִיא יְהוָה יֵרֵד מִן־הָהָר לִקְרֹא אֶת־סֵפֶר תּוֹרַת הַבְּרִית אֲלֵיכֶם", a: "야훼의 그 예언자는 그 언약의 율법책을 너희들(mp)에게 낭독하기 위해 그 산에서부터 내려갈 것이다.", d: "לִקְרֹא(읽기 위해) 부정사 목적 구문.", v: "נָבִיא(나비): 예언자 | יָרַד(야라드): 내려가다 | הַר(하르): 산 | קָרָא(카라): 부르다/읽다 | סֵפֶר(세페르): 책 | תּוֹרָה(토라): 율법 | בְּרִית(베리트): 언약" },
+        { q: "הַנַּעַר אֲשֶׁר מָצָא אֶת הַזָּהָב שָׁלַח אֹתוֹ לִי", a: "그 금을 찾아낸 그 소년은 그것을 내게 보냈다.", d: "אֹתוֹ는 직접목적어 표지 אֵת에 3ms 대명사가 결합한 것입니다.", v: "נַעַר(나아르): 소년 | אֲשֶׁר(아셰르): ~하는 | מָצָא(마차): 찾다 | זָהָב(자하브): 금 | שָׁלַח(샬라흐): 보내다" },
+        { q: "טוֹב הָאִישׁ אֲשֶׁר לֵב טָהוֹר בְּתוֹכוֹ", a: "속마음이 정결한 그 남자는 좋다.", d: "בְּתוֹכוֹ(그 속에)가 관계절 끝에서 재서대명사 역할을 합니다.", v: "טוֹב(토브): 좋은 | אִישׁ(이쉬): 남자 | לֵב(레브): 마음 | טָהוֹר(타호르): 정결한 | תָּוֶךְ(타베크/베토크): 가운데/속" },
+        { q: "אֲנִי עֹלֶה אֶל־הֶהָרִים לָשֶׁבֶת שָׁם", a: "나는 거주하기 위해서 산들로 올라간다.", d: "לָשֶׁבֶת는 לְ + ישב의 부정사 결합입니다.", v: "אֲנִי(아니): 나 | עָלָה(알라): 올라가다 | הַר(하르): 산 | יָשַׁב(야샤브): 앉다/거주하다 | שָׁם(샴): 거기서" },
+        { q: "לֹא יָכֹל הָאָח הַהוּא לַעֲמֹד לְפָנֶיךָ כִּי קָדוֹשׁ אַתָּה וְלֹא קָדוֹשׁ הוּא", a: "그 형제는 네 앞에 설 수 없다. 왜냐하면 너는 거룩하다. 그러나 그는 거룩하지 않기 때문이다.", d: "לְפָנֶיךָ(네 앞에), 명사문 구조.", v: "יָכֹל(야콜): 할수있다 | אָח(아흐): 형제 | עָמַד(아마드): 서다 | פָּנִים(파님): 앞 | כִּי(키): 왜냐하면 | קָדוֹשׁ(카도쉬): 거룩한" },
+        { q: "אָבָה אָדוֹן כָּל־הָאָרֶץ לִפְקֹד", a: "그 온 땅의 주인이 너를 보살피기를 원한다.", d: "לִפְקֹד(부정사)이 동사의 목적어 역할.", v: "אָבָה(아바): 원하다 | אָדוֹן(아돈): 주인 | כֹּל(콜): 모든 | אֶרֶץ(에레츠): 땅 | פָּקַד(파카드): 방문하다/보살피다" }
+      ]},
+      { title: "7) 성경 읽기", type: "text", items: [
+        { q: "יְהוָה אֱלֹהֵיכֶם הַהֹלֵךְ לִפְנֵיכֶם", a: "너희 앞서 가시는 너희의 하나님 야훼. [신 1:30]", d: "הַהֹלֵךְ는 정관사+분사로 한정적 용법입니다.", v: "אֱלֹהִים(엘로힘): 하나님 | הָלַךְ(할라크): 가다 | פָּנִים(파님/리프네): 앞" },
+        { q: "הַיּוֹם יָדַעְנוּ כִּי־בְתוֹכֵנוּ יְהוָה", a: "야훼께서 우리 가운데 (계시다는) 것을 오늘 우리가 알았다. [수 22:31]", d: "בְתוֹכֵנוּ(우리 가운데) 전치사+대명사 결합.", v: "יוֹם(욤): 날/오늘 | יָדַע(야다): 알다 | כִּי(키): ~라는것을 | תָּוֶךְ(타베크/베토크): 가운데" },
+        { q: "אִישׁ אֲשֶׁר רוּחַ אֱלֹהִים בּוֹ", a: "하나님의 영이 (그와) 함께 하는 사람. [창 41:38]", d: "관계절의 בּוֹ가 재서대명사입니다.", v: "אִישׁ(이쉬): 사람 | אֲשֶׁר(아셰르): ~하는 | רוּחַ(루아흐): 영/바람 | בְּ(베/보): ~안에" }
+      ]}
+    ];
+
+    const data23 = [
+      { title: "1) 존재 동사", type: "text", items: [
+        { q: "הָיָה נָבִיא בָּאָרֶץ", a: "그 땅에 예언자가 있었다.", d: "과거시제 긍정 존재 표현을 위해 הָיָה 사용.", v: "הָיָה(하야): 있었다 | נָבִיא(나비): 예언자 | אֶרֶץ(에레츠): 땅" },
+        { q: "לֹא הָיָה נָבִיא בָּאָרֶץ", a: "그 땅에 예언자가 있지 않았다.", d: "과거 존재를 부정할 때는 לֹא를 앞에 붙입니다.", v: "לֹא(로): 아니다/없다 | הָיָה(하야): 있었다" },
+        { q: "אֵין נָבִיא בָּאָרֶץ", a: "그 땅에 예언자가 없다.", d: "현재 존재 부정은 불변화사 אֵין을 사용합니다.", v: "אֵין(에인): 없다 | נָבִיא(나비): 예언자" },
+        { q: "יֵשׁ נָבִיא בָּאָרֶץ", a: "그 땅에 예언자가 있다.", d: "현재 존재 긍정은 불변화사 יֵשׁ을 사용합니다.", v: "יֵשׁ(예쉬): 있다 | נָבִיא(나비): 예언자" },
+        { q: "יֵשׁ שָׁלוֹם בַּמַּלְכוּת", a: "그 왕국에 평안이 있다.", d: "현재 긍정 존재 구문.", v: "יֵשׁ(예쉬): 있다 | שָׁלוֹם(샬롬): 평안 | מַלְכוּת(말쿠트): 왕국" },
+        { q: "אֵין גִּבּוֹר שָׁם", a: "거기에 용사가 없다.", d: "장소부사 שָׁם과 결합된 현재 부정 존재.", v: "אֵין(에인): 없다 | גִּבּוֹר(기보르): 용사 | שָׁם(샴): 거기" },
+        { q: "לֹא הָיָה גִּבּוֹר שָׁם", a: "거기에 용사가 없었다.", d: "과거 부정 존재.", v: "לֹא(로): 아니다 | הָיָה(하야): 있었다 | גִּבּוֹר(기보르): 용사" },
+        { q: "אֵין זֶבַח עַל-הַמִּזְבֵּחַ", a: "그 제단 위에 희생제물이 없다.", d: "전치사구(עַל) 결합 현재 부정 존재.", v: "אֵין(에인): 없다 | זֶבַח(제바흐): 제물 | עַל(알): ~위에 | מִזְבֵּחַ(미즈베아흐): 제단" },
+        { q: "יֵשׁ גִּבּוֹר עַל-הַדֶּרֶךְ", a: "그 길 위에 용사가 있다.", d: "현재 긍정 존재.", v: "יֵשׁ(예쉬): 있다 | גִּבּוֹר(기보르): 용사 | עַל(알): ~위에 | דֶּרֶךְ(데레크): 길" }
+      ]},
+      { title: "2) 소유 동사", type: "text", items: [
+        { q: "הָיוּ לָאִישׁ בְּהֵמוֹת", a: "그 남자에게 가축(동물)이 있었다.", d: "הָיוּ(복수동사) + ל 전치사 구조로 과거 소유를 나타냅니다.", v: "הָיָה(하야/하유): 있었다 | אִישׁ(이쉬): 남자 | בְּהֵמָה(베헤마): 가축/짐승" },
+        { q: "לֹא הָיוּ לָאִישׁ בְּהֵמוֹת", a: "그 남자에게 가축(동물)이 있지 않았다.", d: "과거 소유 부정 (לֹא הָיוּ + ל).", v: "לֹא(로): 아니다 | הָיָה(하유): 있었다" },
+        { q: "אֵין לָאִישׁ בְּהֵמוֹת", a: "그 남자에게 가축(동물)이 없다.", d: "현재 소유 부정 (אֵין + ל).", v: "אֵין(에인): 없다 | לְ(레/라): ~에게" },
+        { q: "יֵשׁ לָאִישׁ בְּהֵמוֹת", a: "그 남자에게 가축(동물)이 있다.", d: "현재 소유 긍정 (יֵשׁ + ל).", v: "יֵשׁ(예쉬): 있다 | לְ(레/라): ~에게" },
+        { q: "יֵשׁ לְךָ עֲבָדִים", a: "너에게 종들이 있다.", d: "소유 대상(너에게)을 전치사 접미어로 축약했습니다.", v: "לְ(레카): 너에게 | עֶבֶד(에베드/아바딤): 종" },
+        { q: "אֵין לָנוּ שָׁלוֹם", a: "우리에게 평안이 없다.", d: "우리에게(לָנוּ) 평안이 없다는 현재 부정 구조.", v: "אֵין(에인): 없다 | לְ(라누): 우리에게 | שָׁלוֹם(샬롬): 평안" },
+        { q: "לֹא הָיָה לָכֶם כָּבוֹד", a: "너희들에게 영광이 없었다.", d: "주어인 '영광(단수)'에 맞춰 동사도 단수형 הָיָה를 사용.", v: "הָיָה(하야): 있었다 | לְ(라켐): 너희들에게 | כָּבוֹד(카보드): 영광" },
+        { q: "אֵין לְבַת אָח", a: "그 딸에게 형제가 없다.", d: "현재 소유 부정 구조.", v: "אֵין(에인): 없다 | בַּת(바트): 딸 | אָח(아흐): 형제" },
+        { q: "יֵשׁ לָעִיר חוֹמָה", a: "그 도시에 벽이 있다.", d: "현재 소유 긍정 구조.", v: "יֵשׁ(예쉬): 있다 | עִיר(이르): 도시 | חוֹמָה(호마): 성벽" }
+      ]},
+      { title: "3) אֵין + 분사 부정", type: "text", items: [
+        { q: "אֵין אֲנִי כֹּתֵב", a: "나는 쓰고 있지 않다.", d: "אֵין + 주격 대명사 + 분사 구조로 강하게 부정합니다.", v: "אֵין(에인): 아니다/없다 | אֲנִי(아니): 나는 | כָּתַב(카타브): 쓰다" },
+        { q: "אֵינְךָ כֹּתֵב", a: "나는 쓰고 있지 않다. (원문: 너는 쓰고 있지 않다)", d: "אֵין에 2ms 대명접미어를 붙여 주어를 표현했습니다.", v: "אֵין(에인): 아니다 | ךָ(카): 너는" },
+        { q: "אֵין אַתָּה שֹׁמֵעַ", a: "너는 듣고 있지 않다.", d: "독립 인칭 대명사를 사용한 분사 부정.", v: "אַתָּה(아타): 너는 | שָׁמַע(샤마): 듣다" },
+        { q: "אֵינָהּ כֹּתֵב", a: "너는 듣고 있지 않다. (원문: 그녀는 쓰고 있지 않다)", d: "אֵין + 3fs 접미어 형태.", v: "אֵין(에인): 아니다 | ָהּ(아흐): 그녀는" },
+        { q: "אֵין אַתֶּם בְּטְחִים", a: "너희들은 믿고 있지 않다.", d: "복수 대명사 + 복수 분사.", v: "אַתֶּם(아템): 너희들은 | בָּטַח(바타흐): 믿다" },
+        { q: "אֵינְכֶם בְּטְחִים", a: "너희들은 믿고 있지 않다.", d: "접미어(אֵינְכֶם)를 결합한 형태.", v: "אֵין(에인): 아니다 | כֶם(켐): 너희들은" },
+        { q: "אֵין הוּא מֶלֶךְ", a: "그는 다스리고 있지 않다.", d: "독립 대명사를 사용한 3인칭 단수 부정.", v: "הוּא(후): 그는 | מָלַךְ(말라크/멜레크): 다스리다/왕" },
+        { q: "אֵינֶנּוּ מֶלֶךְ", a: "그는 다스리고 있지 않다.", d: "אֵינֶנּוּ 결합 형태.", v: "אֵינֶנּוּ(에이넨누): 그는~가 아니다" },
+        { q: "אֵינֶנּוּ כֹּרְתִים בְּרִית", a: "우리는 언약을 맺지 않는다.", d: "1cp 접미어 결합(우리는 ~가 아니다) 형태.", v: "אֵינֶנּוּ(에이넨누): 우리는~아니다(문맥상) | כָּרַת(카라트): 자르다/맺다 | בְּרִית(베리트): 언약" }
+      ]},
+      { title: "4) 부정사", type: "text", items: [
+        { q: "לֹא אָבִיתָ לִשְׁכַּב עַל-הָאֲדָמָה", a: "너는 땅바닥에 눕기를 원하지 않는다.", d: "לִשְׁכַּב(눕기 위해) 목적을 나타내는 부정사 연계형 구문입니다.", v: "אָבָה(아바): 원하다 | שָׁכַב(샤카브): 눕다 | עַל(알): ~위에 | אֲדָמָה(아다마): 땅" },
+        { q: "יְכֹלְנוּ לַחֲנוֹת תַּחַת הַשָּׁמָיִם", a: "우리는 하늘 아래에 진칠 수 있다.", d: "조동사 역할 동사 뒤에 לַחֲנוֹת(진치기 위해)가 붙었습니다.", v: "יָכֹל(야콜): 할수있다 | חָנָה(하나): 진치다 | תַּחַת(타하트): 아래에 | שָׁמַיִם(샤마임): 하늘" },
+        { q: "וְלֵךְ לִרְאוֹת אֶת-הַמִּלְחָמָה", a: "그는 그 전투를 보기 위해 갈 것이다.", d: "목적(~하기 위해)을 명확히 하는 לִרְאוֹת 부정사.", v: "הָלַךְ(할라크): 가다 | רָאָה(라아): 보다 | מִלְחָמָה(밀하마): 전투" },
+        { q: "לֶכְתּוֹ לִרְאוֹת אֶת-הַמִּלְחָמָה", a: "그가 그 전투를 보기 위해 갈 때 …", d: "부정사 연계형 + 접미어 + ל 전치사가 결합하여 시간을 나타냅니다.", v: "הָלַךְ(할라크/레케트): 가다 | רָאָה(라아): 보다" },
+        { q: "בְּכָתְבִי אֶת-הַסֵּפֶר", a: "내가 그 책을 쓸/썼을 때 …", d: "בְּ 전치사 + 부정사 + 접미어로 명확한 시간부사절을 만듭니다.", v: "בְּ(베): ~할때(부정사와) | כָּתַב(카타브): 쓰다 | סֵפֶר(세페르): 책" },
+        { q: "בְּיוֹם אֲכָלְךָ מִמֶּנּוּ אָכוֹל תֹּאכֵל", a: "그것에서부터 네가 먹는 날에는, 너는 분명히 멸망할 것이다.", d: "אָכוֹל 절대형 부정사를 미완료 동사 앞에 두어 의미를 매우 강하게 만듭니다.", v: "יוֹם(욤): 날 | אָכַל(아칼): 먹다 | מִן(민): ~로부터" },
+        { q: "נֵצֵא מִן-הַבַּיִת לָרֶדֶת מִן-הָהָר", a: "우리는 그 산에서부터 내려가기 위해 그 집에서 나갈 것이다.", d: "לָרֶדֶת는 ירד의 특수 부정사 연계형입니다.", v: "יָצָא(야차): 나가다 | בַּיִת(바이트): 집 | יָרַד(야라드): 내려가다 | הַר(하르): 산" },
+        { q: "שָׁלַח אֶת הָאֲנָשִׁים לִבְנוֹת חוֹמָה", a: "그는 성벽을 짓기 위해 그 사람들을 보냈다.", d: "목적을 나타내는 단골 부정사 구문입니다.", v: "שָׁלַח(샬라흐): 보내다 | אִישׁ(이쉬/아나쉼): 사람들 | בָּנָה(바나): 짓다 | חוֹמָה(호마): 성벽" }
+      ]},
+      { title: "5) 동사 분해", type: "verb", items: [
+        { q: "כְּתַבְתֶּם", a: "qal pf 2mp", p: "케탑템", r: "כתב", rm: "쓰다", t: ["qal","pf","2","m","p","כתב"], d: "칼 완료 2인칭 복수 어미 תֶּם 결합.", pt: "완료 복수 어미 결합 시 앞 모음이 짧아집니다.", v: "כָּתַב(카타브): 쓰다 | תֶּם(템): 너희들(접미어)" },
+        { q: "נִבְטַח", a: "qal impf 1cp", p: "니브타흐", r: "בטח", rm: "신뢰하다/의지하다", t: ["qal","impf","1","c","p","בטח"], d: "접두어 נ이 결합된 미완료 공성 복수.", pt: "미완료 '우리'는 항상 נ으로 시작합니다.", v: "בָּטַח(바타흐): 신뢰하다 | נ(눈): 우리가(미완료접두어)" },
+        { q: "עֲשׂוֹת", a: "qal inf const", p: "아소트", r: "עשה", rm: "하다/만들다", t: ["qal","inf const","-","-","-","עשה"], d: "라메드-헤 약동사 부정사 연계형 규칙 (וֹת 어미).", pt: "여성 복수명사와 동일하게 생겼음을 기억하세요.", v: "עָשָׂה(아사): 하다/만들다" },
+        { q: "נֹפְלוֹת", a: "qal ptc fp", p: "노플로트", r: "נפל", rm: "떨어지다", t: ["qal","ptc","-","f","p","נפל"], d: "칼 능동분사 여성 복수 (홀렘 ֹ + וֹת 어미).", pt: "전형적인 분사 여성 복수 형태입니다.", v: "נָפַל(나팔): 떨어지다" },
+        { q: "דַּעַת", a: "qal inf const", p: "다아트", r: "ידע", rm: "알다", t: ["qal","inf const","-","-","-","ידע"], d: "페-요드와 라메드-후음 이중 불규칙 동사 부정사.", pt: "요드가 떨어지고 후음 때문에 특수한 모음을 갖습니다.", v: "יָדַע(야다): 알다" },
+        { q: "אֶתֵּן", a: "qal impf 1cs", p: "에텐", r: "נתן", rm: "주다", t: ["qal","impf","1","c","s","נתן"], d: "페-눈 동사 미완료 1인칭 단수 (첫 נ 동화).", pt: "동화된 자음은 다게쉬(점)로 흔적을 남깁니다.", v: "נָתַן(나탄): 주다" },
+        { q: "בָּרָאתָ", a: "qal pf 2ms", p: "바라타", r: "ברא", rm: "창조하다", t: ["qal","pf","2","m","s","ברא"], d: "라메드-알렙 동사 완료형 (알렙 뒤 모음 없이 연결).", pt: "알렙이 묵음처리 되어 발음이 부드럽게 넘어갑니다.", v: "בָּרָא(바라): 창조하다 | תָּ(타): 네가(완료어미)" },
+        { q: "תֵּצֵא", a: "qal impf 3fs 또는 2ms", p: "테체", r: "יצא", rm: "나가다", t: ["qal","impf","3/2","f/m","s","יצא"], d: "페-요드 특성(체레 모음) 반영 미완료형.", pt: "문맥상 3fs(그녀가)인지 2ms(네가)인지 파악해야 합니다.", v: "יָצָא(야차): 나가다 | ת(타브): 그녀가/네가(접두어)" },
+        { q: "תֹּאכְלוּ", a: "qal impf 2mp", p: "토클루", r: "אכל", rm: "먹다", t: ["qal","impf","2","m","p","אכל"], d: "페-알렙(א) 특수 미완료 변화 (첫 모음이 홀렘으로 바뀜).", pt: "페-알렙 동사는 미완료에서 불규칙하게 O발음을 냅니다.", v: "אָכַל(아칼): 먹다 | ת(타브): 너희가(접두어)" },
+        { q: "אָבוֹד", a: "qal inf abs", p: "아보드", r: "אבד", rm: "멸망하다/잃어버리다", t: ["qal","inf abs","-","-","-","אבד"], d: "부정사 절대형 (주로 동사 강조 용법에 쓰임).", pt: "절대형은 카메츠+홀렘 패턴이 특징적입니다.", v: "אָבַד(아바드): 멸망하다" }
+      ]},
+      { title: "6) 종합 번역", type: "text", items: [
+        { q: "לֹא יִחְרֶה אַף יְהוָה בְּעַמּוֹ לְעוֹלָם", a: "야훼의 분노가 그분의 백성을 영원히 사르지는 않을 것이다.", d: "관용어 חָרָה אַף(코가 뜨거워지다=분노하다) 구문입니다.", v: "חָרָה(하라): 뜨거워지다/화나다 | אַף(아프): 코/분노 | עַם(암): 백성 | עוֹלָם(올람): 영원" },
+        { q: "וּבַיּוֹם הַהוּא יִהְיֶה שָׁלוֹם בְּכָל־הָאָרֶץ", a: "그리고 그 날에 온 땅에 평화가 있을 것이다.", d: "미래 존재 동사 יִהְיֶה(있을 것이다)가 사용되었습니다.", v: "יוֹם(욤): 날 | הַהוּא(하후): 그(지시사) | הָיָה(하야): 있다 | שָׁלוֹם(샬롬): 평안 | אֶרֶץ(에레츠): 땅" },
+        { q: "יֵשׁ כָּבוֹד לָאִישׁ אֲשֶׁר יָרֵא אֶת־יְהוָה בְּכָל־נַפְשׁוֹ", a: "자기 온 목숨으로 야훼를 경외하는 그 사람에게는 영광이 있다.", d: "יֵשׁ + ל(~에게 있다) 소유구문과 수식절의 결합.", v: "יֵשׁ(예쉬): 있다 | כָּבוֹד(카보드): 영광 | אִישׁ(이쉬): 사람 | יָרֵא(야레): 경외하다 | נֶפֶשׁ(네페쉬): 영혼/목숨" },
+        { q: "בָּכָה בָּכִינוּ כִּי לֹא הָיָה לָנוּ כֹּהֵן לִבָּם זָבַח לָנוּ", a: "우리는 정말로 울었다. 왜냐하면 우리에게는 거룩한 제물을 드릴 제사장이 없기 때문이다.", d: "부정사 절대형 강조(בָּכָה בָּכִינוּ) 복합 문장입니다.", v: "בָּכָה(바카): 울다 | לֹא(로): 아니다 | הָיָה(하야): 있었다 | לְ(라누): 우리에게 | כֹּהֵן(코헨): 제사장 | זָבַח(자바흐): 제사하다" },
+        { q: "הִנֵּה יָצָא הַצָּבָא הָרַב הַזֶּה לְמִלְחָמָה אֲשֶׁר בֵּין הֶהָרִים וּבֵין הַיָּם", a: "이 많은 군대가 산들과 바다 사이에서 [벌어질] 그 전투를 위해 곧 올 것이다.", d: "בֵּין ~ וּבֵין (A와 B 사이) 전치사 숙어.", v: "הִנֵּה(힌네): 보라/곧 | יָצָא(야차): 나오다 | צָבָא(차바): 군대 | מִלְחָמָה(밀하마): 전투 | בֵּין(베인): ~사이에 | הַר(하르): 산 | יָם(얌): 바다" },
+        { q: "הָעֲבָדִים הַבֹּנִים אֶת־הַחוֹמָה יֹשְׁבִים עַל־הָאֲדָמָה לֶאֱכֹל וְלִשְׁתוֹת", a: "그 성벽을 짓고 있는 그 종들이 먹고 마시기 위해 땅바닥 위에 앉아 있다.", d: "한정적 분사, 서술적 분사, 그리고 목적 부정사 2개의 혼합 문장.", v: "עֶבֶד(에베드): 종 | בָּנָה(바나): 짓다 | חוֹמָה(호마): 성벽 | יָשַׁב(야샤브): 앉다 | אֲדָמָה(아다마): 땅 | אָכַל(아칼): 먹다 | שָׁתָה(샤타): 마시다" },
+        { q: "גֹּאֵל הַנָּאֵל יִזְרוֹעַ יְהוָה הַחֲזָקָה אוֹתָנוּ כִּי עַמּוֹ אֲנַחְנוּ", a: "야훼의 그 강한 팔(fs)이 분명히 우리를 속량해 주실 것이다. 왜냐하면 우리는 그분의 백성이기 때문이다.", d: "절대형 부정사 강조 구문. 팔(זְרוֹעַ)은 여성명사 취급.", v: "גָּאַל(가알): 구속/속량하다 | זְרוֹעַ(제로아): 팔 | חָזָק(하자크): 강한 | עַם(암): 백성" },
+        { q: "טוֹבִים דִּבְרֵי הָאִשָּׁה הַיֹּדַעַת אֶת־דֶּרֶךְ הַשָּׁלוֹם", a: "평화의 길을 아는 그 여자의 말은 좋다.", d: "서술형용사(טוֹבִים)가 문장 앞으로 도치되어 강조되었습니다.", v: "טוֹב(토브): 좋은 | דָּבָר(다바르): 말씀 | אִשָּׁה(이샤): 여자 | יָדַע(야다): 알다 | דֶּרֶךְ(데레크): 길 | שָׁלוֹם(샬롬): 평화" }
+      ]},
+      { title: "7) 성경 읽기", type: "text", items: [
+        { q: "אֵין שָׁלוֹם אָמַר אֱלֹהַי לָרְשָׁעִים", a: "\"평화가 없다.\" 내 하나님께서 악인들에게 말씀하셨다. [사 57:21]", d: "현재 존재 부정 אֵין 구문.", v: "אֵין(에인): 없다 | שָׁלוֹם(샬롬): 평화 | אָמַר(아마르): 말하다 | אֱלֹהִים(엘로힘): 하나님 | רָשָׁע(라샤): 악인" },
+        { q: "וְיָדְעוּ כָל־הָאָרֶץ כִּי יֵשׁ אֱלֹהִים לְיִשְׂרָאֵל", a: "그리고 하나님께서 이스라엘을 위하여 계시다는 것을 온 땅이 알게 될 것이다. [삼상 17:46]", d: "יֵשׁ + ל 소유/존재 긍정 구문.", v: "יָדַע(야다): 알다 | כֹּל(콜): 모든 | אֶרֶץ(에레츠): 땅 | יֵשׁ(예쉬): 있다 | יִשְׂרָאֵל(이스라엘): 이스라엘" },
+        { q: "אֵינָם יֹדְעִים אֶת־מִשְׁפַּט אֱלֹהֵי הָאָרֶץ", a: "그 땅 하나님의 법을 아는 이들이 없다. [왕하 17:26]", d: "대명접미어가 붙은 אֵינָם과 능동분사의 결합형.", v: "אֵין(에인): 아니다/없다 | הֵם(헴): 그들은 | יָדַע(야다): 알다 | מִשְׁפָּט(미슈파트): 법/재판 | אֶרֶץ(에레츠): 땅" }
+      ]}
+    ];
+
+    // ==========================================
+    // 렌더링 엔진 (HTML 태그 생성기)
+    // ==========================================
+
+    function renderVocab(vocabString) {
+      if (!vocabString) return '';
+      let words = vocabString.split('|').map(word => {
+        let match = word.match(/(.*?)\((.*?)\):(.*)/);
+        if(match) {
+          return `<span class="vocab-word-item">
+                    <span class="hebrew-small">${match[1].trim()}</span> 
+                    <span class="vocab-pronun">(${match[2].trim()})</span> 
+                    <span>${match[3].trim()}</span>
+                  </span>`;
+        }
+        return `<span>${word}</span>`;
+      }).join('');
+      
+      return `
+        <div class="vocab-box">
+          <div class="vocab-title">📝 주요 단어장</div>
+          <div class="vocab-grid">${words}</div>
         </div>
-        <div class="card-back" id="fc-back">
-          <div id="fc-back-content" style="width:100%"></div>
-        </div>
-      </div>
-    </div>
-    <div class="nav-buttons">
-      <button class="btn btn-ghost" onclick="prevCard()">← 이전</button>
-      <button class="btn btn-secondary btn-sm" onclick="shuffleCards()">🔀 섞기</button>
-      <button class="btn btn-secondary btn-sm" onclick="resetCards()">↺ 처음부터</button>
-      <button class="btn btn-ghost" onclick="nextCard()">다음 →</button>
-    </div>
-    <div class="nav-buttons" style="margin-top:6px">
-      <button class="btn btn-danger btn-sm" onclick="markDifficult()">⚠ 어려워</button>
-      <button class="btn btn-ghost btn-sm" style="color:var(--green);border-color:rgba(126,201,126,0.3)" onclick="markKnown()">✓ 알겠어</button>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════
-     18과 동사분해 TABLE
-════════════════════════════════════════════ -->
-<div id="tab-table18" class="section" style="display:none">
-  <div class="section-title">18과 동사분해 — 약자음 어근 (페-요드 / 페-알렙)</div>
-  <div class="table-view">
-    <table class="data-table">
-      <thead><tr><th>#</th><th>동사</th><th>변화형</th><th>활용형</th><th>인칭</th><th>성</th><th>수</th><th>어근</th></tr></thead>
-      <tbody id="t18-body"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════
-     19과 동사분해 TABLE
-════════════════════════════════════════════ -->
-<div id="tab-table19" class="section" style="display:none">
-  <div class="section-title">19과 동사분해 — 지난 과 되돌아보기</div>
-  <div class="table-view">
-    <table class="data-table">
-      <thead><tr><th>#</th><th>동사</th><th>변화형</th><th>활용형</th><th>인칭</th><th>성</th><th>수</th><th>어근</th></tr></thead>
-      <tbody id="t19-body"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════
-     20과 동사분해 TABLE
-════════════════════════════════════════════ -->
-<div id="tab-table20" class="section" style="display:none">
-  <div class="section-title">20과 동사분해 — 부정사 분해</div>
-  <div class="table-view">
-    <table class="data-table">
-      <thead><tr><th>#</th><th>동사</th><th>변화형</th><th>활용형</th><th>인칭</th><th>성</th><th>수</th><th>어근</th></tr></thead>
-      <tbody id="t20-body"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════
-     18과 종합문제 SENTENCES
-════════════════════════════════════════════ -->
-<div id="tab-sent18" class="section" style="display:none">
-  <div class="section-title">18과 종합문제 — 다음을 우리말로 옮기십시오</div>
-  <div id="s18-list"></div>
-</div>
-
-<!-- ════════════════════════════════════════════
-     19과 종합문제 SENTENCES
-════════════════════════════════════════════ -->
-<div id="tab-sent19" class="section" style="display:none">
-  <div class="section-title">19과 종합문제 — 다음을 우리말로 옮기십시오</div>
-  <div id="s19-list"></div>
-</div>
-
-<!-- ════════════════════════════════════════════
-     20과 종합문제 SENTENCES
-════════════════════════════════════════════ -->
-<div id="tab-sent20" class="section" style="display:none">
-  <div class="section-title">20과 종합문제 — 다음을 우리말로 옮기십시오</div>
-  <div id="s20-list"></div>
-</div>
-
-<!-- ════════════════════════════════════════════
-     20과 부정사 연습
-════════════════════════════════════════════ -->
-<div id="tab-inf20" class="section" style="display:none">
-  <div class="section-title">20과 — 부정사(inf const / inf abs) 연습</div>
-  <div id="inf-list"></div>
-</div>
-
-</main>
-
-<script>
-// ═══════════════════════════════════════════════════════
-//  DATA  ── 18과 동사 분해
-// ═══════════════════════════════════════════════════════
-const data18 = [
-  {
-    num:1, verb:'יִירַשׁ',
-    biform:'칼 미완료',  conjugation:'칼 미완료',
-    person:'3', gender:'m', number:'s',
-    root:'יָרַשׁ',
-    explain:`<strong>어근: יָרַשׁ</strong> (야라쉬) "차지하다, 상속받다" — <strong>페-요드(פ״י)</strong> 동사.<br>
-미완료 3ms 형태: <em>יִ</em>(접두어) + <em>ירשׁ</em><br>
-페-요드 동사는 미완료에서 <strong>요드(י)가 탈락</strong>하고 보상으로 <em>이레</em> 모음(ִי)이 생깁니다.<br>
-기본형 יִיְרַשׁ → יִירַשׁ. 한국어 발음: <strong>이이라쉬</strong>.`
-  },
-  {
-    num:2, verb:'יָלַד',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'3', gender:'m', number:'s',
-    root:'יָלַד',
-    explain:`<strong>어근: יָלַד</strong> (야라드) "낳다" — <strong>페-요드(פ״י)</strong> 동사.<br>
-미완료 3ms: <em>יֵלֵד</em> → 여기서는 완료형 <strong>야라드</strong> (칼 완료 3ms).<br>
-페-요드 동사: 완료형에서는 요드가 유지됩니다. 한국어 발음: <strong>야라드</strong>.`
-  },
-  {
-    num:3, verb:'יֹאכַל',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'3', gender:'m', number:'s',
-    root:'אָכַל',
-    explain:`<strong>어근: אָכַל</strong> (아칼) "먹다" — <strong>페-알렙(פ״א)</strong> 동사.<br>
-미완료 3ms: 접두어 <em>יִ</em> + 알렙(א)가 만나면서 <strong>알렙이 묵음화</strong>되고 접두어 모음이 보상장음 <em>ֹ</em>(호렘)으로 바뀜: <em>יֹאכַל</em>.<br>
-한국어 발음: <strong>요크할</strong>.`
-  },
-  {
-    num:4, verb:'יִיבְשׁוּ',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'3', gender:'m', number:'p',
-    root:'יָבֵשׁ',
-    explain:`<strong>어근: יָבֵשׁ</strong> (야베쉬) "마르다" — <strong>페-요드(פ״י)</strong> 동사.<br>
-미완료 3mp: <em>יִי</em>(접두어+보상) + <em>בְשׁוּ</em>(복수어미).<br>
-복수어미 <em>וּ</em>가 붙어서 3mp 형태. 한국어 발음: <strong>이이브슈</strong>.`
-  },
-  {
-    num:5, verb:'אֵלַךְ',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'1', gender:'c', number:'s',
-    root:'הָלַךְ',
-    explain:`<strong>어근: הָלַךְ</strong> (할라크) "걷다, 가다" — <strong>페-헤(פ״ה)</strong> 변칙 동사(실제로는 페-알렙처럼 행동).<br>
-1cs 미완료: 접두어 <em>אֶ</em>가 붙을 때 헤(ה)가 탈락 → <em>אֵלַךְ</em>.<br>
-<em>אֵ</em>의 쩨레는 보상장음. 한국어 발음: <strong>엘라크</strong>.`
-  },
-  {
-    num:6, verb:'נָתַתִּי',
-    biform:'칼 완료', conjugation:'칼 완료',
-    person:'1', gender:'c', number:'s',
-    root:'נָתַן',
-    explain:`<strong>어근: נָתַן</strong> (나탄) "주다" — <strong>페-눈(פ״נ) + 라메드-눈(ל״נ)</strong> 이중 약자음 동사.<br>
-완료 1cs 어미 <em>תִּי</em>가 붙을 때: 어근 마지막 눈(נ)이 앞에서 동화(assimilation) → <em>נָתַתִּי</em>.<br>
-(נָתַנְתִּי → נָתַתִּי). 한국어 발음: <strong>나타티</strong>.`
-  },
-  {
-    num:7, verb:'כְּרַתֶּם',
-    biform:'칼 완료', conjugation:'칼 완료',
-    person:'2', gender:'m', number:'p',
-    root:'כָּרַת',
-    explain:`<strong>어근: כָּרַת</strong> (카라트) "자르다, 끊다, 언약을 맺다" — 규칙 동사.<br>
-완료 2mp 어미 <em>תֶּם</em>이 붙음: <em>כְּרַתֶּם</em>.<br>
-접두어 카프(כּ)의 다게쉬가 사라지고 쉐바로 약화. 한국어 발음: <strong>크라텝</strong>.`
-  },
-  {
-    num:8, verb:'נֵצֵא',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'1', gender:'c', number:'p',
-    root:'יָצָא',
-    explain:`<strong>어근: יָצָא</strong> (야차) "나가다" — <strong>페-요드 + 라메드-알렙(פ״י / ל״א)</strong> 동사.<br>
-1cp 미완료: <em>נֵ</em>(접두어, 보상장음 쩨레) + <em>צֵא</em>(라메드-알렙으로 알렙 조용히 발음).<br>
-페-요드: 요드 탈락 + 보상장음. 한국어 발음: <strong>네체</strong>.`
-  },
-  {
-    num:9, verb:'תִּירָא',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'2/3', gender:'m/f', number:'s',
-    root:'יָרֵא',
-    explain:`<strong>어근: יָרֵא</strong> (야레) "두려워하다" — <strong>페-요드 + 라메드-알렙(פ״י / ל״א)</strong> 동사.<br>
-미완료: <em>תִּ</em>(2ms 또는 3fs 접두어) + <em>יִרָא</em> → 페-요드 탈락 + 보상이레 → <em>תִּירָא</em>.<br>
-라메드-알렙: 마지막 알렙 묵음화로 모음이 길어짐. 한국어 발음: <strong>티이라</strong>.`
-  },
-  {
-    num:10, verb:'יִתֵּן',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'3', gender:'m', number:'s',
-    root:'נָתַן',
-    explain:`<strong>어근: נָתַן</strong> (나탄) "주다" — <strong>페-눈(פ״נ)</strong> 동사.<br>
-미완료 3ms: 접두어 <em>יִ</em> + 페-눈 탈락(동화) → <em>יִתֵּן</em>.<br>
-눈(נ)이 다음 자음 타브(ת)에 동화되어 다게쉬 포르테(ּ) 생성.<br>
-한국어 발음: <strong>이텐</strong>.`
-  }
-];
-
-// ═══════════════════════════════════════════════════════
-//  DATA  ── 19과 동사 분해 (지난 과 되돌아보기)
-// ═══════════════════════════════════════════════════════
-const data19 = [
-  {
-    num:1, verb:'נָאֱלוּ',
-    biform:'칼 완료', conjugation:'칼 완료',
-    person:'3', gender:'c', number:'p',
-    root:'אָלַל',
-    explain:`<strong>어근: אָלַל / גָּאַל</strong> — 문맥상 <strong>גָּאַל</strong> (가알) "구속하다"의 니팔 완료 3cp일 가능성.<br>
-또는 페-알렙 동사 완료 3cp. 알렙이 후음으로 쉐바 대신 하테프 세골.<br>
-어미 <em>וּ</em>는 3cp 완료 어미. 한국어 발음: <strong>나엘루</strong>.`
-  },
-  {
-    num:2, verb:'תַּעֲמֹד',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'2/3', gender:'m/f', number:'s',
-    root:'עָמַד',
-    explain:`<strong>어근: עָמַד</strong> (아마드) "서다" — 페-아인(פ״ע) 후음 동사.<br>
-미완료 2ms 또는 3fs: 접두어 <em>תַּ</em> + <em>עֲמֹד</em>.<br>
-아인(ע)이 후음이므로 쉐바 → 하테프 파타크(ֲ). 한국어 발음: <strong>타아모드</strong>.`
-  },
-  {
-    num:3, verb:'אֶשָּׂא',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'1', gender:'c', number:'s',
-    root:'נָשָׂא',
-    explain:`<strong>어근: נָשָׂא</strong> (나사) "들어올리다, 지다" — <strong>페-눈(פ״נ) + 라메드-알렙(ל״א)</strong>.<br>
-1cs 미완료: 접두어 <em>אֶ</em> + 눈 탈락(동화) + <em>שָׂא</em> → <em>אֶשָּׂא</em>.<br>
-눈이 사멕에 동화되어 다게쉬 포르테. 한국어 발음: <strong>에싸</strong>.`
-  },
-  {
-    num:4, verb:'בְּכִיתֶם',
-    biform:'칼 완료', conjugation:'칼 완료',
-    person:'2', gender:'m', number:'p',
-    root:'בָּכָה',
-    explain:`<strong>어근: בָּכָה</strong> (바카) "울다" — <strong>라메드-헤(ל״ה)</strong> 동사.<br>
-완료 2mp: 어근의 마지막 헤(ה)가 어미 <em>תֶם</em> 앞에서 탈락 → <em>בְּכִיתֶם</em>.<br>
-이요드(י) 연계 모음 삽입. 한국어 발음: <strong>브키템</strong>.`
-  },
-  {
-    num:5, verb:'יוּכַל',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'3', gender:'m', number:'s',
-    root:'יָכֹל',
-    explain:`<strong>어근: יָכֹל</strong> (야콜) "할 수 있다" — <strong>페-요드(פ״י)</strong> 동사.<br>
-미완료 3ms: 요드 탈락 + 보상 슈렉(וּ) → <em>יוּכַל</em>.<br>
-이 동사는 보상장음이 이레(ִי) 대신 슈렉(וּ)으로 특이하게 나타남. 한국어 발음: <strong>유칼</strong>.`
-  },
-  {
-    num:6, verb:'נֹאמַר',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'1', gender:'c', number:'p',
-    root:'אָמַר',
-    explain:`<strong>어근: אָמַר</strong> (아마르) "말하다" — <strong>페-알렙(פ״א)</strong> 동사.<br>
-1cp 미완료: 접두어 <em>נ</em> + 알렙 묵음화 → 보상 호렘(ֹ) → <em>נֹאמַר</em>.<br>
-한국어 발음: <strong>노마르</strong>.`
-  },
-  {
-    num:7, verb:'תַּעֲשׂוּ',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'2', gender:'m', number:'p',
-    root:'עָשָׂה',
-    explain:`<strong>어근: עָשָׂה</strong> (아사) "하다, 만들다" — <strong>페-아인(후음) + 라메드-헤(ל״ה)</strong>.<br>
-미완료 2mp: <em>תַּ</em>(접두어) + <em>עֲשׂ</em>(후음 하테프) + <em>וּ</em>(2mp 어미) → <em>תַּעֲשׂוּ</em>.<br>
-마지막 헤 탈락. 한국어 발음: <strong>타아수</strong>.`
-  },
-  {
-    num:8, verb:'כָּבֵד',
-    biform:'칼 완료', conjugation:'칼 완료',
-    person:'3', gender:'m', number:'s',
-    root:'כָּבֵד',
-    explain:`<strong>어근: כָּבֵד</strong> (카베드) "무겁다, 영광스럽다" — 형용사/상태동사.<br>
-칼 완료 3ms (상태동사): <em>כָּבֵד</em>는 그대로 3ms 완료형.<br>
-상태동사는 중간 모음이 쩨레(ֵ)로 나타남. 한국어 발음: <strong>카베드</strong>.`
-  },
-  {
-    num:9, verb:'יָכְלָה',
-    biform:'칼 완료', conjugation:'칼 완료',
-    person:'3', gender:'f', number:'s',
-    root:'יָכֹל',
-    explain:`<strong>어근: יָכֹל</strong> (야콜) "할 수 있다" — <strong>페-요드(פ״י)</strong>.<br>
-완료 3fs: 어미 <em>ָה</em> 붙음 → <em>יָכְלָה</em>.<br>
-완료형에서는 페-요드가 유지됨(미완료와 달리). 한국어 발음: <strong>야클라</strong>.`
-  },
-  {
-    num:10, verb:'תֵּשְׁבִי',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'2', gender:'f', number:'s',
-    root:'יָשַׁב',
-    explain:`<strong>어근: יָשַׁב</strong> (야샤브) "앉다, 거주하다" — <strong>페-요드(פ״י)</strong>.<br>
-미완료 2fs: 접두어 <em>תֵּ</em>(보상 쩨레, 요드 탈락) + <em>שְׁבִי</em>(2fs 어미).<br>
-한국어 발음: <strong>테쉬비</strong>.`
-  }
-];
-
-// ═══════════════════════════════════════════════════════
-//  DATA  ── 20과 동사 분해 (부정사)
-// ═══════════════════════════════════════════════════════
-const data20 = [
-  {
-    num:1, verb:'קְטֹל',
-    biform:'칼 부정사 연계형', conjugation:'inf const',
-    person:'—', gender:'—', number:'—',
-    root:'קָטַל',
-    explain:`<strong>어근: קָטַל</strong> (카탈) "죽이다" — 규칙 동사 패러다임.<br>
-부정사 연계형(inf const): <em>קְטֹל</em>. 첫 모음이 쉐바로 약화, 두 번째 호렘.<br>
-전치사 <em>לְ</em>와 함께: <em>לִקְטֹל</em> "죽이기 위하여". 한국어 발음: <strong>크톨</strong>.`
-  },
-  {
-    num:2, verb:'עָבַדְתִּי',
-    biform:'칼 완료', conjugation:'칼 완료',
-    person:'1', gender:'c', number:'s',
-    root:'עָבַד',
-    explain:`<strong>어근: עָבַד</strong> (아바드) "섬기다, 일하다" — 후음 동사(페-아인).<br>
-완료 1cs: 어미 <em>תִּי</em> 붙음. 후음 아인(ע)은 규칙 쉐바 대신 하테프 파타크.<br>
-한국어 발음: <strong>아바드티</strong>.`
-  },
-  {
-    num:3, verb:'אֶכְתֹּב',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'1', gender:'c', number:'s',
-    root:'כָּתַב',
-    explain:`<strong>어근: כָּתַב</strong> (카타브) "쓰다" — 규칙 동사.<br>
-미완료 1cs: 접두어 <em>אֶ</em> + <em>כְתֹּב</em>.<br>
-한국어 발음: <strong>에크토브</strong>.`
-  },
-  {
-    num:4, verb:'יֵרֵד',
-    biform:'칼 미완료', conjugation:'칼 미완료',
-    person:'3', gender:'m', number:'s',
-    root:'יָרַד',
-    explain:`<strong>어근: יָרַד</strong> (야라드) "내려가다" — <strong>페-요드(פ״י)</strong>.<br>
-미완료 3ms: 요드 탈락 + 보상 쩨레 → <em>יֵרֵד</em>.<br>
-두 쩨레 연속이 특징. 한국어 발음: <strong>예레드</strong>.`
-  },
-  {
-    num:5, verb:'שָׁבַת',
-    biform:'칼 완료', conjugation:'칼 완료',
-    person:'3', gender:'f', number:'s',
-    root:'שָׁבַת',
-    explain:`<strong>어근: שָׁבַת</strong> (샤바트) "쉬다, 안식하다" — 규칙 동사.<br>
-완료 3fs: 어미 <em>ה</em> 없이 <em>ת</em>로만 끝남(3fs 특수형 또는 3ms).<br>
-한국어 발음: <strong>샤바트</strong>.`
-  },
-  {
-    num:6, verb:'נִרְאָה',
-    biform:'니팔 완료', conjugation:'니팔 완료',
-    person:'3', gender:'m', number:'s',
-    root:'רָאָה',
-    explain:`<strong>어근: רָאָה</strong> (라아) "보다" — <strong>라메드-헤(ל״ה)</strong> + 니팔(수동).<br>
-니팔 완료 3ms: 접두어 <em>נִ</em> + <em>רְאָה</em> → <em>נִרְאָה</em> "보여졌다, 나타났다".<br>
-한국어 발음: <strong>니르아</strong>.`
-  },
-  {
-    num:7, verb:'גָּלוֹת',
-    biform:'칼 부정사 연계형', conjugation:'inf const',
-    person:'—', gender:'—', number:'—',
-    root:'גָּלָה',
-    explain:`<strong>어근: גָּלָה</strong> (갈라) "드러내다, 포로로 가다" — <strong>라메드-헤(ל״ה)</strong>.<br>
-부정사 연계형: 마지막 헤가 탈락하고 바브+홀렘(וֹ)으로 대체 → <em>גָּלוֹת</em>.<br>
-한국어 발음: <strong>갈로트</strong>.`
-  },
-  {
-    num:8, verb:'אָמוֹר',
-    biform:'칼 부정사 절대형', conjugation:'inf abs',
-    person:'—', gender:'—', number:'—',
-    root:'אָמַר',
-    explain:`<strong>어근: אָמַר</strong> (아마르) "말하다" — 페-알렙(פ״א).<br>
-부정사 절대형(inf abs): <em>אָמוֹר</em>. 절대형은 동사를 강조할 때 동사 앞에 놓임.<br>
-"반드시 말하다" 강조 용법. 한국어 발음: <strong>아모르</strong>.`
-  },
-  {
-    num:9, verb:'לֶכֶת',
-    biform:'칼 부정사 연계형', conjugation:'inf const',
-    person:'—', gender:'—', number:'—',
-    root:'הָלַךְ',
-    explain:`<strong>어근: הָלַךְ</strong> (할라크) "가다" — <strong>페-헤 변칙동사</strong>.<br>
-부정사 연계형: <em>לֶכֶת</em> — 완전히 다른 모양! 페-헤가 탈락하고 특수 형태.<br>
-(기대형 *הלכת 대신 <em>לֶכֶת</em>) 한국어 발음: <strong>레케트</strong>.`
-  },
-  {
-    num:10, verb:'תֵּת',
-    biform:'칼 부정사 연계형', conjugation:'inf const',
-    person:'—', gender:'—', number:'—',
-    root:'נָתַן',
-    explain:`<strong>어근: נָתַן</strong> (나탄) "주다" — <strong>페-눈 + 라메드-눈 이중약자음</strong>.<br>
-부정사 연계형: 페-눈 탈락 + 라메드-눈 탈락 → <em>תֵּת</em>.<br>
-(기대형 *נְתֹן → 눈이 양쪽에서 모두 탈락) 한국어 발음: <strong>테트</strong>.`
-  }
-];
-
-// ═══════════════════════════════════════════════════════
-//  DATA  ── 18과 종합문제 문장
-// ═══════════════════════════════════════════════════════
-const sent18 = [
-  {
-    heb:'זֶה הַיּוֹם אֲשֶׁר עָשָׂה יְהוָה',
-    ko:'이 (날은) 야훼께서 만드신 그 날이다.',
-    analysis:[
-      {w:'זֶה', pron:'제', gloss:'이것', info:'지시대명사 ms. "이것, 이"'},
-      {w:'הַיּוֹם', pron:'하욤', gloss:'그 날', info:'관사 הַ + 명사 יוֹם(욤) "날". 다게쉬로 요드 강조.'},
-      {w:'אֲשֶׁר', pron:'아쉐르', gloss:'~한/하는', info:'관계대명사. 앞의 명사를 수식하는 절을 이끔.'},
-      {w:'עָשָׂה', pron:'아사', gloss:'만드셨다', info:'어근 עָשָׂה (아사) "하다/만들다", 라메드-헤 동사. 칼 완료 3ms.'},
-      {w:'יְהוָה', pron:'아도나이/야훼', gloss:'야훼', info:'하나님의 고유명. 발음은 전통적으로 아도나이.'}
-    ]
-  },
-  {
-    heb:'נָתַתִּי סִפְרִי לַאֲדוֹן-הַבַּיִת',
-    ko:'너(ms)는 내 책을 그 집의 주인에게 주었다.',
-    analysis:[
-      {w:'נָתַתִּי', pron:'나타티', gloss:'내가 주었다', info:'어근 נָתַן, 페-눈+라메드-눈 동사. 칼 완료 1cs. 마지막 눈이 동화되어 탈락: נָתַנְתִּי → נָתַתִּי.'},
-      {w:'סִפְרִי', pron:'시프리', gloss:'나의 책', info:'명사 סֵפֶר(세페르) "책" + 1cs 소유접미어 ִי. 연계 모음 변화.'},
-      {w:'לַאֲדוֹן', pron:'라아돈', gloss:'주인에게', info:'전치사 לְ(~에게) + 관사 הַ → לַ(결합형) + אָדוֹן(아돈) "주인".'},
-      {w:'הַבַּיִת', pron:'하바이트', gloss:'그 집의', info:'관사 הַ + בַּיִת(바이트) "집". 관사 붙으면 다게쉬 포르테.'}
-    ]
-  },
-  {
-    heb:'יִירְאוּ עַבְדֵי מַלְכְּכֶם הַחֲכָמִים אֶת-יְהוָה',
-    ko:'너희(mp) 왕의 현명한 신하들은 야훼를 경외할 것이다.',
-    analysis:[
-      {w:'יִירְאוּ', pron:'이이르우', gloss:'경외할 것이다(3mp)', info:'어근 יָרֵא (야레) "두려워하다". 페-요드 동사. 미완료 3mp: 요드 탈락 + 보상이레 + 3mp 어미 וּ.'},
-      {w:'עַבְדֵי', pron:'아브데이', gloss:'신하들(연계형)', info:'עֶבֶד(에베드) "종/신하"의 복수 연계형 = עַבְדֵי. 뒤에 오는 명사를 수식.'},
-      {w:'מַלְכְּכֶם', pron:'말크켐', gloss:'너희 왕의', info:'מֶלֶךְ(멜레크) "왕" + 2mp 소유접미어 כֶם. 연계 모음 약화.'},
-      {w:'הַחֲכָמִים', pron:'하하카밈', gloss:'현명한', info:'형용사 חָכָם(하캄) + 관사 + mp 어미 ִים. 선행 명사 עַבְדֵי를 한정 수식.'},
-      {w:'אֶת', pron:'에트', gloss:'(목적어 표지)', info:'직접목적어 표지. 뒤에 오는 명사가 동사의 목적어임을 표시.'},
-      {w:'יְהוָה', pron:'야훼', gloss:'야훼를', info:'하나님의 고유명. 목적어.'}
-    ]
-  },
-  {
-    heb:'יֵצְאוּ הָאֲנָשִׁים הָאֵלֶּה מֵעִיר-הַמֶּלֶךְ הַגָּדוֹל',
-    ko:'이 남자들은 그 위대한 왕의 성읍에서 나갈 것이다.',
-    analysis:[
-      {w:'יֵצְאוּ', pron:'예체우', gloss:'나갈 것이다(3mp)', info:'어근 יָצָא (야차). 페-요드+라메드-알렙. 미완료 3mp: 요드 탈락 + 보상쩨레 + 3mp 어미.'},
-      {w:'הָאֲנָשִׁים', pron:'하아나쉼', gloss:'그 남자들', info:'אִישׁ(이쉬)의 복수 변칙형 אֲנָשִׁים + 관사.'},
-      {w:'הָאֵלֶּה', pron:'하엘레', gloss:'이', info:'지시대명사 cp "이것들". 관사 포함.'},
-      {w:'מֵעִיר', pron:'메이르', gloss:'성읍에서', info:'전치사 מִן(~에서) + עִיר(이르) "성읍". מִן + עִ = מֵעִ.'},
-      {w:'הַמֶּלֶךְ', pron:'하멜레크', gloss:'왕의', info:'מֶלֶךְ + 관사. 연계구조로 "왕의 성읍".'},
-      {w:'הַגָּדוֹל', pron:'하가돌', gloss:'위대한', info:'형용사 גָּדוֹל + 관사. 멜레크(왕)를 한정 수식.'}
-    ]
-  },
-  {
-    heb:'יְשָׁרִים דִּבְרֵי הַנָּבִיא הַהוּא מִדִּבְרֵי הָאִישׁ הָרָשָׁע',
-    ko:'저 예언자의 말은 그 악한 사람의 말보다 올곧다.',
-    analysis:[
-      {w:'יְשָׁרִים', pron:'예샤림', gloss:'올곧다(mp)', info:'형용사 יָשָׁר(야샤르) "올곧은". 서술적 용법(p).'},
-      {w:'דִּבְרֵי', pron:'디브레이', gloss:'말들(연계형)', info:'דָּבָר(다바르) "말"의 복수 연계형.'},
-      {w:'הַנָּבִיא', pron:'하나비', gloss:'그 예언자의', info:'נָבִיא(나비) "예언자" + 관사.'},
-      {w:'הַהוּא', pron:'하후', gloss:'저', info:'지시대명사 ms "저". 관사 הַ + הוּא.'},
-      {w:'מִדִּבְרֵי', pron:'미디브레이', gloss:'~의 말보다', info:'전치사 מִן + דִּבְרֵי. 비교 "~보다" 의미.'},
-      {w:'הָאִישׁ', pron:'하이쉬', gloss:'그 사람의', info:'אִישׁ + 관사.'},
-      {w:'הָרָשָׁע', pron:'하라샤', gloss:'악한', info:'형용사 רָשָׁע(라샤) "악한" + 관사.'}
-    ]
-  },
-  {
-    heb:'אֵשֵׁב בְּבֵית יְהוָה לְעוֹלָם',
-    ko:'나는 야훼의 집에서 영원토록 머무를 것이다.',
-    analysis:[
-      {w:'אֵשֵׁב', pron:'에셰브', gloss:'내가 앉을/머물 것이다', info:'어근 יָשַׁב (야샤브). 페-요드 동사. 1cs 미완료: 요드 탈락 + 쩨레 보상.'},
-      {w:'בְּבֵית', pron:'베베이트', gloss:'집에서', info:'전치사 בְּ(~에서) + בַּיִת(바이트) "집".'},
-      {w:'יְהוָה', pron:'야훼', gloss:'야훼의', info:'연계구조 "야훼의 집".'},
-      {w:'לְעוֹלָם', pron:'레올람', gloss:'영원토록', info:'전치사 לְ + עוֹלָם(올람) "영원". "영원히, 언제까지나".'}
-    ]
-  },
-  {
-    heb:'נִקַּח אֶת-הַזָּהָב הֶחָזָק אֶל-אֹהֲלֵנוּ',
-    ko:'우리는 이 강한 백성들의 금을 우리 천막으로 가져갈 것이다.',
-    analysis:[
-      {w:'נִקַּח', pron:'니카흐', gloss:'우리가 가져갈 것이다', info:'어근 לָקַח (라카흐). 페-라메드 동사. 미완료 1cp: 라메드 → 눈으로 동화.'},
-      {w:'אֶת', pron:'에트', gloss:'(목적어 표지)', info:'직접목적어 표지.'},
-      {w:'הַזָּהָב', pron:'하자하브', gloss:'그 금을', info:'זָהָב(자하브) "금" + 관사.'},
-      {w:'הֶחָזָק', pron:'헤하자크', gloss:'강한', info:'형용사 חָזָק(하자크) + 관사. 알렙 후음이므로 헤-하테프 파타크.'},
-      {w:'אֶל', pron:'엘', gloss:'~으로', info:'방향 전치사 "~을 향해, ~로".'},
-      {w:'אֹהֲלֵנוּ', pron:'오할레누', gloss:'우리의 천막', info:'אֹהֶל(오헬) "천막" 복수 연계형 + 1cp 접미어 נוּ.'}
-    ]
-  },
-  {
-    heb:'תֵּלֶד אִשָּׁה בָּנִים וּבָנוֹת',
-    ko:'한 여자가 아들들과 딸들을 낳을 것이다.',
-    analysis:[
-      {w:'תֵּלֶד', pron:'텔레드', gloss:'낳을 것이다(3fs)', info:'어근 יָלַד (야라드) "낳다". 페-요드 동사. 미완료 3fs: 접두어 תּ + 요드 탈락 + 쩨레 보상.'},
-      {w:'אִשָּׁה', pron:'이샤', gloss:'여자', info:'אִשָּׁה "여자, 아내". 주어.'},
-      {w:'בָּנִים', pron:'바님', gloss:'아들들', info:'בֵּן(벤) "아들"의 복수형. 불규칙 복수.'},
-      {w:'וּבָנוֹת', pron:'우바노트', gloss:'그리고 딸들', info:'접속사 וּ + בָּנוֹת(바노트) "딸들". בַּת의 복수형.'}
-    ]
-  },
-  {
-    heb:'תֵּלַךְ בְּדֶרֶךְ-הַבְּרִית אֲשֶׁר כָּרַתִּי בַּאֲבִיךְ',
-    ko:'너는 내가 네 아버지와 맺은 그 언약의 길을 따라 걸을 것이다.',
-    analysis:[
-      {w:'תֵּלַךְ', pron:'텔라크', gloss:'걸을 것이다(2ms)', info:'어근 הָלַךְ (할라크). 페-헤 변칙. 미완료 2ms: 헤 탈락 + 쩨레 보상.'},
-      {w:'בְּדֶרֶךְ', pron:'베데레크', gloss:'길로', info:'전치사 בְּ + דֶּרֶךְ(데레크) "길".'},
-      {w:'הַבְּרִית', pron:'하브리트', gloss:'그 언약의', info:'בְּרִית(브리트) "언약" + 관사. 연계구조.'},
-      {w:'אֲשֶׁר', pron:'아쉐르', gloss:'~한', info:'관계대명사.'},
-      {w:'כָּרַתִּי', pron:'카라티', gloss:'내가 맺은', info:'어근 כָּרַת (카라트) "자르다, 언약을 맺다". 칼 완료 1cs.'},
-      {w:'בַּאֲבִיךְ', pron:'바아비크', gloss:'네 아버지와', info:'전치사 בְּ(~와 함께) + אָב(아브) "아버지" + 2ms 접미어 ךָ.'}
-    ]
-  }
-];
-
-// ═══════════════════════════════════════════════════════
-//  DATA  ── 19과 종합문제 문장
-// ═══════════════════════════════════════════════════════
-const sent19 = [
-  {
-    heb:'יָצְאוּ צְבָאוֹתֵינוּ לַמִּלְחָמָה הַגְּדוֹלָה',
-    ko:'우리의 군대들이 그 큰 전투에 나갈 것이다.',
-    analysis:[
-      {w:'יָצְאוּ', pron:'야체우', gloss:'나갔다/나갈 것이다', info:'어근 יָצָא. 페-요드+라메드-알렙. 칼 완료 또는 미완료 3mp.'},
-      {w:'צְבָאוֹתֵינוּ', pron:'체바오테이누', gloss:'우리의 군대들', info:'צָבָא(차바) "군대"의 복수 צְבָאוֹת + 1cp 접미어 נוּ.'},
-      {w:'לַמִּלְחָמָה', pron:'람밀하마', gloss:'전투에', info:'전치사 לְ + 관사 הַ → לַ + מִלְחָמָה(밀하마) "전쟁".'},
-      {w:'הַגְּדוֹלָה', pron:'하그돌라', gloss:'그 큰', info:'גָּדוֹל의 여성형 גְּדוֹלָה + 관사.'}
-    ]
-  },
-  {
-    heb:'נַעֲלֶה בְּהַר-יְהוָה וּבִמְקוֹם קָדְשׁוֹ נֵשֵׁב',
-    ko:'우리가 하나님의 산에 올라갈 것이다. 그리고 그분의 거룩한 곳에서 우리가 머무를 것이다.',
-    analysis:[
-      {w:'נַעֲלֶה', pron:'나알레', gloss:'우리가 올라갈 것이다', info:'어근 עָלָה (알라) "올라가다". 라메드-헤 동사. 1cp 미완료: 접두어 נ + עֲלֶה.'},
-      {w:'בְּהַר', pron:'베하르', gloss:'산에', info:'전치사 בְּ + הַר(하르) "산".'},
-      {w:'יְהוָה', pron:'야훼', gloss:'야훼의', info:'연계구조 "야훼의 산".'},
-      {w:'וּבִמְקוֹם', pron:'우비므콤', gloss:'그리고 ~곳에서', info:'접속사 וּ + 전치사 בְּ + מָקוֹם(마콤) "장소".'},
-      {w:'קָדְשׁוֹ', pron:'코드쇼', gloss:'그의 거룩한', info:'קֹדֶשׁ(코데쉬) "거룩함" + 3ms 접미어 וֹ.'},
-      {w:'נֵשֵׁב', pron:'네셰브', gloss:'우리가 앉을 것이다', info:'어근 יָשַׁב. 페-요드. 1cp 미완료.'}
-    ]
-  },
-  {
-    heb:'בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ וְאֵת הָאָדָם וְאֵת הַבְּהֵמָה',
-    ko:'태초에 하나님이 하늘과 땅과 사람과 동물을 창조하셨다.',
-    analysis:[
-      {w:'בְּרֵאשִׁית', pron:'베레쉬트', gloss:'태초에', info:'전치사 בְּ + רֵאשִׁית(레쉬트) "시작, 태초". 창세기 첫 단어.'},
-      {w:'בָּרָא', pron:'바라', gloss:'창조하셨다', info:'어근 בָּרָא (바라) "창조하다". 라메드-알렙 동사. 칼 완료 3ms.'},
-      {w:'אֱלֹהִים', pron:'엘로힘', gloss:'하나님', info:'복수 형태이지만 단수 의미(장엄 복수). 창조 주어.'},
-      {w:'אֵת הַשָּׁמַיִם', pron:'에트 하샤마임', gloss:'하늘을', info:'목적어 표지 + שָׁמַיִם(샤마임) "하늘". 이중 복수.'},
-      {w:'וְאֵת הָאָרֶץ', pron:'베에트 하아레츠', gloss:'그리고 땅을', info:'접속사 + 목적어 표지 + אֶרֶץ(에레츠) "땅".'},
-      {w:'וְאֵת הָאָדָם', pron:'베에트 하아담', gloss:'그리고 사람을', info:'אָדָם(아담) "인간, 사람".'},
-      {w:'וְאֵת הַבְּהֵמָה', pron:'베에트 하브헤마', gloss:'그리고 동물을', info:'בְּהֵמָה(브헤마) "짐승, 동물".'}
-    ]
-  },
-  {
-    heb:'לֹא אִירָא אֶת-אֹיְבַי',
-    ko:'나는 내 원수들을 두려워하지 않을 것이다.',
-    analysis:[
-      {w:'לֹא', pron:'로', gloss:'~않다', info:'부정어. 미완료와 함께 미래 부정.'},
-      {w:'אִירָא', pron:'이이라', gloss:'내가 두려워하다', info:'어근 יָרֵא. 페-요드+라메드-알렙. 미완료 1cs.'},
-      {w:'אֶת', pron:'에트', gloss:'(목적어 표지)', info:'직접목적어 표지.'},
-      {w:'אֹיְבַי', pron:'오이바이', gloss:'나의 원수들', info:'אֹיֵב(오예브) "원수" 복수 + 1cs 접미어 ַי.'}
-    ]
-  },
-  {
-    heb:'תִּירַשׁ בָּקָר רַב וְצֹאן רַב מֵאָבִיךְ',
-    ko:'너는 많은 소떼와 많은 양떼를 네 아버지에게서 물려받을 것이다.',
-    analysis:[
-      {w:'תִּירַשׁ', pron:'티이라쉬', gloss:'네가 상속받을 것이다', info:'어근 יָרַשׁ (야라쉬) "상속받다, 차지하다". 페-요드. 미완료 2ms.'},
-      {w:'בָּקָר', pron:'바카르', gloss:'소(떼)', info:'집합명사 "소떼".'},
-      {w:'רַב', pron:'라브', gloss:'많은', info:'형용사 "많은, 큰".'},
-      {w:'וְצֹאן', pron:'베촨', gloss:'그리고 양떼', info:'צֹאן(촨) "양, 염소 떼" 집합명사.'},
-      {w:'מֵאָבִיךְ', pron:'메아비크', gloss:'네 아버지로부터', info:'전치사 מִן(~로부터) + אָב + 2ms 접미어 ךָ. מִן + א = מֵ.'}
-    ]
-  },
-  {
-    heb:'אֵלֶּה כֹּהֲנֶיךָ הַקְּדוֹשִׁים אֲשֶׁר קָרְאוּ בְּסֵפֶר הַתּוֹרָה',
-    ko:'이들이 율법책을 낭독한 너의 거룩한 제사장들이다.',
-    analysis:[
-      {w:'אֵלֶּה', pron:'엘레', gloss:'이들이', info:'지시대명사 cp "이것들, 이들".'},
-      {w:'כֹּהֲנֶיךָ', pron:'코하네이카', gloss:'너의 제사장들', info:'כֹּהֵן(코헨) "제사장" 복수 연계형 + 2ms 접미어 ךָ.'},
-      {w:'הַקְּדוֹשִׁים', pron:'하크도쉼', gloss:'거룩한', info:'형용사 קָדוֹשׁ(카도쉬) + 관사 + mp 어미.'},
-      {w:'אֲשֶׁר', pron:'아쉐르', gloss:'~한', info:'관계대명사.'},
-      {w:'קָרְאוּ', pron:'카르우', gloss:'낭독한', info:'어근 קָרָא (카라) "부르다, 낭독하다". 라메드-알렙. 칼 완료 3mp.'},
-      {w:'בְּסֵפֶר', pron:'베세페르', gloss:'책에서', info:'전치사 בְּ + סֵפֶר "책".'},
-      {w:'הַתּוֹרָה', pron:'하토라', gloss:'율법', info:'תּוֹרָה(토라) "율법, 가르침" + 관사.'}
-    ]
-  },
-  {
-    heb:'הָאֲנָשִׁים הָרְשָׁעִים הֵם יֵרְדוּ אֶל-הַיָּם',
-    ko:'저 악한 사람들은 바다를 향해 내려갈 것이다.',
-    analysis:[
-      {w:'הָאֲנָשִׁים', pron:'하아나쉼', gloss:'그 남자들', info:'אִישׁ의 복수형 אֲנָשִׁים + 관사.'},
-      {w:'הָרְשָׁעִים', pron:'하르샤임', gloss:'악한', info:'형용사 רָשָׁע + 관사 + mp. 한정 수식.'},
-      {w:'הֵם', pron:'헴', gloss:'그들은', info:'3mp 인칭대명사 "그들". 강조 주어.'},
-      {w:'יֵרְדוּ', pron:'예르두', gloss:'내려갈 것이다', info:'어근 יָרַד (야라드) "내려가다". 페-요드. 미완료 3mp.'},
-      {w:'אֶל-הַיָּם', pron:'엘 하얌', gloss:'바다로', info:'전치사 אֶל(~을 향해) + יָם(얌) "바다".'}
-    ]
-  },
-  {
-    heb:'רְאִיתֶם בְּעֵינֵיכֶם וּשְׁמַעְתֶּם בְּאָזְנֵיכֶם',
-    ko:'너희들(남)이 너희의 눈으로 보았고, 너희의 귀로 들었다.',
-    analysis:[
-      {w:'רְאִיתֶם', pron:'레이템', gloss:'너희가 보았다', info:'어근 רָאָה (라아). 라메드-헤 동사. 칼 완료 2mp: 헤 탈락 + 이요드 삽입.'},
-      {w:'בְּעֵינֵיכֶם', pron:'베에이네이켐', gloss:'너희의 눈으로', info:'전치사 בְּ + עַיִן(아인) "눈" 복수 연계형 + 2mp 접미어 כֶם.'},
-      {w:'וּשְׁמַעְתֶּם', pron:'우쉬마아템', gloss:'그리고 너희가 들었다', info:'접속사 וּ + שָׁמַע(샤마) "듣다". 칼 완료 2mp.'},
-      {w:'בְּאָזְנֵיכֶם', pron:'베아즈네이켐', gloss:'너희의 귀로', info:'전치사 בְּ + אֹזֶן(오젠) "귀" 복수 연계형 + 2mp 접미어.'}
-    ]
-  }
-];
-
-// ═══════════════════════════════════════════════════════
-//  DATA  ── 20과 종합문제 문장
-// ═══════════════════════════════════════════════════════
-const sent20 = [
-  {
-    heb:'יָכֹלְתִּי לִקְרֹא אֶת-הַסֵּפֶר הַקָּדוֹשׁ',
-    ko:'나는 그 거룩한 책을 낭독할 수 있다. (상태동사 시제는 현재)',
-    analysis:[
-      {w:'יָכֹלְתִּי', pron:'야콜티', gloss:'나는 ~할 수 있다/있었다', info:'어근 יָכֹל (야콜). 페-요드 동사. 칼 완료 1cs. 상태동사라 현재 의미.'},
-      {w:'לִקְרֹא', pron:'리크로', gloss:'낭독하기 위하여', info:'어근 קָרָא "부르다/낭독하다". 라메드-알렙. 부정사 연계형(inf const) + לְ 전치사.'},
-      {w:'אֶת-הַסֵּפֶר', pron:'에트 하세페르', gloss:'그 책을', info:'목적어 표지 + סֵפֶר "책" + 관사.'},
-      {w:'הַקָּדוֹשׁ', pron:'하카도쉬', gloss:'그 거룩한', info:'형용사 קָדוֹשׁ + 관사. 한정 수식.'}
-    ]
-  },
-  {
-    heb:'יֹאבֶה לָלֶכֶת אֶל-בֵּית-אָבִיךְ',
-    ko:'그는 네 아버지의 집으로 가고 싶어 할 것이다.',
-    analysis:[
-      {w:'יֹאבֶה', pron:'요베', gloss:'원하다/동의하다', info:'어근 אָבָה (아바) "원하다, 동의하다". 페-알렙+라메드-헤. 미완료 3ms.'},
-      {w:'לָלֶכֶת', pron:'랄레케트', gloss:'가기를', info:'어근 הָלַךְ. 부정사 연계형 לֶכֶת + 전치사 לְ → לָלֶכֶת. 헤 탈락 특수형.'},
-      {w:'אֶל-בֵּית', pron:'엘 베이트', gloss:'집으로', info:'전치사 אֶל + בַּיִת(바이트) "집" 연계형 בֵּית.'},
-      {w:'אָבִיךְ', pron:'아비크', gloss:'네 아버지의', info:'אָב(아브) "아버지" + 2ms 접미어 ךָ.'}
-    ]
-  },
-  {
-    heb:'יָרֵאנוּ לַעֲבֹר אֶת-תּוֹרַת יְהוָה כִּי יִשְׁפֹּט אֶת-כָּל-עֲבָדָיו',
-    ko:'우리는 야훼의 율법을 어기는 것을 두려워한다. 왜냐하면 그분은 그분의 모든 종들을 심판하실 것이기 때문이다.',
-    analysis:[
-      {w:'יָרֵאנוּ', pron:'야레아누', gloss:'우리가 두려워한다', info:'어근 יָרֵא. 페-요드 동사. 칼 완료 1cp (상태동사 현재 의미).'},
-      {w:'לַעֲבֹר', pron:'라아보르', gloss:'어기기를/지나기를', info:'어근 עָבַר (아바르) "건너다, 어기다". 부정사 연계형 + לְ. 후음 아인 → 하테프.'},
-      {w:'אֶת-תּוֹרַת', pron:'에트 토라트', gloss:'율법을', info:'목적어 표지 + תּוֹרָה 연계형 תּוֹרַת.'},
-      {w:'יְהוָה', pron:'야훼', gloss:'야훼의', info:'연계구조 "야훼의 율법".'},
-      {w:'כִּי', pron:'키', gloss:'왜냐하면', info:'접속사 "왜냐하면, ~이기 때문에".'},
-      {w:'יִשְׁפֹּט', pron:'이쉬포트', gloss:'심판하실 것이다', info:'어근 שָׁפַט (샤파트) "심판하다". 미완료 3ms.'},
-      {w:'אֶת-כָּל-עֲבָדָיו', pron:'에트 콜 아바다이우', gloss:'그의 모든 종들을', info:'목적어 표지 + כֹּל "모두" + עֶבֶד 복수 + 3ms 접미어 יו.'}
-    ]
-  },
-  {
-    heb:'אָמְרוּ כִּי חָטָאתֶם כִּי לֹא שְׁמַרְתֶּם אֶת-הַבְּרִית',
-    ko:'그들은, 너희가 그 언약을 지키지 않았기 때문에 죄지었다고 말하였다.',
-    analysis:[
-      {w:'אָמְרוּ', pron:'아므루', gloss:'그들이 말하였다', info:'어근 אָמַר. 페-알렙 동사. 칼 완료 3mp.'},
-      {w:'כִּי', pron:'키', gloss:'~라고 / 왜냐하면', info:'인용 접속사 "~라고" 또는 이유 "왜냐하면".'},
-      {w:'חָטָאתֶם', pron:'하타템', gloss:'너희가 죄를 지었다', info:'어근 חָטָא (하타) "죄 짓다". 라메드-알렙. 칼 완료 2mp.'},
-      {w:'לֹא', pron:'로', gloss:'~않다', info:'부정어.'},
-      {w:'שְׁמַרְתֶּם', pron:'쉬마르템', gloss:'너희가 지키지 않았다', info:'어근 שָׁמַר (샤마르) "지키다". 칼 완료 2mp.'},
-      {w:'אֶת-הַבְּרִית', pron:'에트 하브리트', gloss:'그 언약을', info:'목적어 표지 + בְּרִית "언약" + 관사.'}
-    ]
-  },
-  {
-    heb:'נֵצָא מִן-הָעִיר לִשְׁמֹעַ אֶל-הַנָּבִיא אֲשֶׁר דָּרַשׁ אֶת-יְהוָה',
-    ko:'우리는 야훼를 찾는 그 예언자에게 듣기 위하여 그 성읍에서부터 나갈 것이다.',
-    analysis:[
-      {w:'נֵצָא', pron:'네체', gloss:'우리가 나갈 것이다', info:'어근 יָצָא. 페-요드+라메드-알렙. 미완료 1cp.'},
-      {w:'מִן-הָעִיר', pron:'민 하이르', gloss:'그 성읍으로부터', info:'전치사 מִן + עִיר "성읍" + 관사.'},
-      {w:'לִשְׁמֹעַ', pron:'리쉬모아', gloss:'듣기 위하여', info:'어근 שָׁמַע. 부정사 연계형 + לְ. 목적 표현.'},
-      {w:'אֶל-הַנָּבִיא', pron:'엘 하나비', gloss:'그 예언자에게', info:'전치사 אֶל + נָבִיא + 관사.'},
-      {w:'אֲשֶׁר', pron:'아쉐르', gloss:'~한', info:'관계대명사.'},
-      {w:'דָּרַשׁ', pron:'다라쉬', gloss:'찾았다', info:'어근 דָּרַשׁ (다라쉬) "찾다, 구하다". 칼 완료 3ms.'},
-      {w:'אֶת-יְהוָה', pron:'에트 야훼', gloss:'야훼를', info:'목적어 표지 + 야훼.'}
-    ]
-  },
-  {
-    heb:'זָבוֹחַ תִּזְבַּח זְבָחִים טְהוֹרִים לִפְנֵי יְהוָה כִּי קָדוֹשׁ הוּא',
-    ko:'너는 분명히 야훼 앞에 순결한 제물들을 바쳐야 한다. 왜냐하면 그분은 거룩하시기 때문이다.',
-    analysis:[
-      {w:'זָבוֹחַ', pron:'자보아흐', gloss:'(강조) 제사 드리기', info:'어근 זָבַח. 부정사 절대형(inf abs). 동사 강조용법: "반드시, 분명히".'},
-      {w:'תִּזְבַּח', pron:'티즈바흐', gloss:'네가 제사 드리다', info:'어근 זָבַח "제사 드리다". 미완료 2ms. inf abs + 미완료 = 강조 용법.'},
-      {w:'זְבָחִים', pron:'즈바힘', gloss:'제물들', info:'זֶבַח(제바흐) "제물" 복수형.'},
-      {w:'טְהוֹרִים', pron:'트호림', gloss:'순결한', info:'형용사 טָהוֹר(타호르) "정결한" 복수형.'},
-      {w:'לִפְנֵי', pron:'리프네이', gloss:'앞에', info:'전치사 לְ + פָּנֶה(파네) "얼굴" 복수 연계형 = "~의 앞에".'},
-      {w:'יְהוָה', pron:'야훼', gloss:'야훼', info:'고유명.'},
-      {w:'כִּי', pron:'키', gloss:'왜냐하면', info:'이유 접속사.'},
-      {w:'קָדוֹשׁ', pron:'카도쉬', gloss:'거룩하시다', info:'형용사 서술 용법(p). 성: m, 수: s.'},
-      {w:'הוּא', pron:'후', gloss:'그분은', info:'3ms 인칭대명사 주어.'}
-    ]
-  },
-  {
-    heb:'בְּשָׁכְבָם בַּלַּיְלָה לֹא יִירְאוּ כִּי אֱלֹהֵיהֶם יִשְׁמֹר אֶת-נַפְשׁוֹתֵיהֶם',
-    ko:'그들이 밤에 누울 때, 그들은 두려워하지 않을 것이다. 왜냐하면 그들의 하나님께서 그들의 목숨을 지키실 것이기 때문이다.',
-    analysis:[
-      {w:'בְּשָׁכְבָם', pron:'베샤크밤', gloss:'그들이 누울 때', info:'전치사 בְּ + 부정사 연계형 שָׁכַב(샤카브) "눕다" + 3mp 접미어 ָם = "그들이 누울 때".'},
-      {w:'בַּלַּיְלָה', pron:'발라일라', gloss:'밤에', info:'전치사 בְּ + 관사 הַ + לַיְלָה(라일라) "밤".'},
-      {w:'לֹא יִירְאוּ', pron:'로 이이르우', gloss:'두려워하지 않을 것이다', info:'부정어 + 어근 יָרֵא 미완료 3mp.'},
-      {w:'כִּי', pron:'키', gloss:'왜냐하면', info:'이유 접속사.'},
-      {w:'אֱלֹהֵיהֶם', pron:'엘로헤이헴', gloss:'그들의 하나님', info:'אֱלֹהִים "하나님" 연계형 + 3mp 접미어.'},
-      {w:'יִשְׁמֹר', pron:'이쉬모르', gloss:'지키실 것이다', info:'어근 שָׁמַר. 미완료 3ms.'},
-      {w:'אֶת-נַפְשׁוֹתֵיהֶם', pron:'에트 나프쇼테이헴', gloss:'그들의 목숨들을', info:'목적어 표지 + נֶפֶשׁ(네페쉬) "생명/목숨" 복수 + 3mp 접미어.'}
-    ]
-  },
-  {
-    heb:'נַעֲבֹד אֶת-יְהוָה צְבָאוֹת כָּל-יְמֵי-חַיֵּינוּ כִּי טוֹב הוּא',
-    ko:'우리는 우리가 사는 날 내내 만군의 야훼를 섬길 것이다. 왜냐하면 그분은 좋으시기 때문이다.',
-    analysis:[
-      {w:'נַעֲבֹד', pron:'나아보드', gloss:'우리가 섬길 것이다', info:'어근 עָבַד "섬기다". 미완료 1cp. 후음 아인 → 하테프 파타크.'},
-      {w:'אֶת-יְהוָה', pron:'에트 야훼', gloss:'야훼를', info:'목적어 표지 + 야훼.'},
-      {w:'צְבָאוֹת', pron:'체바오트', gloss:'만군의', info:'צָבָא "군대" 복수형. "만군의 야훼" = 군대들의 주님.'},
-      {w:'כָּל-יְמֵי', pron:'콜 예메이', gloss:'모든 날들 동안', info:'כֹּל "모두" + יוֹם "날" 복수 연계형 יְמֵי.'},
-      {w:'חַיֵּינוּ', pron:'하예이누', gloss:'우리의 삶', info:'חַיִּים(하임) "삶, 생명" + 1cp 접미어 נוּ.'},
-      {w:'כִּי', pron:'키', gloss:'왜냐하면', info:'이유 접속사.'},
-      {w:'טוֹב', pron:'토브', gloss:'좋으시다', info:'형용사 서술용법. 단수 남성. "그분은 선하시다".'},
-      {w:'הוּא', pron:'후', gloss:'그분은', info:'3ms 인칭대명사.'}
-    ]
-  }
-];
-
-// ═══════════════════════════════════════════════════════
-//  DATA  ── 20과 부정사 연습
-// ═══════════════════════════════════════════════════════
-const infData = {
-  constRoots: [
-    {inf:'קְטֹל', root:'קָטַל', note:'규칙 동사 패러다임'},
-    {inf:'שְׁמוֹעַ', root:'שָׁמַע', note:'라메드-알렙: 마지막 알렙 묵음화'},
-    {inf:'עֲמֹר', root:'עָמַד', note:'페-아인 후음: 쉐바→하테프'},
-    {inf:'שֶׁבֶת', root:'יָשַׁב', note:'페-요드: 요드 탈락 특수형'},
-    {inf:'גָּלוֹת', root:'גָּלָה', note:'라메드-헤: 헤→ וֹת'},
-    {inf:'לֶדֶת', root:'יָלַד', note:'페-요드: 특수형'},
-    {inf:'שְׁלֹחַ', root:'שָׁלַח', note:'라메드-후음: 파타크 보상'},
-    {inf:'דַּעַת', root:'יָדַע', note:'페-요드: 요드 탈락 특수형'},
-    {inf:'בְּנוֹת', root:'בָּנָה', note:'라메드-헤: 헤→ וֹת'},
-    {inf:'בְּכוֹת', root:'בָּכָה', note:'라메드-헤: 헤→ וֹת'},
-    {inf:'רֶדֶת', root:'יָרַד', note:'페-요드: 특수형'},
-    {inf:'לֶכֶת', root:'הָלַךְ', note:'페-헤 변칙: 완전히 특수형'},
-    {inf:'תֵּת', root:'נָתַן', note:'페-눈+라메드-눈: 양쪽 눈 탈락'},
-    {inf:'צֵאת', root:'יָצָא', note:'페-요드+라메드-알렙'}
-  ],
-  constSentences: [
-    {heb:'לִכְתֹּב', ko:'쓰기 위하여', note:'לְ + inf const of כָּתַב'},
-    {heb:'לִזְכֹּר', ko:'기억하기 위하여', note:'לְ + inf const of זָכַר'},
-    {heb:'לִזְבֹּחַ', ko:'제사 드리기 위하여', note:'לְ + inf const of זָבַח'},
-    {heb:'לִמְלֹךְ', ko:'다스리기 위하여', note:'לְ + inf const of מָלַךְ'},
-    {heb:'לָשֶׁבֶת', ko:'앉기/거주하기 위하여', note:'לְ + inf const of יָשַׁב (페-요드)'},
-    {heb:'לָלֶדֶת', ko:'낳기 위하여', note:'לְ + inf const of יָלַד'},
-    {heb:'בְּרַדְתּוֹ', ko:'그가 내려갈 때', note:'בְּ + inf const of יָרַד + 3ms 접미어'},
-    {heb:'בְּדַעְתּוֹ', ko:'그가 알 때', note:'בְּ + inf const of יָדַע + 3ms 접미어'},
-    {heb:'כְּבְנוֹתוֹ', ko:'그가 지을 때', note:'כְּ + inf const of בָּנָה + 3ms 접미어'},
-    {heb:'כְּגָלוּתוֹ', ko:'그가 포로로 갈 때', note:'כְּ + inf const of גָּלָה + 3ms 접미어'},
-    {heb:'לִרְאוֹתוֹ', ko:'그가 볼 때/보기 위하여', note:'לְ + inf const of רָאָה + 3ms 접미어'},
-    {heb:'לַעֲשׂוֹתוֹ', ko:'그가 행하기 위하여', note:'לְ + inf const of עָשָׂה + 3ms 접미어'},
-    {heb:'לָתֵת', ko:'주기 위하여', note:'לְ + inf const of נָתַן (페-눈+라메드-눈)'},
-    {heb:'לָלֶכֶת', ko:'가기 위하여', note:'לְ + inf const of הָלַךְ'},
-    {heb:'לָצֵאת', ko:'나가기 위하여', note:'לְ + inf const of יָצָא'},
-    {heb:'בְּקַחְתּוֹ', ko:'그가 취할 때', note:'בְּ + inf const of לָקַח + 3ms 접미어'}
-  ],
-  absSentences: [
-    {heb:'שָׁמוֹר תִּשְׁמֹר', ko:'너는 반드시 지킬 것이다 (강조)', note:'שָׁמַר의 inf abs + 미완료 2ms'},
-    {heb:'שָׁלוֹחַ תִּשְׁלַח', ko:'너는 반드시 보낼 것이다', note:'שָׁלַח의 inf abs + 미완료 2ms'},
-    {heb:'זָכוֹר תִּזְכֹּר', ko:'너는 반드시 기억할 것이다', note:'זָכַר의 inf abs + 미완료 2ms'},
-    {heb:'הָלוֹךְ תֵּלַךְ', ko:'너는 반드시 갈 것이다', note:'הָלַךְ의 inf abs + 미완료 2ms'},
-    {heb:'יָשׁוֹב תָּשֵׁב', ko:'너는 반드시 돌아올 것이다', note:'שׁוּב의 inf abs + 미완료'},
-    {heb:'יָדוֹעַ תֵּדַע', ko:'너는 반드시 알 것이다', note:'יָדַע의 inf abs + 미완료'},
-    {heb:'בָּנֹה תִּבְנֶה', ko:'그는 반드시 지을 것이다', note:'בָּנָה의 inf abs + 미완료 라메드-헤'},
-    {heb:'בָּכֹה תִּבְכֶּה', ko:'그는 반드시 울 것이다', note:'בָּכָה의 inf abs + 미완료'},
-    {heb:'כָּלֹה תִּכְלֶה', ko:'그는 반드시 끝낼 것이다', note:'כָּלָה의 inf abs + 미완료'},
-    {heb:'נָתוֹן תִּתֵּן', ko:'너는 반드시 줄 것이다', note:'נָתַן의 inf abs + 미완료'},
-    {heb:'יָצוֹא תֵּצֵא', ko:'너는 반드시 나갈 것이다', note:'יָצָא의 inf abs + 미완료'},
-    {heb:'עָלֹה תַּעֲלֶה', ko:'너는 반드시 올라갈 것이다', note:'עָלָה의 inf abs + 미완료'}
-  ]
-};
-
-// ═══════════════════════════════════════════════════════
-//  FLASHCARD ENGINE
-// ═══════════════════════════════════════════════════════
-let allCards = [];
-let filteredCards = [];
-let currentIdx = 0;
-let known = new Set();
-let difficult = new Set();
-let currentFilter = 'all';
-
-function buildAllCards() {
-  allCards = [];
-  // 18과 verbs
-  data18.forEach(d => allCards.push({
-    id:'18v'+d.num, chapter:'18', type:'verb',
-    front: d.verb,
-    tags:[{cls:'tag-chapter',t:'제18과'},{cls:'tag-type',t:'동사분해'}],
-    back: {
-      root: d.root,
-      meaning: d.conjugation,
-      morpheme: `변화형: ${d.biform} | 인칭: ${d.person}인칭 | 성: ${d.gender} | 수: ${d.number}`,
-      explain: d.explain
+      `;
     }
-  }));
-  // 19과 verbs
-  data19.forEach(d => allCards.push({
-    id:'19v'+d.num, chapter:'19', type:'verb',
-    front: d.verb,
-    tags:[{cls:'tag-chapter',t:'제19과'},{cls:'tag-type',t:'동사분해'}],
-    back: {
-      root: d.root,
-      meaning: d.conjugation,
-      morpheme: `변화형: ${d.biform} | 인칭: ${d.person}인칭 | 성: ${d.gender} | 수: ${d.number}`,
-      explain: d.explain
-    }
-  }));
-  // 20과 verbs/inf
-  data20.forEach(d => allCards.push({
-    id:'20v'+d.num, chapter:'20', type: d.biform.includes('부정사') ? 'inf' : 'verb',
-    front: d.verb,
-    tags:[{cls:'tag-chapter',t:'제20과'},{cls:'tag-type',t: d.biform.includes('부정사')?'부정사':'동사'}],
-    back: {
-      root: d.root,
-      meaning: d.conjugation,
-      morpheme: `변화형: ${d.biform} | 인칭: ${d.person} | 성: ${d.gender} | 수: ${d.number}`,
-      explain: d.explain
-    }
-  }));
-  // 18과 sentences
-  sent18.forEach((s,i) => allCards.push({
-    id:'18s'+i, chapter:'18', type:'sent',
-    front: s.heb,
-    tags:[{cls:'tag-chapter',t:'제18과'},{cls:'tag-type',t:'종합문장'}],
-    back: { root:'', meaning: s.ko, morpheme:'', explain: buildSentExplain(s) }
-  }));
-  // 19과 sentences
-  sent19.forEach((s,i) => allCards.push({
-    id:'19s'+i, chapter:'19', type:'sent',
-    front: s.heb,
-    tags:[{cls:'tag-chapter',t:'제19과'},{cls:'tag-type',t:'종합문장'}],
-    back: { root:'', meaning: s.ko, morpheme:'', explain: buildSentExplain(s) }
-  }));
-  // 20과 sentences
-  sent20.forEach((s,i) => allCards.push({
-    id:'20s'+i, chapter:'20', type:'sent',
-    front: s.heb,
-    tags:[{cls:'tag-chapter',t:'제20과'},{cls:'tag-type',t:'종합문장'}],
-    back: { root:'', meaning: s.ko, morpheme:'', explain: buildSentExplain(s) }
-  }));
-  // 20과 inf const sentences
-  infData.constSentences.forEach((s,i) => allCards.push({
-    id:'20ic'+i, chapter:'20', type:'inf',
-    front: s.heb,
-    tags:[{cls:'tag-chapter',t:'제20과'},{cls:'tag-type',t:'inf const'}],
-    back: { root: s.note, meaning: s.ko, morpheme:'', explain:`<strong>용법:</strong> ${s.note}` }
-  }));
-  applyFilter(currentFilter);
-}
 
-function buildSentExplain(s) {
-  let html = '';
-  s.analysis.forEach(w => {
-    html += `<div style="background:rgba(255,255,255,0.03);border-radius:6px;padding:8px 10px;margin-bottom:6px;border-left:3px solid var(--accent2)">
-      <span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15rem;color:var(--hebrew);direction:rtl;display:inline-block;margin-left:8px">${w.w}</span>
-      <span style="font-size:0.82rem;color:var(--accent)">${w.pron} / ${w.gloss}</span>
-      <div style="font-size:0.78rem;color:var(--text-dim);line-height:1.7;margin-top:3px">${w.info}</div>
-    </div>`;
-  });
-  return html;
-}
-
-function applyFilter(f) {
-  currentFilter = f;
-  if(f==='all') filteredCards = [...allCards];
-  else if(f==='18') filteredCards = allCards.filter(c=>c.chapter==='18');
-  else if(f==='19') filteredCards = allCards.filter(c=>c.chapter==='19');
-  else if(f==='20') filteredCards = allCards.filter(c=>c.chapter==='20');
-  else filteredCards = allCards.filter(c=>c.type===f);
-  currentIdx = 0;
-  renderCard();
-  updateStats();
-}
-
-function setFilter(f, el) {
-  document.querySelectorAll('#fc-filter .filter-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  applyFilter(f);
-}
-
-function renderCard() {
-  if(!filteredCards.length) return;
-  const card = filteredCards[currentIdx];
-  document.getElementById('fc-counter').textContent = `${currentIdx+1} / ${filteredCards.length}`;
-  // front
-  const frontHeb = document.getElementById('fc-heb');
-  frontHeb.textContent = card.front;
-  frontHeb.className = card.type==='sent' ? 'hebrew-sm' : 'hebrew-main';
-  // tags
-  const tagsEl = document.getElementById('fc-tags');
-  tagsEl.innerHTML = card.tags.map(t=>`<span class="tag ${t.cls}">${t.t}</span>`).join(' ');
-  // back
-  const b = card.back;
-  let bhtml = '';
-  if(b.root) bhtml += `<div class="back-section"><div class="back-label">어근 / 기본형</div><div class="back-value big" style="font-family:'Frank Ruhl Libre',serif;direction:rtl;font-size:1.5rem">${b.root}</div></div>`;
-  bhtml += `<div class="back-section"><div class="back-label">의미 / 해석</div><div class="back-value big">${b.meaning}</div></div>`;
-  if(b.morpheme) bhtml += `<div class="back-section"><div class="back-label">형태소 분석</div><div class="back-value">${b.morpheme}</div></div>`;
-  if(b.explain) bhtml += `<div class="back-section"><div class="back-label">상세 설명</div><div class="explain-box">${b.explain}</div></div>`;
-  document.getElementById('fc-back-content').innerHTML = bhtml;
-  // unflip
-  document.getElementById('fc-card').classList.remove('flipped');
-  updateProgress();
-}
-
-function flipCard() {
-  document.getElementById('fc-card').classList.toggle('flipped');
-}
-function nextCard() {
-  if(currentIdx < filteredCards.length-1) { currentIdx++; renderCard(); }
-}
-function prevCard() {
-  if(currentIdx > 0) { currentIdx--; renderCard(); }
-}
-function shuffleCards() {
-  filteredCards.sort(()=>Math.random()-0.5);
-  currentIdx=0; renderCard();
-}
-function resetCards() { currentIdx=0; known.clear(); difficult.clear(); renderCard(); updateStats(); }
-function markKnown() {
-  if(filteredCards[currentIdx]) known.add(filteredCards[currentIdx].id);
-  updateStats(); nextCard();
-}
-function markDifficult() {
-  if(filteredCards[currentIdx]) difficult.add(filteredCards[currentIdx].id);
-  updateStats(); nextCard();
-}
-function updateStats() {
-  document.getElementById('fc-total').textContent = filteredCards.length;
-  document.getElementById('fc-done').textContent = known.size;
-  document.getElementById('fc-remain').textContent = filteredCards.length - known.size;
-}
-function updateProgress() {
-  const pct = filteredCards.length ? Math.round((currentIdx+1)/filteredCards.length*100) : 0;
-  document.getElementById('pbar').style.width = pct+'%';
-  document.getElementById('progress-text').textContent = `${currentIdx+1} / ${filteredCards.length}`;
-}
-
-// ═══════════════════════════════════════════════════════
-//  TABLE RENDERERS
-// ═══════════════════════════════════════════════════════
-function renderTable(data, tbodyId) {
-  const tbody = document.getElementById(tbodyId);
-  tbody.innerHTML = data.map(d => `
-    <tr>
-      <td class="num">${d.num}</td>
-      <td class="heb">${d.verb}</td>
-      <td class="ans">${d.biform}</td>
-      <td class="ans">${d.conjugation}</td>
-      <td class="ans">${d.person}</td>
-      <td class="ans">${d.gender}</td>
-      <td class="ans">${d.number}</td>
-      <td class="ans" style="font-family:'Frank Ruhl Libre',serif;font-size:1.2rem;color:var(--hebrew);direction:rtl">${d.root}</td>
-    </tr>
-    <tr>
-      <td colspan="8" style="padding:0 10px 10px;text-align:left">
-        <div class="explain-box" style="font-size:0.78rem">${d.explain}</div>
-      </td>
-    </tr>
-  `).join('');
-}
-
-// ═══════════════════════════════════════════════════════
-//  SENTENCE RENDERER
-// ═══════════════════════════════════════════════════════
-function renderSentences(data, containerId) {
-  const el = document.getElementById(containerId);
-  el.innerHTML = data.map((s, i) => `
-    <div class="sentence-card">
-      <div class="sentence-heb">${s.heb}</div>
-      <button class="reveal-toggle" onclick="toggleDetail(this)">▼ 단어별 분석 보기</button>
-      <div class="sentence-detail">
-        <div class="sentence-ko">📖 ${s.ko}</div>
-        <div style="margin-top:12px">
-          ${s.analysis.map(w => `
-            <div class="word-analysis">
-              <span class="word-heb-label">${w.w}</span>
-              <span class="word-ko-gloss">${w.pron} / ${w.gloss}</span>
-              <div class="word-info">${w.info}</div>
+    function renderVerb(item, index) {
+      return `
+        <details class="question-card">
+          <summary class="q-summary">
+            <div class="q-header">
+              <span class="q-num">${index + 1}.</span>
+              <span class="hebrew">${item.q}</span>
             </div>
-          `).join('')}
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
+            <div class="toggle-indicator">▼ 해설 및 단어장 열기</div>
+          </summary>
+          <div class="explanation-panel">
+            <div class="exp-box">
+              <div class="exp-item">📖 정답: <span class="ans-highlight">${item.a}</span></div>
+              <div class="exp-item" style="margin-top:8px;">🔤 발음: <span class="pronun">${item.p}</span></div>
+              <div class="exp-item" style="margin-top:8px;">🌱 원형(어근): <span class="hebrew-small" style="margin-left:5px;">${item.r}</span> (${item.rm})</div>
+            </div>
+            ${renderVocab(item.v)}
+            <div class="exp-box">
+              <div class="exp-title">🔍 문법 분석표</div>
+              <table class="detail-table">
+                <tr><th>변화형</th><th>활용형</th><th>인칭</th><th>성</th><th>수</th><th>어근</th></tr>
+                <tr><td>${item.t[0]}</td><td>${item.t[1]}</td><td>${item.t[2]}</td><td>${item.t[3]}</td><td>${item.t[4]}</td><td class="hebrew-small">${item.t[5]}</td></tr>
+              </table>
+              <div class="exp-item" style="margin-top:15px;">💡 <strong>변형 이유:</strong> ${item.d}</div>
+            </div>
+            <div class="grammar-point">📚 <strong>핵심 포인트:</strong> ${item.pt}</div>
+          </div>
+        </details>
+      `;
+    }
 
-function toggleDetail(btn) {
-  const detail = btn.nextElementSibling;
-  detail.classList.toggle('open');
-  btn.textContent = detail.classList.contains('open') ? '▲ 닫기' : '▼ 단어별 분석 보기';
-}
+    function renderText(item, index) {
+      return `
+        <details class="question-card">
+          <summary class="q-summary">
+            <div class="q-header">
+              <span class="q-num">${index + 1}.</span>
+              <span class="hebrew">${item.q}</span>
+            </div>
+            <div class="toggle-indicator">▼ 해설 및 단어장 열기</div>
+          </summary>
+          <div class="explanation-panel">
+            <div class="exp-box">
+              <div class="exp-item">📖 정답/번역: <span class="ans-highlight">${item.a}</span></div>
+            </div>
+            ${renderVocab(item.v)}
+            <div class="exp-box" style="border-left-color: var(--secondary-color);">
+              <div class="exp-title">🔍 구조 분석 & 특수 문법 사항</div>
+              <div class="exp-item">${item.d}</div>
+            </div>
+          </div>
+        </details>
+      `;
+    }
 
-// ═══════════════════════════════════════════════════════
-//  INF RENDERER
-// ═══════════════════════════════════════════════════════
-function renderInf() {
-  const el = document.getElementById('inf-list');
-  let html = `
-    <div class="section-title" style="margin-top:0">1) inf const 어근 쓰기</div>
-    <div class="table-view">
-      <table class="data-table">
-        <thead><tr><th>#</th><th>inf const</th><th>어근</th><th>변화 설명</th></tr></thead>
-        <tbody>
-          ${infData.constRoots.map((r,i)=>`
-            <tr>
-              <td class="num">${i+1}</td>
-              <td class="heb">${r.inf}</td>
-              <td style="font-family:'Frank Ruhl Libre',serif;font-size:1.2rem;color:var(--hebrew);direction:rtl">${r.root}</td>
-              <td style="font-size:0.8rem;color:var(--text-dim);text-align:left">${r.note}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    </div>
-    <div class="section-title" style="margin-top:24px">2) inf const 용법 — 문장 번역</div>
-    ${infData.constSentences.map((s,i)=>`
-      <div class="sentence-card">
-        <div class="sentence-heb">${s.heb}</div>
-        <button class="reveal-toggle" onclick="toggleDetail(this)">▼ 번역 보기</button>
-        <div class="sentence-detail">
-          <div class="sentence-ko">📖 ${s.ko}</div>
-          <div class="explain-box" style="margin-top:8px;font-size:0.8rem">${s.note}</div>
-        </div>
-      </div>
-    `).join('')}
-    <div class="section-title" style="margin-top:24px">3) inf abs 용법 — 강조 문장</div>
-    ${infData.absSentences.map((s,i)=>`
-      <div class="sentence-card">
-        <div class="sentence-heb">${s.heb}</div>
-        <button class="reveal-toggle" onclick="toggleDetail(this)">▼ 번역 보기</button>
-        <div class="sentence-detail">
-          <div class="sentence-ko">📖 ${s.ko}</div>
-          <div class="explain-box" style="margin-top:8px;font-size:0.8rem">${s.note}</div>
-        </div>
-      </div>
-    `).join('')}
-  `;
-  el.innerHTML = html;
-}
+    function initApp() {
+      const buildSection = (dataList) => dataList.map(sec => {
+        let html = `<h2 class="section-title">${sec.title}</h2>`;
+        html += sec.items.map((item, i) => {
+          return sec.type === 'verb' ? renderVerb(item, i) : renderText(item, i);
+        }).join('');
+        return html;
+      }).join('');
 
-// ═══════════════════════════════════════════════════════
-//  TAB CONTROLLER
-// ═══════════════════════════════════════════════════════
-const TAB_IDS = {
-  'flash':'tab-flash', 'table18':'tab-table18', 'table19':'tab-table19',
-  'table20':'tab-table20', 'sent18':'tab-sent18', 'sent19':'tab-sent19',
-  'sent20':'tab-sent20', 'inf20':'tab-inf20'
-};
+      document.getElementById('lesson21').innerHTML = buildSection(data21);
+      document.getElementById('lesson22').innerHTML = buildSection(data22);
+      document.getElementById('lesson23').innerHTML = buildSection(data23);
 
-function showTab(name) {
-  Object.values(TAB_IDS).forEach(id => {
-    document.getElementById(id).style.display = 'none';
-  });
-  document.getElementById(TAB_IDS[name]).style.display = 'block';
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.remove('active'));
-  const tabEls = document.querySelectorAll('.tab');
-  const tabNames = Object.keys(TAB_IDS);
-  const idx = tabNames.indexOf(name);
-  if(tabEls[idx]) tabEls[idx].classList.add('active');
-}
+      const updateCounter = () => {
+        const activeTab = document.querySelector('.tab-content.active');
+        const total = activeTab.querySelectorAll('details').length;
+        const open = activeTab.querySelectorAll('details[open]').length;
+        document.getElementById('statusCounter').textContent = `${open} / ${total} 해설 열림`;
+      };
 
-// ═══════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded', () => {
-  renderTable(data18, 't18-body');
-  renderTable(data19, 't19-body');
-  renderTable(data20, 't20-body');
-  renderSentences(sent18, 's18-list');
-  renderSentences(sent19, 's19-list');
-  renderSentences(sent20, 's20-list');
-  renderInf();
-  buildAllCards();
-  showTab('flash');
-});
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab-btn, .tab-content').forEach(el => el.classList.remove('active'));
+          btn.classList.add('active');
+          document.getElementById(btn.dataset.target).classList.add('active');
+          updateCounter();
+        });
+      });
 
-// Keyboard navigation
-document.addEventListener('keydown', e => {
-  if(e.key==='ArrowRight' || e.key==='l') nextCard();
-  if(e.key==='ArrowLeft' || e.key==='h') prevCard();
-  if(e.key===' ' || e.key==='f') { e.preventDefault(); flipCard(); }
-  if(e.key==='k') markKnown();
-  if(e.key==='d') markDifficult();
-});
-</script>
+      document.body.addEventListener('toggle', (e) => {
+        if(e.target.tagName === 'DETAILS') updateCounter();
+      }, true);
+
+      document.getElementById('themeToggle').addEventListener('click', (e) => {
+        document.body.classList.toggle('dark-mode');
+        e.target.textContent = document.body.classList.contains('dark-mode') ? "☀️ 라이트 모드" : "🌙 다크 모드";
+      });
+
+      document.getElementById('expandAll').addEventListener('click', () => {
+        document.querySelector('.tab-content.active').querySelectorAll('details').forEach(d => d.open = true);
+        updateCounter();
+      });
+      document.getElementById('collapseAll').addEventListener('click', () => {
+        document.querySelector('.tab-content.active').querySelectorAll('details').forEach(d => d.open = false);
+        updateCounter();
+      });
+
+      updateCounter();
+    }
+
+    window.onload = initApp;
+  </script>
 </body>
 </html>
